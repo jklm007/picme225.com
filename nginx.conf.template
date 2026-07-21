@@ -1,0 +1,63 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name api.picme.ci;
+    
+    # Redirect HTTP to HTTPS (A configurer aprs installation des certificats SSL)
+    # return 301 https://$host$request_uri;
+
+    root /var/www/picme/public;
+    index index.php index.html index.htm;
+
+    charset utf-8;
+
+    # Rate Limiting basique (A configurer dans nginx.conf global : limit_req_zone $binary_remote_addr zone=mylimit:10m rate=10r/s;)
+    # limit_req zone=mylimit burst=20 nodelay;
+
+    # Scurit des Headers
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-XSS-Protection "1; mode=block";
+    add_header X-Content-Type-Options "nosniff";
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+    # 1. Routage des WebSockets (Node.js via PM2)
+    # Les applications mobiles taperont sur "wss://api.picme.ci/socket.io/"
+    location /socket.io/ {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        
+        # Timeout optimis pour les websockets long-lived
+        proxy_read_timeout 60s;
+        proxy_send_timeout 60s;
+    }
+
+    # 2. Routage Laravel API (PHP-FPM)
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    error_page 404 /index.php;
+
+    location ~ \.php$ {
+        # Remplacer php8.1-fpm par la version exacte installe sur Google Cloud Compute Engine
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+        
+        # Masquer la version de PHP pour la scurit
+        fastcgi_hide_header X-Powered-By;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}

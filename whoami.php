@@ -1,0 +1,1 @@
+<?php echo posix_getpwuid(posix_geteuid())["name"]; ?>

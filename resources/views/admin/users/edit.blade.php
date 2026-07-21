@@ -49,6 +49,23 @@
 				</div>
 
 				<div class="form-group row">
+					<label for="subscription_plan_id" class="col-xs-2 col-form-label">Abonnement</label>
+					<div class="col-xs-10">
+						<select name="subscription_plan_id" class="form-control" id="subscription_plan_id">
+                            <option value="">Aucun abonnement</option>
+                            @foreach($plans as $plan)
+                                <option value="{{ $plan->id }}" {{ $user->subscription_plan_id == $plan->id ? 'selected' : '' }}>
+                                    {{ $plan->name }} ({{ number_format($plan->price) }} CFA)
+                                </option>
+                            @endforeach
+                        </select>
+                        @if($user->subscription_plan_id && $user->subscription_expires_at)
+                        <small class="text-muted">Expire le : {{ \Carbon\Carbon::parse($user->subscription_expires_at)->format('d/m/Y H:i') }}</small>
+                        @endif
+					</div>
+				</div>
+
+				<div class="form-group row">
 					<label for="zipcode" class="col-xs-2 col-form-label"></label>
 					<div class="col-xs-10">
 						<button type="submit" class="btn btn-primary">Update User</button>

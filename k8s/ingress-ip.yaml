@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: picme-ingress-ip
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+    # Règle catch-all (sans host) : répond aux accès par IP et à tout hostname non reconnu
+    # ⚠️ À désactiver une fois le DNS de picme225.site configuré
+    - http:
+        paths:
+          - path: /socket.io/
+            pathType: Prefix
+            backend:
+              service:
+                name: nodejs-service
+                port:
+                  number: 3000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: laravel-service
+                port:
+                  number: 80

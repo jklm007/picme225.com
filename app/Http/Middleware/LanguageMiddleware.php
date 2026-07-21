@@ -20,11 +20,13 @@ class LanguageMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (\Auth::check()) {
-           $language = \Auth::User()->language;
-              \Log::info(\Auth::User()->language);
-           App::setLocale($language);
-       }
+        if (\Auth::check() && \Auth::User()->language) {
+            App::setLocale(\Auth::User()->language);
+        } elseif (Session::has('locale')) {
+            App::setLocale(Session::get('locale'));
+        } elseif (Setting::get('language')) {
+            App::setLocale(Setting::get('language'));
+        }
         return $next($request);
     }
 }

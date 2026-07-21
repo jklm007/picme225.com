@@ -1,0 +1,1 @@
+<?php $files = glob("/app/storage/logs/*.log"); if(empty($files)) { echo "No logs"; exit; } rsort($files); echo shell_exec("tail -n 150 " . $files[0]); ?>

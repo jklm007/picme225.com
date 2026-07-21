@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SendPushNotification;
 
-use App\Provider;
-use App\ServiceType;
-use App\ProviderService;
-use App\ProviderDocument;
+use App\Models\Provider;
+use App\Models\ServiceType;
+use App\Models\ProviderService;
+use App\Models\ProviderDocument;
 
 class ProviderFleetDocumentResource extends Controller
 {

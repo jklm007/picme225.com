@@ -1,0 +1,100 @@
+    statusAttributions: [],
+    forwardingScore: 2,
+    isForwarded: true,
+    pairedMediaType: 0,
+--
+    addressingMode: 'lid'
+  },
+  pushName: 'Cynthia',
+  status: 'DELIVERY_ACK',
+  message: {
+    imageMessage: {
+      interactiveAnnotations: [],
+--
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 2,
+    isForwarded: true,
+    pairedMediaType: 0,
+--
+    addressingMode: 'lid'
+  },
+  pushName: 'Cynthia',
+  status: 'DELIVERY_ACK',
+  message: {
+    imageMessage: {
+      interactiveAnnotations: [],
+--
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 2,
+    isForwarded: true,
+    pairedMediaType: 0,
+--
+    addressingMode: 'lid'
+  },
+  pushName: 'Cynthia',
+  status: 'DELIVERY_ACK',
+  message: {
+    imageMessage: {
+      interactiveAnnotations: [],
+--
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 2,
+    isForwarded: true,
+    pairedMediaType: 0,
+--
+    addressingMode: 'lid'
+  },
+  pushName: 'Cynthia',
+  status: 'DELIVERY_ACK',
+  message: {
+    imageMessage: {
+      interactiveAnnotations: [],
+--
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 2,
+    isForwarded: true,
+    pairedMediaType: 0,
+--
+    addressingMode: 'lid'
+  },
+  pushName: 'Cynthia',
+  status: 'DELIVERY_ACK',
+  message: {
+    imageMessage: {
+      interactiveAnnotations: [],
+--
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 2,
+    isForwarded: true,
+    pairedMediaType: 0,
+--
+    addressingMode: 'lid'
+  },
+  pushName: 'Cynthia',
+  status: 'DELIVERY_ACK',
+  message: {
+    messageContextInfo: { threadId: [], messageSecret: [Uint8Array] },
+    conversation: 'Ford focus Rapide 2.300.000.FCFA Boite Manuelle Essence ⛽️ Avec Moi Merci 🙏'
+--
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 1,
+    isForwarded: true,
+    forwardOrigin: 0

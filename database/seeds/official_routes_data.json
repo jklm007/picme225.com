@@ -1,0 +1,277 @@
+{
+    "companies": [
+        {
+            "id": "utb",
+            "name": "UTB (Union des Transports de Bouaké)",
+            "logo": "utb_logo.png",
+            "description": "Leader du transport interurbain en Côte d'Ivoire.",
+            "routes": [
+                {
+                    "source": "Abidjan",
+                    "destination": "Bouaké",
+                    "price": 6100,
+                    "duration": "5h30",
+                    "departures": [
+                        "06:00",
+                        "07:30",
+                        "09:00",
+                        "11:00",
+                        "13:00",
+                        "15:00",
+                        "17:30",
+                        "20:00"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "Yamoussoukro",
+                    "price": 4000,
+                    "duration": "3h00",
+                    "departures": [
+                        "06:30",
+                        "08:30",
+                        "10:30",
+                        "12:30",
+                        "14:30",
+                        "16:30"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "San-Pédro",
+                    "price": 9000,
+                    "duration": "7h00",
+                    "departures": [
+                        "06:00",
+                        "08:00",
+                        "10:00",
+                        "21:00"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "Man",
+                    "price": 9000,
+                    "duration": "9h00",
+                    "departures": [
+                        "06:00",
+                        "07:30",
+                        "19:00"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "Korhogo",
+                    "price": 11000,
+                    "duration": "10h00",
+                    "departures": [
+                        "06:00",
+                        "08:00",
+                        "19:00"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "Daloa",
+                    "price": 6000,
+                    "duration": "6h00",
+                    "departures": [
+                        "06:30",
+                        "08:30",
+                        "10:30",
+                        "13:30"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "stif",
+            "name": "STIF",
+            "logo": "stif_logo.png",
+            "description": "Compagnie de transport interurbain desservant les grandes lignes.",
+            "routes": [
+                {
+                    "source": "Abidjan",
+                    "destination": "Bouaké",
+                    "price": 6000,
+                    "duration": "5h30",
+                    "departures": [
+                        "06:30",
+                        "08:30",
+                        "10:30",
+                        "13:30",
+                        "16:30"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "Yamoussoukro",
+                    "price": 3500,
+                    "duration": "3h00",
+                    "departures": [
+                        "07:00",
+                        "09:00",
+                        "11:00",
+                        "14:00",
+                        "17:00"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "Gagnoa",
+                    "price": 4000,
+                    "duration": "4h30",
+                    "departures": [
+                        "06:30",
+                        "09:30",
+                        "12:30",
+                        "15:30"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "San-Pédro",
+                    "price": 8500,
+                    "duration": "7h00",
+                    "departures": [
+                        "06:00",
+                        "09:00",
+                        "21:00"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "sbta",
+            "name": "SBTA",
+            "logo": "sbta_logo.png",
+            "description": "Transport de personnes et de colis sur l'ensemble du territoire.",
+            "routes": [
+                {
+                    "source": "Abidjan",
+                    "destination": "Bouaké",
+                    "price": 6100,
+                    "duration": "6h00",
+                    "departures": [
+                        "06:00",
+                        "08:00",
+                        "10:00",
+                        "12:00",
+                        "14:00"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "Daloa",
+                    "price": 6000,
+                    "duration": "7h00",
+                    "departures": [
+                        "06:30",
+                        "09:30",
+                        "12:30"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "Issia",
+                    "price": 5000,
+                    "duration": "6h30",
+                    "departures": [
+                        "07:00",
+                        "11:00"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "Soubré",
+                    "price": 7000,
+                    "duration": "8h00",
+                    "departures": [
+                        "06:00",
+                        "09:00",
+                        "21:00"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "avs",
+            "name": "AVS",
+            "logo": "avs_logo.png",
+            "description": "Spécialiste de la ligne Abidjan - Bouaké.",
+            "routes": [
+                {
+                    "source": "Abidjan",
+                    "destination": "Bouaké",
+                    "price": 6100,
+                    "duration": "5h00",
+                    "departures": [
+                        "06:00",
+                        "07:00",
+                        "08:00",
+                        "09:00",
+                        "10:00",
+                        "11:00",
+                        "12:00",
+                        "13:00",
+                        "14:00",
+                        "15:00"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "Yamoussoukro",
+                    "price": 4000,
+                    "duration": "2h45",
+                    "departures": [
+                        "07:30",
+                        "09:30",
+                        "11:30",
+                        "13:30",
+                        "15:30"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "art_luxury",
+            "name": "ART Luxury",
+            "logo": "art_luxury_logo.png",
+            "description": "Service VIP haut de gamme avec bus climatisés et Wi-Fi.",
+            "routes": [
+                {
+                    "source": "Abidjan",
+                    "destination": "Bouaké",
+                    "price": 10000,
+                    "duration": "4h30",
+                    "departures": [
+                        "07:30",
+                        "13:30",
+                        "17:30"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "Yamoussoukro",
+                    "price": 7000,
+                    "duration": "2h30",
+                    "departures": [
+                        "08:00",
+                        "12:00",
+                        "17:00"
+                    ]
+                },
+                {
+                    "source": "Abidjan",
+                    "destination": "Korhogo",
+                    "price": 15000,
+                    "duration": "9h00",
+                    "departures": [
+                        "07:00",
+                        "19:30"
+                    ]
+                }
+            ]
+        }
+    ]
+}

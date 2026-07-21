@@ -1,0 +1,543 @@
+/* ============================================
+   PicMe Pro — Marketing Landing Pages CSS
+   Premium dark design, mobile-first, fast loading
+   100% isolated from core app styles
+   ============================================ */
+
+/* --- Base Wrapper --- */
+.mkt-wrapper {
+    background: #0a0a0a;
+    color: #e0e0e0;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+.mkt-wrapper a { text-decoration: none; color: inherit; }
+.mkt-wrapper img { max-width: 100%; height: auto; }
+
+/* --- Navigation --- */
+.mkt-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0 1.5rem;
+}
+
+.mkt-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+.mkt-logo img {
+    height: 36px;
+    filter: brightness(0) invert(1);
+}
+
+.mkt-nav-links {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.mkt-nav-links a {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #999;
+    transition: all 0.2s;
+}
+
+.mkt-nav-links a:hover,
+.mkt-nav-links a.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.mkt-nav-cta {
+    background: #25d366;
+    color: #fff !important;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.mkt-nav-cta:hover {
+    background: #1ebe57;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+}
+
+/* --- Hero Section --- */
+.mkt-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 1.5rem 60px;
+    overflow: hidden;
+}
+
+.mkt-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(37, 211, 102, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.mkt-hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+}
+
+.mkt-hero-badge {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: #aaa;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.mkt-hero h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+}
+
+.mkt-hero-subtitle {
+    font-size: 1.15rem;
+    color: #888;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mkt-hero-price {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.mkt-price-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+}
+
+.mkt-price-value {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #25d366;
+}
+
+.mkt-price-value small {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #888;
+}
+
+.mkt-hero-trust {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.mkt-hero-trust span {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.mkt-hero-trust .fa-check-circle {
+    color: #25d366;
+}
+
+/* --- WhatsApp Buttons --- */
+.mkt-btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: #25d366;
+    color: #fff !important;
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+}
+
+.mkt-btn-whatsapp:hover {
+    background: #1ebe57;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(37, 211, 102, 0.45);
+}
+
+.mkt-btn-xl {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    border-radius: 16px;
+}
+
+.mkt-btn-sm {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.mkt-btn-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #888 !important;
+    font-weight: 600;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s;
+}
+
+.mkt-btn-call:hover {
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* --- Section Helpers --- */
+.mkt-section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.mkt-section-title {
+    text-align: center;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 3rem;
+    letter-spacing: -0.5px;
+}
+
+/* --- Features --- */
+.mkt-features {
+    padding: 5rem 0;
+    background: #0f0f0f;
+}
+
+.mkt-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.mkt-feature-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.mkt-feature-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(37, 211, 102, 0.2);
+    transform: translateY(-4px);
+}
+
+.mkt-feature-icon {
+    font-size: 2rem;
+    color: #25d366;
+    margin-bottom: 1rem;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 16px;
+    background: rgba(37, 211, 102, 0.1);
+    margin: 0 auto 1rem;
+}
+
+.mkt-feature-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.mkt-feature-card p {
+    font-size: 0.9rem;
+    color: #777;
+    line-height: 1.5;
+}
+
+.mkt-route-price {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #25d366;
+    margin: 0.5rem 0;
+}
+
+/* --- Steps (How it works) --- */
+.mkt-steps {
+    padding: 5rem 0;
+    background: #0a0a0a;
+}
+
+.mkt-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+.mkt-step {
+    text-align: center;
+    padding: 2rem;
+}
+
+.mkt-step-number {
+    width: 56px;
+    height: 56px;
+    line-height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #25d366, #128c44);
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin: 0 auto 1rem;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.mkt-step h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.mkt-step p {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* --- Trust / Social Proof --- */
+.mkt-trust {
+    padding: 4rem 0;
+    background: #0f0f0f;
+}
+
+.mkt-trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.mkt-trust-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #25d366;
+    margin-bottom: 0.25rem;
+}
+
+.mkt-trust-label {
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --- Final CTA --- */
+.mkt-final-cta {
+    padding: 6rem 0;
+    text-align: center;
+    background: linear-gradient(180deg, #0a0a0a 0%, #111 100%);
+}
+
+.mkt-final-cta h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.mkt-final-cta p {
+    color: #888;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    font-size: 1.05rem;
+}
+
+/* --- Footer --- */
+.mkt-footer {
+    background: #050505;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 4rem 0 2rem;
+}
+
+.mkt-footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.mkt-footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.mkt-footer-logo {
+    height: 40px;
+    filter: brightness(0) invert(1);
+    margin-bottom: 1rem;
+}
+
+.mkt-footer-col p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.mkt-footer-col h4 {
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.mkt-footer-col ul {
+    list-style: none;
+}
+
+.mkt-footer-col ul li {
+    margin-bottom: 0.6rem;
+}
+
+.mkt-footer-col ul li a {
+    color: #666;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.mkt-footer-col ul li a:hover {
+    color: #25d366;
+}
+
+.mkt-footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.mkt-footer-bottom p {
+    color: #444;
+    font-size: 0.8rem;
+}
+
+/* --- WhatsApp Floating Button --- */
+.mkt-whatsapp-float {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 64px;
+    height: 64px;
+    background: #25d366;
+    color: #fff !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    z-index: 999;
+    box-shadow: 0 4px 25px rgba(37, 211, 102, 0.5);
+    transition: all 0.3s;
+    animation: mkt-pulse 2s infinite;
+}
+
+.mkt-whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 35px rgba(37, 211, 102, 0.6);
+}
+
+@keyframes mkt-pulse {
+    0%, 100% { box-shadow: 0 4px 25px rgba(37, 211, 102, 0.5); }
+    50% { box-shadow: 0 4px 35px rgba(37, 211, 102, 0.7), 0 0 0 12px rgba(37, 211, 102, 0.1); }
+}
+
+/* --- Mobile Responsive --- */
+@media (max-width: 768px) {
+    .mkt-nav-links { display: none; }
+
+    .mkt-hero { min-height: auto; padding: 120px 1rem 60px; }
+
+    .mkt-hero-trust { flex-direction: column; gap: 0.5rem; }
+
+    .mkt-features-grid { grid-template-columns: 1fr; }
+    .mkt-steps-grid { grid-template-columns: 1fr; }
+    .mkt-trust-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .mkt-footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+    .mkt-btn-xl { width: 100%; padding: 1rem; }
+    .mkt-btn-call { width: 100%; justify-content: center; }
+
+    .mkt-whatsapp-float {
+        bottom: 1rem;
+        right: 1rem;
+        width: 56px;
+        height: 56px;
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .mkt-trust-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .mkt-trust-number { font-size: 2rem; }
+}

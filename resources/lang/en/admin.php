@@ -51,7 +51,7 @@ return [
 	],
 	'auth' => [
 		'reset_password' => 'Reset Password',
-		'admin_login' => 'Admin Login',
+		'admin_login' => 'PicMe225 — Connexion',
 		'login_here' => 'Login Here',
 		'remember_me' => 'Remember Me',
 		'sign_in' => 'Sign In',
@@ -88,7 +88,7 @@ return [
 	'include' => [
 		'profile' => 'Profile',
 		'sign_out' => 'Sign out',
-		'admin_dashboard' => 'Admin Dashboard',
+		'admin_dashboard' => 'Dashboard',
 		'dashboard' => 'Dashboard',
 		'dispatcher_panel' => 'Dispatcher Panel',
 		'heat_map' => 'Heat Map',
@@ -110,7 +110,7 @@ return [
 		'add_new_account_manager' => 'Add New Account Manager',
 		'accounts' => 'Accounts',
 		'statements' => 'Statements',
-		'overall_ride_statments' => 'Overall Ride Statments',
+		'overall_ride_statments' => 'Overall Ride Statements',
 		'provider_statement' => 'Provider Statement',
 		'daily_statement' => 'Daily Statement',
 		'monthly_statement' => 'Monthly Statement',
@@ -151,7 +151,9 @@ return [
 		'hospitals' => 'Hospitals',
 		'hospital_list' => 'Hospital List',
 		'add_hospital' => 'Add New Hospital',
-        'km-hours' => 'Km-Hours'
+        'km-hours' => 'Km-Hours',
+        'service_sharing' => 'PDP Network & Lines',
+        'transit_routes' => 'PDP Routes Management'
 	],
 	
 	'pages' => [

@@ -1,0 +1,156 @@
+[
+    {
+        "name": "Abidjan -> Bouaké (UTB VIP CLIMATISE)",
+        "description": "Ligne Premium UTB avec climatisation et grand confort",
+        "type": "INTERURBAN",
+        "status": "APPROVED",
+        "base_price": 9000,
+        "stops": [
+            {"name": "Gare UTB VIP Adjamé", "address": "Av. 13, Adjamé, Abidjan, Côte d'Ivoire", "latitude": 5.35239, "longitude": -4.02208, "type": "gare", "order": 1},
+            {"name": "Gare UTB Yamoussoukro (VIP)", "address": "Quartier 220 Logements, Yamoussoukro", "latitude": 6.8205, "longitude": -5.2745, "type": "arret", "order": 2},
+            {"name": "Gare UTB Bouaké (VIP Commerce)", "address": "Bouaké Commerce, Côte d'Ivoire", "latitude": 7.6912, "longitude": -5.0285, "type": "gare", "order": 3}
+        ],
+        "segments": [
+            {"from_stop_order": 1, "to_stop_order": 2, "price": 6000, "distance_km": 242.0},
+            {"from_stop_order": 2, "to_stop_order": 3, "price": 3000, "distance_km": 106.0}
+        ]
+    },
+    {
+        "name": "Abidjan -> Bouaké (UTB NORMAL)",
+        "description": "Ligne Standard UTB - Confort Classique",
+        "type": "INTERURBAN",
+        "status": "APPROVED",
+        "base_price": 7000,
+        "stops": [
+            {"name": "Gare UTB Renault", "address": "Adjamé Renault, Abidjan, Côte d'Ivoire", "latitude": 5.3550, "longitude": -4.0180, "type": "gare", "order": 1},
+            {"name": "Escale Yamoussoukro (Normal)", "address": "Yamoussoukro", "latitude": 6.8150, "longitude": -5.2800, "type": "arret", "order": 2},
+            {"name": "Gare UTB Bouaké (Normal)", "address": "Bouaké", "latitude": 7.6912, "longitude": -5.0285, "type": "gare", "order": 3}
+        ],
+        "segments": [
+            {"from_stop_order": 1, "to_stop_order": 2, "price": 4500, "distance_km": 242.0},
+            {"from_stop_order": 2, "to_stop_order": 3, "price": 2500, "distance_km": 106.0}
+        ]
+    },
+    {
+        "name": "Abidjan -> San Pedro (SBTA VIP CLIMATISE)",
+        "description": "Ligne VIP Côte d'Ivoire - Confort Exceptionnel",
+        "type": "INTERURBAN",
+        "status": "APPROVED",
+        "base_price": 10000,
+        "stops": [
+            {"name": "Gare SBTA VIP Adjamé", "address": "Avenue 13, Adjamé, Abidjan", "latitude": 5.35114, "longitude": -4.02610, "type": "gare", "order": 1},
+            {"name": "Gare SBTA San Pedro (VIP)", "address": "Cité, San Pedro", "latitude": 4.7485, "longitude": -6.6360, "type": "gare", "order": 2}
+        ],
+        "segments": [
+            {"from_stop_order": 1, "to_stop_order": 2, "price": 10000, "distance_km": 350.0}
+        ]
+    },
+    {
+        "name": "Abidjan -> San Pedro (SBTA NORMAL)",
+        "description": "Ligne Standard SBTA - Route Cotière",
+        "type": "INTERURBAN",
+        "status": "APPROVED",
+        "base_price": 8000,
+        "stops": [
+            {"name": "Gare SBTA Adjamé", "address": "Avenue 13, Adjamé, Abidjan", "latitude": 5.35114, "longitude": -4.02610, "type": "gare", "order": 1},
+            {"name": "Gare SBTA San Pedro", "address": "Rte Béréby, San Pedro", "latitude": 4.7485, "longitude": -6.6360, "type": "gare", "order": 2}
+        ],
+        "segments": [
+            {"from_stop_order": 1, "to_stop_order": 2, "price": 8000, "distance_km": 350.0}
+        ]
+    },
+    {
+        "name": "Abidjan -> Man (UTB VIP CLIMATISE)",
+        "description": "Ligne VIP vers l'Ouest Montagneux",
+        "type": "INTERURBAN",
+        "status": "APPROVED",
+        "base_price": 12000,
+        "stops": [
+            {"name": "Gare UTB VIP Adjamé", "address": "Av. 13, Adjamé, Abidjan", "latitude": 5.35239, "longitude": -4.02208, "type": "gare", "order": 1},
+            {"name": "Gare UTB Yamoussoukro (VIP)", "address": "Yamoussoukro", "latitude": 6.8205, "longitude": -5.2745, "type": "arret", "order": 2},
+            {"name": "Gare UTB Man Centre", "address": "Man Centre", "latitude": 7.40926, "longitude": -7.55416, "type": "gare", "order": 3}
+        ],
+        "segments": [
+            {"from_stop_order": 1, "to_stop_order": 2, "price": 6000, "distance_km": 242.0},
+            {"from_stop_order": 2, "to_stop_order": 3, "price": 6000, "distance_km": 218.0}
+        ]
+    },
+    {
+        "name": "Abidjan -> Gagnoa (STIF VIP CLIMATISE)",
+        "description": "Ligne Premium vers Gagnoa",
+        "type": "INTERURBAN",
+        "status": "APPROVED",
+        "base_price": 7000,
+        "stops": [
+            {"name": "Gare STIF Adjamé (VIP)", "address": "Adjamé Renault, Abidjan, Côte d'Ivoire", "latitude": 5.3551, "longitude": -4.0209, "type": "gare", "order": 1},
+            {"name": "Gare STIF Gagnoa (VIP)", "address": "Gagnoa Centre", "latitude": 6.1319, "longitude": -5.9500, "type": "gare", "order": 2}
+        ],
+        "segments": [
+            {"from_stop_order": 1, "to_stop_order": 2, "price": 7000, "distance_km": 270.0}
+        ]
+    },
+    {
+        "name": "Abidjan -> Yopougon -> Bouaké (ART LUXURY VIP CLIMATISE)",
+        "description": "Premium Confort via Yopougon, Flotte Exceptionnelle",
+        "type": "INTERURBAN",
+        "status": "APPROVED",
+        "base_price": 10000,
+        "stops": [
+            {"name": "ART Luxury Agence Principale", "address": "Rue C20, 53, Adjamé, Abidjan", "latitude": 5.3482, "longitude": -4.01757, "type": "gare", "order": 1},
+            {"name": "ART Luxury Agence Yopougon", "address": "Yopougon, Abidjan", "latitude": 5.34618, "longitude": -4.0631, "type": "arret", "order": 2},
+            {"name": "ART Luxury Agence Bouaké", "address": "Bouaké Centre", "latitude": 7.6912, "longitude": -5.0285, "type": "gare", "order": 3}
+        ],
+        "segments": [
+            {"from_stop_order": 1, "to_stop_order": 2, "price": 1500, "distance_km": 15.0},
+            {"from_stop_order": 2, "to_stop_order": 3, "price": 8500, "distance_km": 340.0}
+        ]
+    },
+    {
+        "name": "Abidjan -> Guiglo -> Man (AVS NORMAL)",
+        "description": "Boucle Sassandra / Montagnes",
+        "type": "INTERURBAN",
+        "status": "APPROVED",
+        "base_price": 11000,
+        "stops": [
+            {"name": "Gare AVS Adjamé", "address": "Adjamé, Abidjan", "latitude": 5.35507, "longitude": -4.0000, "type": "gare", "order": 1},
+            {"name": "Gare AVS Guiglo", "address": "Guiglo, District des Montagnes", "latitude": 6.54577, "longitude": -7.48626, "type": "arret", "order": 2},
+            {"name": "Gare AVS Man", "address": "Man Centre", "latitude": 7.41000, "longitude": -7.55000, "type": "gare", "order": 3}
+        ],
+        "segments": [
+            {"from_stop_order": 1, "to_stop_order": 2, "price": 9000, "distance_km": 480.0},
+            {"from_stop_order": 2, "to_stop_order": 3, "price": 2000, "distance_km": 80.0}
+        ]
+    },
+    {
+        "name": "Abidjan -> Odienné (UTB VIP CLIMATISE)",
+        "description": "Grand Nord - Confort VIP",
+        "type": "INTERURBAN",
+        "status": "APPROVED",
+        "base_price": 18000,
+        "stops": [
+            {"name": "Gare UTB VIP Adjamé", "address": "Av. 13, Adjamé, Abidjan", "latitude": 5.35239, "longitude": -4.02208, "type": "gare", "order": 1},
+            {"name": "Escale Bouaké (VIP)", "address": "Bouaké", "latitude": 7.6912, "longitude": -5.0285, "type": "arret", "order": 2},
+            {"name": "Gare UTB Odienné (VIP)", "address": "Odienné Centre", "latitude": 9.5051, "longitude": -7.5643, "type": "gare", "order": 3}
+        ],
+        "segments": [
+            {"from_stop_order": 1, "to_stop_order": 2, "price": 9000, "distance_km": 348.0},
+            {"from_stop_order": 2, "to_stop_order": 3, "price": 9000, "distance_km": 420.0}
+        ]
+    },
+    {
+        "name": "Abidjan -> Ferké (UTB VIP CLIMATISE)",
+        "description": "Ligne Nord via Korhogo - VIP",
+        "type": "INTERURBAN",
+        "status": "APPROVED",
+        "base_price": 16000,
+        "stops": [
+            {"name": "Gare UTB VIP Adjamé", "address": "Av. 13, Adjamé, Abidjan", "latitude": 5.35239, "longitude": -4.02208, "type": "gare", "order": 1},
+            {"name": "Escale Bouaké (VIP)", "address": "Bouaké", "latitude": 7.6912, "longitude": -5.0285, "type": "arret", "order": 2},
+            {"name": "Gare UTB Ferké (VIP)", "address": "Ferkéssédougou Centre", "latitude": 9.5928, "longitude": -5.1983, "type": "gare", "order": 3}
+        ],
+        "segments": [
+            {"from_stop_order": 1, "to_stop_order": 2, "price": 9000, "distance_km": 348.0},
+            {"from_stop_order": 2, "to_stop_order": 3, "price": 7000, "distance_km": 260.0}
+        ]
+    }
+]

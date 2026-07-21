@@ -10,7 +10,7 @@ use DB;
 use Exception;
 use Setting;
 
-use App\Document;
+use App\Models\Document;
 use App\Helpers\Helper;
 
 class DocumentResource extends Controller
@@ -77,7 +77,7 @@ class DocumentResource extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Document  $providerDocument
+     * @param  \App\Models\Document  $providerDocument
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -92,7 +92,7 @@ class DocumentResource extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Document  $providerDocument
+     * @param  \App\Models\Document  $providerDocument
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -109,7 +109,7 @@ class DocumentResource extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Document  $providerDocument
+     * @param  \App\Models\Document  $providerDocument
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -135,7 +135,7 @@ class DocumentResource extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Document  $providerDocument
+     * @param  \App\Models\Document  $providerDocument
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

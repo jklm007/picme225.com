@@ -69,13 +69,19 @@
                 <div class="col-xs-12" style="margin-bottom: 20px;">
                     <div class="col-xs-4">
                         <select class="form-control input" name="service_type" id="service_type" required>
-                            @forelse($ServiceTypes->where('ambulance','!=','1') as $Type)
-                            <option value="{{ $Type->id }}">{{ $Type->name }}</option>
-                            @empty
-                            <option>- Please Create a Service Type -</option>
-                            @endforelse
+                            @php
+                                $nonAmbulanceTypes = $ServiceTypes->where('ambulance', '!=', '1')->values();
+                                $ambulanceTypes = $ServiceTypes->where('ambulance', '1')->values();
+                            @endphp
+                            @if($nonAmbulanceTypes->count() > 0)
+                                @foreach($nonAmbulanceTypes as $Type)
+                                    <option value="{{ $Type->id }}">{{ $Type->name }}</option>
+                                @endforeach
+                            @else
+                                <option>- Please Create a Service Type -</option>
+                            @endif
                              <optgroup label="AMBULANCE" class="optiongroup">
-                                 @foreach($ServiceTypes->where('ambulance','1') as $type)
+                                 @foreach($ambulanceTypes as $type)
                                     <option value="{{$type->id}}">{{$type->name}}</option>
                                 @endforeach
                             </optgroup>

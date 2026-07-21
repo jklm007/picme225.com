@@ -1,0 +1,225 @@
+<?php
+
+namespace App\Http\Controllers\ProviderAuth;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
+use App\Http\Controllers\Controller;
+use Laravel\Passport\Token;
+use App\Notifications\ResetPasswordOTP;
+use App\Models\Provider;
+use App\Models\ProviderDevice;
+use App\Models\ProviderService;
+use App\Models\RequestFilter;
+use App\Models\ServiceType;
+use App\Models\Hospital;
+use Exception;
+use Notification;
+use Socialite;
+
+class TokenController extends Controller
+{
+    /**
+     * Liste des hôpitaux
+     */
+    public function hospitals()
+    {
+        return response()->json([
+            'hospitals' => Hospital::all()
+        ]);
+    }
+
+    /**
+     * Liste des services
+     */
+    public function services()
+    {
+        return response()->json([
+            'services' => ServiceType::all()
+        ]);
+    }
+
+    /**
+     * Inscription d'un provider
+     */
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'device_id'       => 'required',
+            'device_type'     => 'required|in:android,ios',
+            'device_token'    => 'required',
+            'first_name'      => 'required|max:255',
+            'last_name'       => 'required|max:255',
+            'email'           => 'required|email|max:255|unique:providers',
+            'mobile'          => 'required',
+            'password'        => 'required|min:6|confirmed',
+            'service_type_id' => 'required',
+            'service_number'  => 'required',
+            'service_model'   => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
+
+        try {
+            $provider = new Provider();
+            $provider->fill($request->except('password'));
+            $provider->password = Hash::make($request->password);
+            $provider->status = 'banned';
+            $provider->save();
+
+            // Création du service
+            ProviderService::create([
+                'provider_id'     => $provider->id,
+                'service_type_id' => $request->service_type_id,
+                'status'          => 'active',
+                'service_number'  => $request->service_number,
+                'service_model'   => $request->service_model,
+                'hospital_id'     => $request->hospital_id ?? '0',
+                'document_url'    => $request->file('document_url') ? $request->file('document_url')->store('provider/hospitaldocuments') : null,
+            ]);
+
+            // Création du device
+            ProviderDevice::create([
+                'provider_id' => $provider->id,
+                'udid'        => $request->device_id,
+                'token'       => $request->device_token,
+                'type'        => $request->device_type,
+            ]);
+
+            return response()->json(['message' => 'Inscription réussie', 'provider' => $provider], 201);
+        } catch (QueryException $e) {
+            return response()->json(['error' => 'Une erreur est survenue'], 500);
+        }
+    }
+
+    /**
+     * Authentification via Passport
+     */
+    public function authenticate(Request $request)
+    {
+        \Log::debug("Début de authenticate() : Request reçue", $request->all());
+
+        $validator = Validator::make($request->all(), [
+            'email'       => 'required|email',
+            'password'    => 'required|min:6',
+            'device_id'   => 'required',
+            'device_type' => 'required|in:android,ios',
+            'device_token'=> 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
+
+        $provider = Provider::where('email', $request->email)->first();
+
+        if (!$provider || !Hash::check($request->password, $provider->password)) {
+            return response()->json(['error' => 'Identifiants incorrects'], 401);
+        }
+
+        // Création du token Passport
+        $token = $provider->createToken('ProviderToken')->accessToken;
+
+        // Mise à jour du device
+        ProviderDevice::updateOrCreate(
+            ['provider_id' => $provider->id],
+            [
+                'udid'  => $request->device_id,
+                'token' => $request->device_token,
+                'type'  => $request->device_type,
+            ]
+        );
+
+        return response()->json([
+            'access_token' => $token,
+            'token_type'   => 'Bearer',
+            'provider'     => $provider
+        ]);
+    }
+  /**
+     * Déconnexion du provider
+     */
+    public function logout(Request $request)
+    {
+        try {
+            $request->user()->token()->revoke();
+            ProviderDevice::where('provider_id', $request->user()->id)->update(['udid' => '', 'token' => '']);
+            return response()->json(['message' => 'Déconnexion réussie']);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Erreur lors de la déconnexion'], 500);
+        }
+    }
+
+    /**
+     * Réinitialisation du mot de passe via OTP
+     */
+    public function forgot_password(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:providers,email',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
+
+        try {
+            $provider = Provider::where('email', $request->email)->first();
+            $otp = mt_rand(100000, 999999);
+            $provider->otp = $otp;
+            $provider->save();
+
+            Notification::send($provider, new ResetPasswordOTP($otp));
+
+            return response()->json(['message' => 'OTP envoyé à votre email']);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Erreur lors de l\'envoi de l\'OTP'], 500);
+        }
+    }
+
+    /**
+     * Changement du mot de passe
+     */
+    public function reset_password(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'id'       => 'required|numeric|exists:providers,id',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
+
+        try {
+            $provider = Provider::findOrFail($request->id);
+            $provider->password = Hash::make($request->password);
+            $provider->save();
+
+            return response()->json(['message' => 'Mot de passe mis à jour']);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Erreur lors de la mise à jour'], 500);
+        }
+    }
+
+    /**
+     * Vérification de la disponibilité de l'email
+     */
+    public function verify(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255|unique:providers',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
+
+        return response()->json(['message' => 'Email disponible']);
+    }
+}

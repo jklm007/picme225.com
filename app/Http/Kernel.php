@@ -14,7 +14,12 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        \App\Http\Middleware\TrustProxies::class,
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        \Illuminate\Foundation\Http\Middleware\TrimStrings::class,
+        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        // PERFORMANCE: Optimizes API responses with cache headers
+        \App\Http\Middleware\OptimizeResponse::class,
     ];
 
     /**
@@ -33,8 +38,12 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            'throttle:60,1',
-            'bindings',
+            \App\Http\Middleware\CorsMiddleware::class,
+            'throttle:120,1',
+            // \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\LogRequests::class,
+            //'bindings',
         ],
     ];
 
@@ -54,7 +63,6 @@ class Kernel extends HttpKernel
         'dispatcher.guest' => \App\Http\Middleware\RedirectIfDispatcher::class,
         'provider' => \App\Http\Middleware\RedirectIfNotProvider::class,
         'provider.guest' => \App\Http\Middleware\RedirectIfProvider::class,
-        'provider.api' => \App\Http\Middleware\ProviderApiMiddleware::class,
         'admin' => \App\Http\Middleware\RedirectIfNotAdmin::class,
         'admin.guest' => \App\Http\Middleware\RedirectIfAdmin::class,
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
@@ -63,13 +71,17 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
-        'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
+        //      'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
+//        'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
         'demo' => \App\Http\Middleware\DemoModeMiddleware::class,
-       // 'language' => \App\Http\Middleware\LanguageMiddleware::class,
+        'firebase-jwt' => \App\Http\Middleware\FirebaseJWTMiddleware::class,
+        // 'language' => \App\Http\Middleware\LanguageMiddleware::class,
         'language' => \App\Http\Middleware\LandingLanguageMiddleware::class,
         'provider.language' => \App\Http\Middleware\LandingLanguageMiddleware::class,
-       // 'provider.language' => \App\Http\Middleware\ProviderLanguageMiddleware::class,
-        
+        // 'provider.language' => \App\Http\Middleware\ProviderLanguageMiddleware::class,
+        'provider.eco' => \App\Http\Middleware\ProviderEcoBalanceMiddleware::class,
+        'check.subscription' => \App\Http\Middleware\CheckSubscription::class,
+        'gateway.auth' => \App\Http\Middleware\GatewayAuth::class,
+        'feature.level' => \App\Http\Middleware\EnsureFeatureLevel::class,
     ];
 }

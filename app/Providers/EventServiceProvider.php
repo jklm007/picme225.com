@@ -27,6 +27,6 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        \App\Models\MarketplaceListing::observe(\App\Observers\MarketplaceListingObserver::class);
     }
 }

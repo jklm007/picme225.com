@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Resource;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\KmHour;
+use App\Models\KmHour;
 
 class KmHourResource extends Controller
 {

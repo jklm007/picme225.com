@@ -1,0 +1,6 @@
+--- OAUTH CLIENTS ---
+ID: 5
+Name: PickMe Driver Mobile App
+Secret: rzlIaqH3PBAnnpySPwVFSMyffEdgf0gxKdpPjSvu
+Password Client: 1
+--------------------

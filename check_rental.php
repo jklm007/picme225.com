@@ -1,0 +1,1 @@
+<?php require __DIR__.'/vendor/autoload.php'; $app = require_once __DIR__.'/bootstrap/app.php'; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); $services = App\Models\ServiceType::where('type', 'rental')->get(['id', 'name', 'allowed_variants', 'type']); echo json_encode($services, JSON_PRETTY_PRINT);

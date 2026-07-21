@@ -4,7 +4,7 @@
 
 @section('styles')
 <style type="text/css">
-    .surge-block{
+    .surge-block {
         background-color: black;
         width: 50px;
         height: 50px;
@@ -13,10 +13,13 @@
         padding: 10px;
         padding-top: 15px;
     }
-    .surge-text{
+    .surge-text {
         top: 11px;
         font-weight: bold;
         color: white;
+    }
+    .distance-duration {
+        margin: 15px 0;
     }
 </style>
 @endsection
@@ -44,15 +47,18 @@
                         <dd>{{currency($fare->rental_amount)}}</dd>
                         @else
                         <dt>@lang('user.total_distance')</dt>
-                        <dd>{{$fare->distance}} Kms</dd>
+                        <dd>{{$fare->distance ?? 0}} Kms</dd>
                         <dt>@lang('user.eta')</dt>
-                        <dd>{{$fare->time}}</dd>
-                        <dt>@lang('user.estimated_fare')@if($fare->round_trip == 1) (Round Trip) @endif</dt>
-                        <dd>{{currency($fare->estimated_fare)}}</dd>
+                        <dd>{{$fare->time ?? '--'}}</dd>
+                        <dt>@lang('user.estimated_fare')@if(($fare->round_trip ?? 0) == 1) (Round Trip) @endif</dt>
+                        <dd>{{currency($fare->estimated_fare ?? 0)}}</dd>
                         @endif
                         <hr>
+                        <div class="distance-duration">
+                            <p><strong>Distance:</strong> <span id="distance">{{$fare->distance ?? 0}} km</span></p>
+                            <p><strong>Duration:</strong> <span id="duration">{{$fare->time ?? '--'}}</span></p>
+                        </div>
                         @if(Auth::user()->wallet_balance > 0)
-
                         <input type="checkbox" name="use_wallet" value="1"><span style="padding-left: 15px;">@lang('user.use_wallet_balance')</span>
                         <br>
                         <br>
@@ -68,8 +74,9 @@
                     <input type="hidden" name="d_latitude" value="{{Request::get('d_latitude')}}">
                     <input type="hidden" name="d_longitude" value="{{Request::get('d_longitude')}}">
                     <input type="hidden" name="service_type" value="{{Request::get('service_type')}}">
-                    <input type="hidden" name="distance" value="{{$fare->distance}}">
-                    <input type="hidden" name="method" value="{{$fare->method}}">
+                    <input type="hidden" name="distance" id="hidden_distance" value="{{$fare->distance ?? 0}}">
+                    <input type="hidden" name="duration" id="hidden_duration" value="{{$fare->time ?? ''}}">
+                    <input type="hidden" name="method" value="{{$fare->method ?? 'normal'}}">
                     <input type="hidden" name="package_id" value="{{Request::get('package_id')}}">
                     @if(isset($fare->round_trip))
                     <input type="hidden" name="round_trip" value="{{$fare->round_trip}}">
@@ -87,7 +94,6 @@
                       @endif
                     </select>
                     <br>
-
                     @if(Setting::get('CARD') == 1)
                         @if($cards->count() > 0)
                         <select class="form-control" name="card_id" style="display: none;" id="card_id">
@@ -98,18 +104,13 @@
                         </select>
                         @endif
                     @endif
-
                     @if($fare->surge == 1)
-
                         <span><em>Note : Due to High Demand the fare may vary!</em></span>
                         <div class="surge-block"><span class="surge-text">{{$fare->surge_value}}</span>
                         </div>
-                    
                     @endif
-
                     <button type="submit" class="half-primary-btn fare-btn">@lang('user.ride.ride_now')</button>
                     <button type="button" class="half-secondary-btn fare-btn" data-toggle="modal" data-target="#schedule_modal">Schedule Later</button>
-
                 </form>
             </div>
 
@@ -138,66 +139,11 @@
 
     </div>
 </div>
-
-
-
-<!-- Schedule Modal -->
-<div id="schedule_modal" class="modal fade schedule-modal" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Schedule a Ride</h4>
-      </div>
-      <form>
-      <div class="modal-body">
-        
-        <label>Date</label>
-        <input value="{{date('m/d/Y')}}" type="text" id="datepicker" placeholder="Date" name="schedule_date">
-        <label>Time</label>
-        <input value="{{date('H:i')}}" type="text" id="timepicker" placeholder="Time" name="schedule_time">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="schedule_button" class="btn btn-default" data-dismiss="modal">Schedule Ride</button>
-      </div>
-
-      </form>
-    </div>
-
-  </div>
-</div>
-
-
 @endsection
 
 @section('scripts')
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#schedule_button').click(function(){
-                $("#datepicker").clone().attr('type','hidden').appendTo($('#create_ride'));
-                $("#timepicker").clone().attr('type','hidden').appendTo($('#create_ride'));
-                document.getElementById('create_ride').submit();
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        var date = new Date();
-        date.setDate(date.getDate()-1);
-        $('#datepicker').datepicker({  
-            startDate: date
-        });
-        $('#timepicker').timepicker({showMeridian : false});
-    </script>
-    <script type="text/javascript">
-        function card(value){
-            if(value == 'CARD'){
-                $('#card_id').fadeIn(300);
-            }else{
-                $('#card_id').fadeOut(300);
-            }
-        }
-    </script>
+<script>
+    // Set Distance and Duration (Optional Dynamic Fetching with Google Maps)
+</script>
 @endsection
+

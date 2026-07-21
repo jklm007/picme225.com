@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-worker
+  labels:
+    app: laravel-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: laravel-worker
+  template:
+    metadata:
+      labels:
+        app: laravel-worker
+    spec:
+      containers:
+        - name: laravel-worker
+          image: picme225-laravel:latest
+          imagePullPolicy: Never
+          command: ["php", "artisan", "queue:work", "--tries=3", "--timeout=90"]
+          envFrom:
+            - secretRef:
+                name: laravel-env
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

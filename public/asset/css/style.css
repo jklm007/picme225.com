@@ -23,26 +23,26 @@ span,
 a,
 li,
 ul {
-    font-family: "ClanPro-Book", sans-serif;
+    font-family: 'Inter', "ClanPro-Book", sans-serif;
     font-weight: 300;
-    color: #000;
+    color: #F8FAFC;
     letter-spacing: 0.1px;
 }
 
 body {
-    background-color: #ffffff;
-    color: #44444d;
+    background-color: #0A1628;
+    color: #a0aec0;
 }
 
 .strong {
     font-weight: 600;
-    color: #000;
+    color: #F8FAFC;
     letter-spacing: 0.1px;
 }
 
 .light {
     font-weight: 300;
-    color: #000;
+    color: #F8FAFC;
     letter-spacing: 0.1px;
 }
 
@@ -110,8 +110,9 @@ a:hover {
 }
 
 .navbar-nav>li>a {
-    font-size: 16px;
-    padding: 20px 30px;
+    font-size: 14px;
+    padding: 20px 7px;
+    white-space: nowrap;
     /*border-top: 4px solid #333; */
 }
 
@@ -122,7 +123,7 @@ a:hover {
 .navbar {
     border: 0;
     border-radius: 0;
-    background-color: #fff;
+    background-color: #0A1628;
 }
 
 .nav>li>a:focus,
@@ -131,8 +132,8 @@ a:hover {
 .nav>li.active>a:focus,
 .nav>li.active>a:hover {
     text-decoration: none;
-    background-color: #37b38b;
-    color: #fff;
+    background-color: transparent;
+    color: #C9A84C;
 }
 
 .page-content {
@@ -166,16 +167,18 @@ a:hover {
 }
 
 .banner-form {
-    background-color: #fff;
-    border-top: 10px solid #eee;
+    background-color: rgba(15, 32, 64, 0.85);
+    backdrop-filter: blur(10px);
+    border-top: 10px solid #C9A84C;
     padding: 30px;
     border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .banner-form .fields {
     margin-bottom: 20px!important;
     padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .banner-form .left {
@@ -194,6 +197,7 @@ a:hover {
     margin-bottom: 10px;
     margin-top: 10px;
     font-size: 20px;
+    color: #F8FAFC;
 }
 
 .banner-form h5 {
@@ -202,11 +206,11 @@ a:hover {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 1px;
-    color: #37b38b;
+    color: #C9A84C;
 }
 
 .banner-form h5 i {
-    color: #37b38b;
+    color: #C9A84C;
     -webkit-transition: all .1s cubic-bezier(.9, 0, .1, 1);
     transition: all .1s cubic-bezier(.9, 0, .1, 1);
 }
@@ -218,13 +222,13 @@ a:hover {
 .banner-form .right a:hover h5,
 .banner-form .right a:focus h5,
 .banner-form .right a:active h5 {
-    color: #278064;
+    color: #B89535;
 }
 
 .banner-form .right a:hover h5 i,
 .banner-form .right a:focus h5 i,
 .banner-form .right a:active h5 i {
-    color: #278064;
+    color: #B89535;
     position: relative;
     left: 5px;
     -webkit-transition: all .1s cubic-bezier(.9, 0, .1, 1);
@@ -232,32 +236,34 @@ a:hover {
 }
 
 .note-or a {
-    color: #37b38b;
+    color: #C9A84C;
 }
 
 .note-or:hover a,
 .note-or:active a,
 .note-or:focus a {
-    color: #278064;
+    color: #B89535;
     text-decoration: none;
 }
 
 .menu-btn {
-    padding: 10px 15px!important;
-    margin: 10px;
-    line-height: 15px!important padding-top: 13px!important;
-    background-color: #37b38b;
+    padding: 8px 10px!important;
+    margin: 5px;
+    line-height: 15px!important;
+    padding-top: 13px!important;
+    background-color: #C9A84C;
     color: #fff;
+    white-space: nowrap;
 }
 
 .white-section {
-    background-color: #fff;
+    background-color: #0A1628;
     padding-top: 80px;
     padding-bottom: 80px;
 }
 
 .gray-section {
-    background-color: #f8f8f9;
+    background-color: #0D1F3C;
     padding-top: 80px;
     padding-bottom: 80px;
 }
@@ -292,11 +298,11 @@ a:hover {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 1px;
-    color: #37b38b;
+    color: #C9A84C;
 }
 
 .content-more i {
-    color: #37b38b;
+    color: #C9A84C;
     -webkit-transition: all .1s cubic-bezier(.9, 0, .1, 1);
     transition: all .1s cubic-bezier(.9, 0, .1, 1);
 }
@@ -308,13 +314,13 @@ a:hover {
 .content-more:hover,
 .content-more:focus,
 .content-more:active {
-    color: #278064;
+    color: #B89535;
 }
 
 .content-more:hover i,
 .content-more:focus i,
 .content-more:active i {
-    color: #278064;
+    color: #B89535;
     position: relative;
     left: 5px;
     -webkit-transition: all .1s cubic-bezier(.9, 0, .1, 1);
@@ -346,7 +352,7 @@ a:hover {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 1px;
-    background-color: #37b38b;
+    background-color: #C9A84C;
     color: #fff;
     padding: 15px 20px;
     display: inline-block;
@@ -354,7 +360,6 @@ a:hover {
 }
 
 .content-more-btn i {
-    /*background-color: #37b38b;*/
     color: #fff;
     -webkit-transition: all .1s cubic-bezier(.9, 0, .1, 1);
     transition: all .1s cubic-bezier(.9, 0, .1, 1);
@@ -367,7 +372,7 @@ a:hover {
 .content-more-btn:hover,
 .content-more-btn:focus,
 .content-more-btn:active {
-    background-color: #278064;
+    background-color: #B89535;
     color: #fff;
 }
 
@@ -409,7 +414,7 @@ a:hover {
     border-radius: 0;
     height: 45px;
     padding: 10px 20px;
-    background-color: #37b38b;
+    background-color: #C9A84C;
 }
 
 .find-form span button i {
@@ -503,8 +508,7 @@ a:hover {
 }
 
 .navbar-brand {
-    margin-left: 60px!important;
-    margin-right: 50px;
+    /* margins managed in app.blade.php flex header */
 }
 
 
@@ -886,9 +890,9 @@ html {
 .car-tab .nav-tabs li a:hover,
 .car-tab .nav-tabs li a:focus,
 .car-tab .nav-tabs li a:active {
-    color: #37b38b;
+    color: #C9A84C;
     border: 0;
-    border-bottom: 4px solid #37b38b!important;
+    border-bottom: 4px solid #C9A84C!important;
     background-color: transparent;
 }
 
@@ -943,7 +947,7 @@ html {
     border-radius: 0;
     height: 45px;
     padding: 10px 20px;
-    background-color: #37b38b;
+    background-color: #C9A84C;
 }
 
 .fare-form span button i {
@@ -1002,7 +1006,7 @@ html {
     padding: 0;
     padding: 10px;
     padding-top: 14px;
-    background-color: #37b38b;
+    background-color: #C9A84C;
     color: #fff;
     text-align: left;
     display: block;
@@ -1115,7 +1119,7 @@ html {
 }
 
 .log-teal-btn {
-    background-color: #37b38b;
+    background-color: #C9A84C;
     padding: 20px;
     display: block;
     color: #fff;
@@ -1130,7 +1134,7 @@ html {
 .log-teal-btn:hover,
 .log-teal-btn:focus,
 .log-teal-btn:active {
-    background-color: #2c8467;
+    background-color: #B89535;
     color: #fff;
 }
 
@@ -1161,13 +1165,13 @@ html {
 }
 
 .helper a {
-    color: #37b38b;
+    color: #C9A84C;
 }
 
 .helper a:hover,
 .helper a:focus,
 .helper a :active {
-    color: #37b38b;
+    color: #B89535;
     text-decoration: none;
 }
 

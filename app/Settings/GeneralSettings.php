@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Models\Settings;
+
+use Spatie\LaravelSettings\Settings;
+
+class GeneralSettings extends Settings
+{
+    public string $site_name;
+    public string $site_language;
+
+    public static function group(): string
+    {
+        return 'general';
+    }
+}
+

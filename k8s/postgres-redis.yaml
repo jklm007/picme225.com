@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  labels:
+    app: postgres
+spec:
+  replicas: 1 # On garde 1 réplica pour la BDD (sinon problèmes de corruption de données)
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgis/postgis:15-3.3
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: "picme_db"
+            - name: POSTGRES_USER
+              value: "picme_user"
+            - name: POSTGRES_PASSWORD
+              value: "secret_password"
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-data
+
+      volumes:
+        - name: postgres-data
+          emptyDir: {} # WARNING: Pour la production, utilisez un PersistentVolumeClaim (PVC) !
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          ports:
+            - containerPort: 6379
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+spec:
+  selector:
+    app: redis
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379

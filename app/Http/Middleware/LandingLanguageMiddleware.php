@@ -21,11 +21,13 @@ class LandingLanguageMiddleware
      */
     public function handle($request, Closure $next)
     {
-         if (Setting::get('language')) {
-           $language = Setting::get('language');
-              \Log::info(Setting::get('language'));
-           App::setLocale($language);
-       }
+        if (Session::has('locale')) {
+            App::setLocale(Session::get('locale'));
+        } elseif (Setting::get('language')) {
+            App::setLocale(Setting::get('language'));
+        } else {
+            App::setLocale('fr');
+        }
         return $next($request);
     }
 }

@@ -48,7 +48,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('provider.auth.login');
+        return redirect('/login?role=driver');
     }
 
     /**
@@ -59,5 +59,23 @@ class LoginController extends Controller
     protected function guard()
     {
         return Auth::guard('provider');
+    }
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        $login = request()->input('email');
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile';
+        request()->merge([$field => $login]);
+        return $field;
+    }
+
+    protected function authenticated(\Illuminate\Http\Request $request, $user)
+    {
+        return redirect('/provider');
     }
 }

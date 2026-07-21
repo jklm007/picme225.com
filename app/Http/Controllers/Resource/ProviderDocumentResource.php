@@ -11,10 +11,10 @@ use DB;
 use Exception;
 use Setting;
 
-use App\Provider;
-use App\ServiceType;
-use App\ProviderService;
-use App\ProviderDocument;
+use App\Models\Provider;
+use App\Models\ServiceType;
+use App\Models\ProviderService;
+use App\Models\ProviderDocument;
 use App\Helpers\Helper;
 
 class ProviderDocumentResource extends Controller
@@ -80,7 +80,7 @@ class ProviderDocumentResource extends Controller
                     'status' => 'offline',
                     'service_number' => $request->service_number,
                     'service_model' => $request->service_model,
-                    'hospital_id' => $request->hospital_id ? : '',
+                    'hospital_id' => $request->hospital_id ? : '0',
                     'document_url' => $document,
                 ]);
 
@@ -94,7 +94,7 @@ class ProviderDocumentResource extends Controller
                     'status' => 'offline',
                     'service_number' => $request->service_number,
                     'service_model' => $request->service_model,
-                    'hospital_id' => $request->hospital_id ? : '',
+                    'hospital_id' => $request->hospital_id ? : '0',
                     'document_url' => $document,
                 ]);
         }
@@ -119,17 +119,20 @@ class ProviderDocumentResource extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($provider, $id)
-    {
-        try {
-            $Document = ProviderDocument::where('provider_id', $provider)
-                ->findOrFail($id);
+   public function edit($provider, $id)
+{
+    try {
+        $Document = ProviderDocument::with(['provider', 'document']) // **EAGER LOAD RELATIONSHIPS - ADD THIS!**
+            ->where('provider_id', $provider)
+            ->findOrFail($id); 
 
-            return view('admin.providers.document.edit', compact('Document'));
-        } catch (ModelNotFoundException $e) {
-            return redirect()->route('admin.index');
-        }
+        // dd($Document); // Keep dd() for debugging if needed, or comment out after verifying
+
+        return view('admin.providers.document.edit', compact('Document')); 
+    } catch (ModelNotFoundException $e) {
+        return redirect()->route('admin.index');
     }
+}
 
     /**
      * Update the specified resource in storage.

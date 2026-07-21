@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://appearance-federation-gives-jurisdiction.trycloudflare.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => env('APP_TIMEZONE' , 'UTC'),
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -169,16 +169,21 @@ return [
 
         Laravel\Passport\PassportServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        //        PhpOpenSourceSaver\JWTAuth\Providers\LaravelServiceProvider::class,  
         anlutro\LaravelSettings\ServiceProvider::class,
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
-        Barryvdh\TranslationManager\ManagerServiceProvider::class,
-        Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider::class,
+        //        Barryvdh\TranslationManager\ManagerServiceProvider::class,
+//        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+//        Barryvdh\TranslationManager\ManagerServiceProvider::class,
+        //      Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider::class,
+        //        Spatie\LaravelSettings\LaravelSettingsServiceProvider::class,
+//        Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
@@ -225,14 +230,15 @@ return [
         'Route' => Illuminate\Support\Facades\Route::class,
         'Schema' => Illuminate\Support\Facades\Schema::class,
         'Session' => Illuminate\Support\Facades\Session::class,
+        'Setting' => anlutro\LaravelSettings\Facade::class,
         'Storage' => Illuminate\Support\Facades\Storage::class,
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Setting' => anlutro\LaravelSettings\Facade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
-        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        //      'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        // 'Settings' => Spatie\LaravelSettings\Facade::class,
+//        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'PushNotification' => Davibennun\LaravelPushNotification\Facades\PushNotification::class,
     ],
 ];

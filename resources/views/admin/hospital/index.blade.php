@@ -21,6 +21,8 @@
                         <tr>
                             <th>@lang('admin.id')</th>
                             <th>@lang('admin.hospital.hospital') </th>
+                            <th>Téléphone</th>
+                            <th>Dispo</th>
                             <th>@lang('admin.action')</th>
                         </tr>
                     </thead>
@@ -29,6 +31,8 @@
                         <tr>
                             <td>{{$index + 1}}</td>
                             <td>{{$hospital->hospital_address}}</td>
+                            <td>{{$hospital->contact_phone}}</td>
+                            <td>{{$hospital->is_available ? 'Oui' : 'Non'}}</td>
                             <td>
                                 <form action="{{ route('admin.hospital.destroy', $hospital->id) }}" method="POST">
                                     {{ csrf_field() }}
@@ -46,6 +50,8 @@
                         <tr>
                             <th>@lang('admin.id')</th>
                             <th>@lang('admin.hospital.hospital') </th>
+                            <th>Téléphone</th>
+                            <th>Dispo</th>
                             <th>@lang('admin.action')</th>
                         </tr>
                     </tfoot>

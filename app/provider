@@ -1,0 +1,125 @@
+<?php
+
+namespace App;
+
+use App\Notifications\ProviderResetPassword;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
+
+class Provider extends Authenticatable
+{
+    use HasApiTokens, Notifiable;
+
+    protected $fillable = [
+        'first_name', 'last_name', 'email', 'password', 'mobile', 'address', 'picture', 'gender',
+        'latitude', 'longitude', 'status', 'avatar', 'social_unique_id', 'fleet', 'language',
+        'commune', 'available', 'service_type_id', 'passengers_count', 'device_token',
+        'device_id', 'device_type', 'login_by'
+    ];
+
+    protected $hidden = [
+        'password', 'remember_token', 'otp'
+    ];
+
+    protected $casts = [
+        'latitude' => 'double', 'longitude' => 'double', 'available' => 'boolean',
+        'passengers_count' => 'integer', 'rating' => 'double', 'fleet' => 'integer'
+    ];
+
+    // Constantes pour les statuts
+    const STATUS_AVAILABLE = 'approved';
+    const STATUS_RIDING = 'riding';
+    const STATUS_OFFLINE = 'onboarding';
+
+    public function setStatusAttribute($value)
+    {
+        $this->attributes['status'] = $value;
+        $this->attributes['available'] = ($value === self::STATUS_AVAILABLE);
+    }
+
+    public function isAvailable()
+    {
+        return $this->status === self::STATUS_AVAILABLE;
+    }
+
+    public function isRiding()
+    {
+        return $this->status === self::STATUS_RIDING;
+    }
+
+    // Relations
+    public function serviceType()
+    {
+        return $this->belongsTo(ServiceType::class);
+    }
+
+    public function service()
+    {
+        return $this->hasOne('App\ProviderService');
+    }
+
+    public function incoming_requests()
+    {
+        return $this->hasMany('App\RequestFilter')->where('status', 0);
+    }
+
+    public function requests()
+    {
+        return $this->hasMany('App\RequestFilter');
+    }
+
+    public function profile()
+    {
+        return $this->hasOne('App\ProviderProfile');
+    }
+
+    public function device()
+    {
+        return $this->hasOne('App\ProviderDevice');
+    }
+
+    public function trips()
+    {
+        return $this->hasMany('App\UserRequests');
+    }
+
+    public function accepted()
+    {
+        return $this->hasMany('App\UserRequests', 'provider_id')
+                    ->where('status', '!=', 'CANCELLED');
+    }
+
+    public function cancelled()
+    {
+        return $this->hasMany('App\UserRequests', 'provider_id')
+                    ->where('status', 'CANCELLED');
+    }
+
+    public function documents()
+    {
+        return $this->hasMany('App\ProviderDocument');
+    }
+
+    public function document($id)
+    {
+        return $this->hasOne('App\ProviderDocument')->where('document_id', $id)->first();
+    }
+
+    public function pending_documents()
+    {
+        return $this->hasMany('App\ProviderDocument')->where('status', 'ASSESSING')->count();
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'driver_user')
+                    ->withPivot('pickup_latitude', 'pickup_longitude', 'destination_latitude', 'destination_longitude', 'dropped_off')
+                    ->withTimestamps();
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ProviderResetPassword($token));
+    }
+}

@@ -7,3 +7,14 @@ Homestead.json
 Homestead.yaml
 .env
 /public/uploads/*
+
+scratch/
+.agents/
+.gemini/
+
+storage/logs/
+*.tar.gz
+*.zip
+*.sql
+*.exe
+*.apk

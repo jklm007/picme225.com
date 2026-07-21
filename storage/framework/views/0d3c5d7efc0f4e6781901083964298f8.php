@@ -1,0 +1,1 @@
+<!-- Footer completely removed --><?php /**PATH C:\Users\HP\Documents\Jews-world Backend\picme225.com_backend\resources\views/user/include/footer.blade.php ENDPATH**/ ?>

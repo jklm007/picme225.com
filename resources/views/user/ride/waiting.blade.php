@@ -416,7 +416,7 @@
 								<dt>@lang('user.ride.promotion_applied')(
 									@if($request->payment)
 										@if($request->payment->promocode_id)
-												<?php $promo=App\Promocode::find($request->payment->promocode_id); ?>
+												<?php $promo=App\Models\Promocode::find($request->payment->promocode_id); ?>
 
 			                            	@if($promo->discount_type=='percent')
 			                            		{{$promo->discount}}%

@@ -11,16 +11,16 @@ use Setting;
 use Exception;
 use \Carbon\Carbon;
 
-use App\User;
-use App\Fleet;
-use App\Account;
-use App\Provider;
+use App\Models\User;
+use App\Models\Fleet;
+use App\Models\Account;
+use App\Models\Provider;
 use App\UserPayment;
-use App\ServiceType;
-use App\UserRequests;
-use App\ProviderService;
-use App\UserRequestRating;
-use App\UserRequestPayment;
+use App\Models\ServiceType;
+use App\Models\UserRequests;
+use App\Models\ProviderService;
+use App\Models\UserRequestRating;
+use App\Models\UserRequestPayment;
 
 class AccountController extends Controller
 {
@@ -39,7 +39,7 @@ class AccountController extends Controller
     /**
      * Dashboard.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function dashboard()
@@ -67,7 +67,7 @@ class AccountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function profile()
@@ -78,7 +78,7 @@ class AccountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function profile_update(Request $request)
@@ -107,7 +107,7 @@ class AccountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function password()
@@ -118,7 +118,7 @@ class AccountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function password_update(Request $request)
@@ -148,7 +148,7 @@ class AccountController extends Controller
     /**
      * account statements.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function statement($type = 'individual', $request = null){
@@ -222,7 +222,7 @@ class AccountController extends Controller
     /**
      * account statements today.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function statement_today(){
@@ -232,7 +232,7 @@ class AccountController extends Controller
     /**
      * account statements today.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function statement_range(Request $request){
@@ -242,7 +242,7 @@ class AccountController extends Controller
     /**
      * account statements monthly.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function statement_monthly(){
@@ -252,7 +252,7 @@ class AccountController extends Controller
      /**
      * account statements monthly.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function statement_yearly(){
@@ -263,7 +263,7 @@ class AccountController extends Controller
     /**
      * account statements.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function statement_provider(){

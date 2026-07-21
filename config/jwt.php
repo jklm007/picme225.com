@@ -73,7 +73,7 @@ return [
     |
     */
 
-    'user' => 'App\Provider',
+    'user' => 'App\Models\Provider',
 
     /*
     |--------------------------------------------------------------------------
@@ -132,7 +132,7 @@ return [
         | on the subject claim
         |
         */
-
+//          'user' => PhpOpenSourceSaver\JWTAuth\Providers\User\EloquentUserAdapter::class,
         'user' => 'Tymon\JWTAuth\Providers\User\EloquentUserAdapter',
 
         /*
@@ -143,8 +143,9 @@ return [
         | Specify the provider that is used to create and decode the tokens.
         |
         */
-
+//        'jwt' => PhpOpenSourceSaver\JWTAuth\Providers\JWT\Lcobucci::class,
         'jwt' => 'Tymon\JWTAuth\Providers\JWT\NamshiAdapter',
+//        'jwt' => 'Tymon\JWTAuth\Providers\JWT\LcobucciAdapter',
 
         /*
         |--------------------------------------------------------------------------
@@ -154,8 +155,8 @@ return [
         | Specify the provider that is used to authenticate users.
         |
         */
-
-        'auth' => 'Tymon\JWTAuth\Providers\Auth\IlluminateAuthAdapter',
+      //  'auth' => PhpOpenSourceSaver\JWTAuth\Providers\Auth\Illuminate::class,
+       'auth' => 'Tymon\JWTAuth\Providers\Auth\IlluminateAuthAdapter',
 
         /*
         |--------------------------------------------------------------------------
@@ -165,8 +166,8 @@ return [
         | Specify the provider that is used to store tokens in the blacklist
         |
         */
-
-        'storage' => 'Tymon\JWTAuth\Providers\Storage\IlluminateCacheAdapter',
+      //  'storage' => PhpOpenSourceSaver\JWTAuth\Providers\Storage\IlluminateCache::class,
+       'storage' => 'Tymon\JWTAuth\Providers\Storage\IlluminateCacheAdapter',
 
     ],
 

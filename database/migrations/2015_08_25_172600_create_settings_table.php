@@ -1,43 +1,40 @@
 <?php
 
+
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Schema;
 
 class CreateSettingsTable extends Migration
 {
-	public function __construct()
-	{
-		if (version_compare(Application::VERSION, '5.0', '>=')) {
-			$this->tablename = Config::get('settings.table');
-		} else {
-			$this->tablename = Config::get('anlutro/l4-settings::table');
-		}
-	}
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        // Utilisation d'une table de configuration par défaut ou personnalisée
+        $tableName = config('settings.table', 'settings');
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create($this->tablename, function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->string('key')->index();
-			$table->text('value');
-		});
-	}
+        Schema::create($tableName, function (Blueprint $table) {
+            $table->id(); // Equivalent à increments('id')
+            $table->string('key')->index(); // Index sur la clé
+            $table->text('value'); // Valeur des paramètres
+            $table->timestamps(); // Colonnes created_at et updated_at
+        });
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop($this->tablename);
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        $tableName = config('settings.table', 'settings');
+
+        Schema::dropIfExists($tableName);
+    }
 }

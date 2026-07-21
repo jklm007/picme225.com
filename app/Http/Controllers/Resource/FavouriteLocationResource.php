@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Exception;
 use Auth;
 use DB;
-use App\FavouriteLocation;
-use App\UserRequests;
+use App\Models\FavouriteLocation;
+use App\Models\UserRequests;
 
 class FavouriteLocationResource extends Controller
 {

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Google Maps</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGkmFdNwPivPmIC3DvyeywySodt6d8saQ"></script>
+</head>
+<body>
+  <div id="map" style="height: 500px; width: 100%;"></div>
+  <script>
+    function initMap() {
+      var location = {lat: -25.363, lng: 131.044};
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4,
+        center: location
+      });
+      var marker = new google.maps.Marker({
+        position: location,
+        map: map
+      });
+    }
+    window.onload = initMap;
+  </script>
+</body>
+</html>

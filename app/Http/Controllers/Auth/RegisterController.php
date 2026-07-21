@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -38,7 +38,8 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        // Middleware guest retiré pour permettre l'accès aux pages d'inscription
+        // même quand l'utilisateur est connecté
     }
 
     /**
@@ -91,10 +92,13 @@ class RegisterController extends Controller
         return view('user.auth.register');
     }
 
-     public function lang(Request $request){
-
-        Setting::set('language', $request->id);
-        Setting::save();
+    public function lang(Request $request){
+        \Session::put('locale', $request->id);
+        if(\Auth::check()){
+            $user = \Auth::user();
+            $user->language = $request->id;
+            $user->save();
+        }
         return 1;
     }
 }

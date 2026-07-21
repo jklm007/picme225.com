@@ -1,0 +1,155 @@
+  2026-07-07 13:44:33 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 13:44:35] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":80,"listable_id":null,"wasRecently":true} 
+[2026-07-07 13:44:35] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 13:44:35] production.INFO: resolveWhatsappJid: using LID {"phone":"2250714950219","lid":"124086621593622@lid"} 
+[2026-07-07 13:44:35] production.WARNING: notifyUser: échec envoi message {"listing_id":80,"to":"124086621593622@lid","status":400,"body":"{\"status\":400,\"error\":\"Bad Request\",\"response\":{\"message\":[[\"instance requires property \\\"mediatype\\\"\"]]}}"} 
+[2026-07-07 13:44:36] production.INFO: notifyAdmin: résultat envoi {"listing_id":80,"to":"22559747444@s.whatsapp.net","status":400} 
+[2026-07-07 13:44:36] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":80,"user_phone":"2250714950219"} 
+  2026-07-07 13:44:36 App\Jobs\ProcessWhatsappBatchJob ............... 2s DONE
+  2026-07-07 13:44:36 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 13:44:38] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":81,"listable_id":null,"wasRecently":true} 
+[2026-07-07 13:44:38] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 13:44:38] production.WARNING: notifyUser: échec envoi message {"listing_id":81,"to":"124086621593622@lid","status":400,"body":"{\"status\":400,\"error\":\"Bad Request\",\"response\":{\"message\":[[\"instance requires property \\\"mediatype\\\"\"]]}}"} 
+[2026-07-07 13:44:38] production.INFO: notifyAdmin: résultat envoi {"listing_id":81,"to":"22559747444@s.whatsapp.net","status":400} 
+[2026-07-07 13:44:38] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":81,"user_phone":"124086621593622"} 
+  2026-07-07 13:44:38 App\Jobs\ProcessWhatsappBatchJob ............... 2s DONE
+  2026-07-07 13:46:56 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 13:46:58] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":82,"listable_id":null,"wasRecently":true} 
+[2026-07-07 13:46:58] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 13:46:58] production.INFO: resolveWhatsappJid: using LID {"phone":"2250714950219","lid":"124086621593622@lid"} 
+[2026-07-07 13:46:58] production.WARNING: notifyUser: échec envoi message {"listing_id":82,"to":"124086621593622@lid","status":400,"body":"{\"status\":400,\"error\":\"Bad Request\",\"response\":{\"message\":[[\"instance requires property \\\"mediatype\\\"\"]]}}"} 
+[2026-07-07 13:46:58] production.INFO: notifyAdmin: résultat envoi {"listing_id":82,"to":"22559747444@s.whatsapp.net","status":400} 
+[2026-07-07 13:46:58] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":82,"user_phone":"2250714950219"} 
+  2026-07-07 13:46:58 App\Jobs\ProcessWhatsappBatchJob ............... 1s DONE
+  2026-07-07 13:54:55 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 13:54:56] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":83,"listable_id":null,"wasRecently":true} 
+[2026-07-07 13:54:56] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 13:54:56] production.INFO: resolveWhatsappJid: using LID {"phone":"2250714950219","lid":"124086621593622@lid"} 
+[2026-07-07 13:54:56] production.WARNING: notifyUser: échec envoi message {"listing_id":83,"to":"124086621593622@lid","status":400,"body":"{\"status\":400,\"error\":\"Bad Request\",\"response\":{\"message\":[[\"instance requires property \\\"mediatype\\\"\"]]}}"} 
+[2026-07-07 13:54:56] production.INFO: notifyAdmin: résultat envoi {"listing_id":83,"to":"22559747444@s.whatsapp.net","status":400} 
+[2026-07-07 13:54:56] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":83,"user_phone":"2250714950219"} 
+  2026-07-07 13:54:56 App\Jobs\ProcessWhatsappBatchJob ............... 1s DONE
+  2026-07-07 13:54:56 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 13:54:57] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktProduct","listing_id":84,"listable_id":null,"wasRecently":true} 
+[2026-07-07 13:54:57] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 13:54:57] production.WARNING: notifyUser: échec envoi message {"listing_id":84,"to":"124086621593622@lid","status":400,"body":"{\"status\":400,\"error\":\"Bad Request\",\"response\":{\"message\":[[\"instance requires property \\\"mediatype\\\"\"]]}}"} 
+[2026-07-07 13:54:57] production.INFO: notifyAdmin: résultat envoi {"listing_id":84,"to":"22559747444@s.whatsapp.net","status":400} 
+[2026-07-07 13:54:57] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":84,"user_phone":"124086621593622"} 
+  2026-07-07 13:54:57 App\Jobs\ProcessWhatsappBatchJob ............... 1s DONE
+  2026-07-07 14:08:30 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 14:08:32] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":85,"listable_id":null,"wasRecently":true} 
+[2026-07-07 14:08:32] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 14:08:32] production.INFO: resolveWhatsappJid: using LID {"phone":"2250714950219","lid":"124086621593622@lid"} 
+[2026-07-07 14:08:33] production.INFO: notifyUser: message envoyé avec succès {"listing_id":85,"to":"124086621593622@lid","status":201} 
+[2026-07-07 14:08:36] production.INFO: notifyAdmin: résultat envoi {"listing_id":85,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 14:08:36] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":85,"user_phone":"2250714950219"} 
+  2026-07-07 14:08:36 App\Jobs\ProcessWhatsappBatchJob ............... 5s DONE
+  2026-07-07 14:08:36 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 14:08:38] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":86,"listable_id":null,"wasRecently":true} 
+[2026-07-07 14:08:38] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 14:08:39] production.INFO: notifyUser: message envoyé avec succès {"listing_id":86,"to":"124086621593622@lid","status":201} 
+[2026-07-07 14:08:41] production.INFO: notifyAdmin: résultat envoi {"listing_id":86,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 14:08:41] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":86,"user_phone":"124086621593622"} 
+  2026-07-07 14:08:41 App\Jobs\ProcessWhatsappBatchJob ............... 4s DONE
+  2026-07-07 14:33:09 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 14:33:11] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":87,"listable_id":null,"wasRecently":true} 
+[2026-07-07 14:33:11] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 14:33:11] production.INFO: resolveWhatsappJid: using LID {"phone":"2250714950219","lid":"124086621593622@lid"} 
+[2026-07-07 14:33:12] production.INFO: notifyUser: message envoyé avec succès {"listing_id":87,"to":"124086621593622@lid","status":201} 
+[2026-07-07 14:33:14] production.INFO: notifyAdmin: résultat envoi {"listing_id":87,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 14:33:14] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":87,"user_phone":"2250714950219"} 
+  2026-07-07 14:33:14 App\Jobs\ProcessWhatsappBatchJob ............... 5s DONE
+  2026-07-07 14:50:43 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 14:50:44] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":88,"listable_id":null,"wasRecently":true} 
+[2026-07-07 14:50:44] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 14:50:44] production.INFO: resolveWhatsappJid: using LID {"phone":"2250714950219","lid":"124086621593622@lid"} 
+[2026-07-07 14:50:45] production.INFO: notifyUser: message envoyé avec succès {"listing_id":88,"to":"124086621593622@lid","status":201} 
+[2026-07-07 14:50:46] production.INFO: notifyAdmin: résultat envoi {"listing_id":88,"to":"2250759747444@s.whatsapp.net","status":400} 
+[2026-07-07 14:50:46] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":88,"user_phone":"2250714950219"} 
+  2026-07-07 14:50:46 App\Jobs\ProcessWhatsappBatchJob ............... 3s DONE
+  2026-07-07 14:52:28 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 14:52:30] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":89,"listable_id":null,"wasRecently":true} 
+[2026-07-07 14:52:30] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 14:52:30] production.INFO: resolveWhatsappJid: using LID {"phone":"22503812524","lid":"132057560793264@lid"} 
+[2026-07-07 14:52:32] production.INFO: notifyUser: message envoyé avec succès {"listing_id":89,"to":"132057560793264@lid","status":201} 
+[2026-07-07 14:52:33] production.INFO: notifyAdmin: résultat envoi {"listing_id":89,"to":"2250759747444@s.whatsapp.net","status":400} 
+[2026-07-07 14:52:33] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":89,"user_phone":"22503812524"} 
+  2026-07-07 14:52:33 App\Jobs\ProcessWhatsappBatchJob ............... 4s DONE
+  2026-07-07 14:58:17 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 14:58:19] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":90,"listable_id":null,"wasRecently":true} 
+[2026-07-07 14:58:19] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 14:58:19] production.INFO: resolveWhatsappJid: using LID {"phone":"2250714950219","lid":"124086621593622@lid"} 
+[2026-07-07 14:58:21] production.INFO: notifyUser: message envoyé avec succès {"listing_id":90,"to":"124086621593622@lid","status":201} 
+[2026-07-07 14:58:28] production.INFO: notifyAdmin: résultat envoi {"listing_id":90,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 14:58:28] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":90,"user_phone":"2250714950219"} 
+  2026-07-07 14:58:28 App\Jobs\ProcessWhatsappBatchJob .............. 10s DONE
+  2026-07-07 15:09:48 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 15:09:50] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":91,"listable_id":null,"wasRecently":true} 
+[2026-07-07 15:09:50] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 15:09:52] production.WARNING: notifyUser: échec envoi message {"listing_id":91,"to":"225714950219@s.whatsapp.net","status":400,"body":"{\"status\":400,\"error\":\"Bad Request\",\"response\":{\"message\":[{\"jid\":\"225714950219@s.whatsapp.net\",\"exists\":false,\"number\":\"225714950219@s.whatsapp.net\"}]}}"} 
+[2026-07-07 15:09:53] production.INFO: notifyAdmin: résultat envoi {"listing_id":91,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 15:09:53] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":91,"user_phone":"2250714950219"} 
+  2026-07-07 15:09:53 App\Jobs\ProcessWhatsappBatchJob ............... 4s DONE
+  2026-07-07 15:17:23 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 15:17:26] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":92,"listable_id":null,"wasRecently":true} 
+[2026-07-07 15:17:26] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 15:17:29] production.INFO: notifyUser: message envoyé avec succès {"listing_id":92,"to":"2250714950219@s.whatsapp.net","status":201} 
+[2026-07-07 15:17:31] production.INFO: notifyAdmin: résultat envoi {"listing_id":92,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 15:17:31] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":92,"user_phone":"2250714950219"} 
+  2026-07-07 15:17:31 App\Jobs\ProcessWhatsappBatchJob ............... 7s DONE
+  2026-07-07 15:23:26 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 15:23:28] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":93,"listable_id":null,"wasRecently":true} 
+[2026-07-07 15:23:28] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 15:23:30] production.INFO: notifyUser: message envoyé avec succès {"listing_id":93,"to":"22577436121@s.whatsapp.net","status":201} 
+[2026-07-07 15:23:32] production.INFO: notifyAdmin: résultat envoi {"listing_id":93,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 15:23:32] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":93,"user_phone":"22577436121"} 
+  2026-07-07 15:23:32 App\Jobs\ProcessWhatsappBatchJob ............... 5s DONE
+  2026-07-07 15:33:39 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 15:33:40] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":94,"listable_id":null,"wasRecently":true} 
+[2026-07-07 15:33:40] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 15:33:42] production.INFO: notifyUser: message envoyé avec succès {"listing_id":94,"to":"22577436121@s.whatsapp.net","status":201} 
+[2026-07-07 15:33:44] production.INFO: notifyAdmin: résultat envoi {"listing_id":94,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 15:33:44] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":94,"user_phone":"22577436121"} 
+  2026-07-07 15:33:44 App\Jobs\ProcessWhatsappBatchJob ............... 4s DONE
+  2026-07-07 15:43:45 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 15:43:47] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":95,"listable_id":null,"wasRecently":true} 
+[2026-07-07 15:43:47] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 15:43:48] production.INFO: notifyUser: message envoyé avec succès {"listing_id":95,"to":"22577436121@s.whatsapp.net","status":201} 
+[2026-07-07 15:43:50] production.INFO: notifyAdmin: résultat envoi {"listing_id":95,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 15:43:50] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":95,"user_phone":"22577436121"} 
+  2026-07-07 15:43:50 App\Jobs\ProcessWhatsappBatchJob ............... 5s DONE
+  2026-07-07 16:56:22 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 16:56:24] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":96,"listable_id":null,"wasRecently":true} 
+[2026-07-07 16:56:24] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 16:56:27] production.INFO: notifyUser: message envoyé avec succès {"listing_id":96,"to":"22577436121@s.whatsapp.net","status":201} 
+[2026-07-07 16:56:29] production.INFO: notifyAdmin: résultat envoi {"listing_id":96,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 16:56:29] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":96,"user_phone":"22577436121"} 
+  2026-07-07 16:56:29 App\Jobs\ProcessWhatsappBatchJob ............... 7s DONE
+  2026-07-07 17:06:51 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 17:06:54] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktProduct","listing_id":97,"listable_id":null,"wasRecently":true} 
+[2026-07-07 17:06:54] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 17:06:56] production.INFO: notifyUser: message envoyé avec succès {"listing_id":97,"to":"22503097778@s.whatsapp.net","status":201} 
+[2026-07-07 17:06:58] production.INFO: notifyAdmin: résultat envoi {"listing_id":97,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 17:06:58] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":97,"user_phone":"22503097778"} 
+  2026-07-07 17:06:58 App\Jobs\ProcessWhatsappBatchJob ............... 7s DONE
+  2026-07-07 17:54:06 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 17:54:09] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":98,"listable_id":null,"wasRecently":true} 
+[2026-07-07 17:54:09] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 17:54:09] production.INFO: notifyUser: message envoyé avec succès {"listing_id":98,"to":"195923657408723@lid","status":201} 
+[2026-07-07 17:54:10] production.INFO: notifyAdmin: résultat envoi {"listing_id":98,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 17:54:10] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":98,"user_phone":"22558286571"} 
+  2026-07-07 17:54:10 App\Jobs\ProcessWhatsappBatchJob ............... 3s DONE
+  2026-07-07 18:17:26 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 18:17:29] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":99,"listable_id":null,"wasRecently":true} 
+[2026-07-07 18:17:29] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 18:17:32] production.INFO: notifyUser: message envoyé avec succès via groupe {"listing_id":99,"group":"120363410060021196@g.us","userJid":"195923657408723@lid","status":201} 
+[2026-07-07 18:17:33] production.INFO: notifyAdmin: résultat envoi {"listing_id":99,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 18:17:33] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":99,"user_phone":"22558286571"} 
+  2026-07-07 18:17:33 App\Jobs\ProcessWhatsappBatchJob ............... 7s DONE
+  2026-07-07 18:27:16 App\Jobs\ProcessWhatsappBatchJob ............... RUNNING
+[2026-07-07 18:27:18] production.INFO: savePolymorphic {"modelClass":"App\\Models\\MktVehicle","listing_id":100,"listable_id":null,"wasRecently":true} 
+[2026-07-07 18:27:18] production.INFO: savePolymorphic: create (new listing)  
+[2026-07-07 18:27:20] production.INFO: notifyUser: message envoyé avec succès {"listing_id":100,"to":"22558286571@s.whatsapp.net","status":201} 
+[2026-07-07 18:27:21] production.INFO: notifyAdmin: résultat envoi {"listing_id":100,"to":"22559747444@s.whatsapp.net","status":201} 
+[2026-07-07 18:27:21] production.INFO: Nouvelle annonce créée depuis WhatsApp {"listing_id":100,"user_phone":"22558286571"} 
+  2026-07-07 18:27:21 App\Jobs\ProcessWhatsappBatchJob ............... 4s DONE

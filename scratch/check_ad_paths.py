@@ -1,0 +1,58 @@
+import paramiko, time
+
+client = paramiko.SSHClient()
+client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+client.connect('109.199.123.69', username='root', password='Charlotte23')
+
+pod = "laravel-deployment-56f54497f-r8pmg"
+
+check_php = '''<?php
+require '/app/vendor/autoload.php';
+$app = require '/app/bootstrap/app.php';
+$app->make('Illuminate\\Contracts\\Console\\Kernel')->bootstrap();
+
+use Illuminate\\Support\\Facades\\Storage;
+
+// Check all ad_contents with bad (local) image_url
+$contents = \\App\\Models\\AdContent::whereNotNull('image_url')
+    ->where('image_url', 'not like', 'http%')
+    ->get();
+
+echo "=== AD CONTENTS WITH LOCAL PATHS ===\\n";
+foreach ($contents as $c) {
+    echo "Content #{$c->id} (campaign #{$c->ad_campaign_id}): {$c->image_url}\\n";
+    
+    // Check if the file exists in local storage
+    $localPath = ltrim($c->image_url, '/');
+    $localPath = str_replace('storage/', '', $localPath);
+    $existsLocal = Storage::disk('local')->exists('public/' . $localPath) 
+                   || file_exists(public_path($c->image_url));
+    echo "  Local file exists: " . ($existsLocal ? "YES" : "NO") . "\\n";
+    
+    // Check on S3 - maybe the file was already uploaded under a different path
+    $s3Key = ltrim($c->image_url, '/');
+    $s3Key = str_replace('storage/', '', $s3Key);
+    $existsS3 = Storage::disk('s3')->exists($s3Key);
+    echo "  S3 exists (" . $s3Key . "): " . ($existsS3 ? "YES" : "NO") . "\\n";
+    
+    // Try the ads/ path directly
+    $fileName = basename($c->image_url);
+    $adsS3Key = 'ads/' . $fileName;
+    $existsAds = Storage::disk('s3')->exists($adsS3Key);
+    echo "  S3 exists (ads/" . $fileName . "): " . ($existsAds ? "YES" : "NO") . "\\n";
+}
+echo "DONE\\n";
+'''
+
+with open('scratch/check_ad_paths.php', 'w', encoding='utf-8') as f:
+    f.write(check_php)
+
+sftp = client.open_sftp()
+sftp.put('scratch/check_ad_paths.php', '/tmp/check_ad_paths.php')
+sftp.close()
+
+client.exec_command("kubectl cp /tmp/check_ad_paths.php " + pod + ":/tmp/check_ad_paths.php")
+time.sleep(1)
+stdin, stdout, stderr = client.exec_command("kubectl exec " + pod + " -- php /tmp/check_ad_paths.php 2>&1")
+print(stdout.read().decode('utf-8', errors='replace'))
+client.close()

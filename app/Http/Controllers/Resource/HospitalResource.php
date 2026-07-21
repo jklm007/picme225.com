@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Resource;
 
-use App\Hospital;
+use App\Models\Hospital;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -92,13 +92,8 @@ class HospitalResource extends Controller
         ]);
 
         try {
-
            $hospital = Hospital::findOrFail($id);
-
-            $hospital->hospital_address = $request->hospital_address;
-            $hospital->latitude = $request->latitude;
-            $hospital->longitude = $request->longitude;
-            $hospital->save();
+            $hospital->update($request->all());
 
             return redirect()->route('admin.hospital.index')->with('flash_success', 'Hospital Updated Successfully');    
         } 

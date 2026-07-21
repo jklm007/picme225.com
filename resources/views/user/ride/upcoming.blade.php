@@ -70,7 +70,7 @@
                                         <div class="mytrip-right">
                                              <h5>Provider Details</h5>
                                              <div class="trip-user">
-                                                <div class="user-img" style="background-image: url({{img($trip->provider->avatar)}});">
+                                                <div class="user-img" style="background-image: url({{ $trip->provider ? img($trip->provider->avatar) : asset('asset/img/provider.jpg') }});">
                                                 </div>
                                                 <div class="user-right">
                                                 @if($trip->provider)

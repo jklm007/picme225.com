@@ -1,0 +1,19 @@
+    remoteIdentityKey: <Buffer 05 ff 4d b3 3c 44 64 a7 f1 a4 be 69 95 8d a7 94 09 ad 4e 42 ee 57 37 e1 70 f0 ab 0b 26 8a 60 d0 44>
+  }
+}
+CACHE: {
+  cached: null,
+  updateKey: 'e33b7f30-7f1a-4252-a6a7-1fecc707b052_3EB00E520B652F6A79C6AF_0',
+  messageTimestamp: undefined,
+  secondsSinceEpoch: 1783451488
+}
+Decrypted message with closed session.
+{
+  key: {
+    remoteJid: '2250714950219@s.whatsapp.net',
+    remoteJidAlt: '2250714950219@s.whatsapp.net',
+    fromMe: false,
+    id: 'ACA3775E22232438A78FC634FCDB273F',
+    participant: '',
+    participantAlt: undefined,
+    addressingMode: 'lid'

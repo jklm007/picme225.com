@@ -1,0 +1,1 @@
+<?php require __DIR__.'/vendor/autoload.php'; \ = require_once __DIR__.'/bootstrap/app.php'; \->make('Illuminate\Contracts\Console\Kernel')->bootstrap(); echo json_encode(\App\Models\GatewayNode::where('phone_number', 'like', '%0759747444%')->first());

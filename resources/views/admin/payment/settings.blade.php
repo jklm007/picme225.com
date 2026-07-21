@@ -144,6 +144,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="gold_rental_voyage_commission" class="col-xs-4 col-form-label">Commission Spéciale GOLD - Location & Voyage (%)</label>
+                            <div class="col-xs-8">
+                                <input class="form-control"
+                                    type="number"
+                                    value="{{ Setting::get('gold_rental_voyage_commission', '10') }}"
+                                    id="gold_rental_voyage_commission"
+                                    name="gold_rental_voyage_commission"
+                                    min="0"
+                                    max="100"
+                                    placeholder="Ex: 10">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="booking_prefix" class="col-xs-4 col-form-label">@lang('admin.payment.booking_id_prefix')</label>
                             <div class="col-xs-8">
                                 <input class="form-control"
@@ -154,6 +168,20 @@
                                     min="0"
                                     max="4"
                                     placeholder="Booking ID Prefix">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="platform_booking_fee" class="col-xs-4 col-form-label">Frais de réservation plateforme ({{ Setting::get('currency', '$') }})</label>
+                            <div class="col-xs-8">
+                                <input class="form-control"
+                                    type="number"
+                                    value="{{ Setting::get('platform_booking_fee', '0') }}"
+                                    id="platform_booking_fee"
+                                    name="platform_booking_fee"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="Booking Fee">
                             </div>
                         </div>
 

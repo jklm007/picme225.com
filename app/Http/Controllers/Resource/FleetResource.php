@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Resource;
 
-use App\Fleet;
+use App\Models\Fleet;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -20,7 +20,7 @@ class FleetResource extends Controller
      */
     public function __construct()
     {
-        $this->middleware('demo', ['only' => [ 'update', 'destroy']]);
+        $this->middleware('demo', ['only' => ['update', 'destroy']]);
     }
 
     /**
@@ -30,7 +30,7 @@ class FleetResource extends Controller
      */
     public function index()
     {
-        $fleets = Fleet::orderBy('created_at' , 'desc')->get();
+        $fleets = Fleet::orderBy('created_at', 'desc')->get();
         return view('admin.fleet.index', compact('fleets'));
     }
 
@@ -54,6 +54,7 @@ class FleetResource extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
+            'type' => 'required|in:INDIVIDUAL,COMPANY,CORPORATE,SYNDICATE',
             'company' => 'required|max:255',
             'email' => 'required|unique:fleets,email|email|max:255',
             'mobile' => 'digits_between:6,13',
@@ -61,21 +62,19 @@ class FleetResource extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        try{
+        try {
 
             $fleet = $request->all();
             $fleet['password'] = bcrypt($request->password);
-            if($request->hasFile('logo')) {
+            if ($request->hasFile('logo')) {
                 $fleet['logo'] = $request->logo->store('fleet');
             }
 
             $fleet = Fleet::create($fleet);
 
-            return back()->with('flash_success','Fleet Owner Created Successfully');
+            return back()->with('flash_success', 'Fleet Owner Created Successfully');
 
-        } 
-
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return back()->with('flash_error', 'Fleet Not Found');
         }
     }
@@ -83,7 +82,7 @@ class FleetResource extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Fleet  $fleet
+     * @param  \App\Models\Fleet  $fleet
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -94,14 +93,14 @@ class FleetResource extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Fleet  $fleet
+     * @param  \App\Models\Fleet  $fleet
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         try {
             $fleet = Fleet::findOrFail($id);
-            return view('admin.fleet.edit',compact('fleet'));
+            return view('admin.fleet.edit', compact('fleet'));
         } catch (ModelNotFoundException $e) {
             return $e;
         }
@@ -111,14 +110,15 @@ class FleetResource extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Fleet  $fleet
+     * @param  \App\Models\Fleet  $fleet
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        
+
         $this->validate($request, [
             'name' => 'required|max:255',
+            'type' => 'required|in:INDIVIDUAL,COMPANY,CORPORATE,SYNDICATE',
             'company' => 'required|max:255',
             'mobile' => 'digits_between:6,13',
             'logo' => 'mimes:jpeg,jpg,bmp,png|max:5242880',
@@ -128,20 +128,19 @@ class FleetResource extends Controller
 
             $fleet = Fleet::findOrFail($id);
 
-            if($request->hasFile('logo')) {
+            if ($request->hasFile('logo')) {
                 \Storage::delete($fleet->logo);
                 $fleet->logo = $request->logo->store('fleet');
             }
 
             $fleet->name = $request->name;
+            $fleet->type = $request->type;
             $fleet->company = $request->company;
             $fleet->mobile = $request->mobile;
             $fleet->save();
 
-            return redirect()->route('admin.fleet.index')->with('flash_success', 'Fleet Updated Successfully');    
-        } 
-
-        catch (ModelNotFoundException $e) {
+            return redirect()->route('admin.fleet.index')->with('flash_success', 'Fleet Updated Successfully');
+        } catch (ModelNotFoundException $e) {
             return back()->with('flash_error', 'Fleet Not Found');
         }
     }
@@ -149,17 +148,16 @@ class FleetResource extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Fleet  $Fleet
+     * @param  \App\Models\Fleet  $Fleet
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        
+
         try {
             Fleet::find($id)->delete();
             return back()->with('message', 'Fleet deleted successfully');
-        } 
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return back()->with('flash_error', 'Fleet Not Found');
         }
     }

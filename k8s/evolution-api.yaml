@@ -1,0 +1,159 @@
+---
+# ══════════════════════════════════════════════
+# EVOLUTION API — WhatsApp Gateway for PicMe225
+# ══════════════════════════════════════════════
+
+# 1. Persistent Volume Claim (stockage sessions WhatsApp)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: evolution-api-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+
+---
+# 2. Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evolution-api-deployment
+  namespace: default
+  labels:
+    app: evolution-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: evolution-api
+  template:
+    metadata:
+      labels:
+        app: evolution-api
+    spec:
+      containers:
+        - name: evolution-api
+          image: evoapicloud/evolution-api:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            # Auth
+            - name: AUTHENTICATION_TYPE
+              value: "apikey"
+            - name: AUTHENTICATION_API_KEY
+              value: "picme225-evolution-secret-key"
+            - name: AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES
+              value: "true"
+
+            # Server
+            - name: SERVER_PORT
+              value: "8080"
+            - name: SERVER_URL
+              value: "https://evolution.picme225.site"
+
+            # Webhook global (toutes les instances)
+            - name: WEBHOOK_GLOBAL_ENABLED
+              value: "true"
+            - name: WEBHOOK_GLOBAL_URL
+              value: "https://www.picme225.site/api/whatsapp/webhook"
+            - name: WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS
+              value: "false"
+            - name: WEBHOOK_EVENTS_MESSAGES_UPSERT
+              value: "true"
+            - name: WEBHOOK_EVENTS_CONNECTION_UPDATE
+              value: "true"
+
+            # Storage
+            - name: STORE_MESSAGES
+              value: "true"
+            - name: STORE_MESSAGE_UP
+              value: "true"
+            - name: STORE_CONTACTS
+              value: "true"
+
+            # Database
+            - name: DATABASE_ENABLED
+              value: "true"
+            - name: DATABASE_PROVIDER
+              value: "postgresql"
+            - name: DATABASE_CONNECTION_URI
+              value: "postgresql://picme_user:secret_password@postgres-service:5432/picme_db?schema=evolution&sslmode=disable"
+
+            # Redis
+            - name: REDIS_ENABLED
+              value: "true"
+            - name: REDIS_URI
+              value: "redis://redis-service:6379"
+            - name: REDIS_PREFIX_KEY
+              value: "evolution"
+
+            # Logs
+            - name: LOG_LEVEL
+              value: "ERROR"
+            - name: LOG_COLOR
+              value: "false"
+
+          volumeMounts:
+            - name: evolution-storage
+              mountPath: /evolution/instances
+
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+
+      volumes:
+        - name: evolution-storage
+          persistentVolumeClaim:
+            claimName: evolution-api-pvc
+
+---
+# 3. Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: evolution-api-service
+  namespace: default
+spec:
+  selector:
+    app: evolution-api
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+---
+# 4. Ingress — expose sous evolution.picme225.site
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: evolution-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    traefik.ingress.kubernetes.io/router.entrypoints: "web,websecure"
+spec:
+  tls:
+    - hosts:
+        - evolution.picme225.site
+      secretName: evolution-tls
+  rules:
+    - host: evolution.picme225.site
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: evolution-api-service
+                port:
+                  number: 8080

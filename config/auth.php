@@ -97,46 +97,46 @@ return [
     'providers' => [
         'accounts' => [
             'driver' => 'eloquent',
-            'model' => App\Account::class,
+            'model' => App\Models\Account::class,
         ],
 
         'fleets' => [
             'driver' => 'eloquent',
-            'model' => App\Fleet::class,
+            'model' => App\Models\Fleet::class,
         ],
 
         'dispatchers' => [
             'driver' => 'eloquent',
-            'model' => App\Dispatcher::class,
+            'model' => App\Models\Dispatcher::class,
         ],
 
         'accounts' => [
             'driver' => 'eloquent',
-            'model' => App\Account::class,
+            'model' => App\Models\Account::class,
         ],
 
         'fleets' => [
             'driver' => 'eloquent',
-            'model' => App\Fleet::class,
+            'model' => App\Models\Fleet::class,
         ],
 
         'dispatchers' => [
             'driver' => 'eloquent',
-            'model' => App\Dispatcher::class,
+            'model' => App\Models\Dispatcher::class,
         ],
         'providers' => [
             'driver' => 'eloquent',
-            'model' => App\Provider::class,
+            'model' => App\Models\Provider::class,
         ],
 
         'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Admin::class,
+            'model' => App\Models\Admin::class,
         ],
 
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\User::class,
         ],
     ],
 
@@ -176,17 +176,17 @@ return [
 
         'accounts' => [
             'driver' => 'eloquent',
-            'model' => App\Account::class,
+            'model' => App\Models\Account::class,
         ],
 
         'fleets' => [
             'driver' => 'eloquent',
-            'model' => App\Fleet::class,
+            'model' => App\Models\Fleet::class,
         ],
 
         'dispatchers' => [
             'driver' => 'eloquent',
-            'model' => App\Dispatcher::class,
+            'model' => App\Models\Dispatcher::class,
         ],
         
         'providers' => [

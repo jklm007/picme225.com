@@ -244,10 +244,208 @@
         <!-- Endd of earning content -->
     </div>                
 </div>
+
+
+
+<style>
+/* Light Mode style for earnings */
+body, .page-content, .pro-dashboard, .pro-dashboard-content, .earning-content {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+.pro-dashboard-head {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #e9ecef !important;
+    margin-top: 60px !important;
+}
+.pro-head-link {
+    color: #495057 !important;
+}
+.pro-head-link.active {
+    color: #000000 !important;
+    border-bottom: 2px solid #000000 !important;
+    font-weight: bold;
+}
+.earning-head {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #e9ecef !important;
+    color: #000000 !important;
+    padding: 20px 0 !important;
+}
+.earning-element {
+    color: #000000 !important;
+}
+.earning-box {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 8px;
+    padding: 15px !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.dashboard-count {
+    color: #2ecc71 !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+}
+.dashboard-txt {
+    color: #6c757d !important;
+    font-size: 10px !important;
+}
+.earning-content {
+    background-color: #ffffff !important;
+}
+.earning-section {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 12px;
+    padding: 20px !important;
+    color: #000000 !important;
+}
+.earn-acc-wrapper {
+    background-color: #f8f9fa !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 8px;
+    color: #000000 !important;
+}
+.earning-acc {
+    background-color: #f8f9fa !important;
+    color: #000000 !important;
+}
+.acc-tit {
+    color: #000000 !important;
+}
+.earning-cost {
+    color: #2ecc71 !important;
+}
+.daily-earn-right label {
+    color: #000000 !important;
+}
+.daily-earn-right select {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #ced4da !important;
+}
+.list-view {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 12px;
+    padding: 20px !important;
+}
+table.earning-table th {
+    color: #495057 !important;
+    border-bottom: 2px solid #dee2e6 !important;
+}
+table.earning-table td {
+    color: #212529 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+table.earning-table tr:hover {
+    background-color: #f8f9fa !important;
+}
+</style>
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
 	document.getElementById('set_fully_sum').textContent = "{{currency($fully_sum)}}";
 </script>
+
+
+
+<style>
+/* Light Mode style for earnings */
+body, .page-content, .pro-dashboard, .pro-dashboard-content, .earning-content {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+.pro-dashboard-head {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #e9ecef !important;
+    margin-top: 60px !important;
+}
+.pro-head-link {
+    color: #495057 !important;
+}
+.pro-head-link.active {
+    color: #000000 !important;
+    border-bottom: 2px solid #000000 !important;
+    font-weight: bold;
+}
+.earning-head {
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #e9ecef !important;
+    color: #000000 !important;
+    padding: 20px 0 !important;
+}
+.earning-element {
+    color: #000000 !important;
+}
+.earning-box {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 8px;
+    padding: 15px !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.dashboard-count {
+    color: #2ecc71 !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+}
+.dashboard-txt {
+    color: #6c757d !important;
+    font-size: 10px !important;
+}
+.earning-content {
+    background-color: #ffffff !important;
+}
+.earning-section {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 12px;
+    padding: 20px !important;
+    color: #000000 !important;
+}
+.earn-acc-wrapper {
+    background-color: #f8f9fa !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 8px;
+    color: #000000 !important;
+}
+.earning-acc {
+    background-color: #f8f9fa !important;
+    color: #000000 !important;
+}
+.acc-tit {
+    color: #000000 !important;
+}
+.earning-cost {
+    color: #2ecc71 !important;
+}
+.daily-earn-right label {
+    color: #000000 !important;
+}
+.daily-earn-right select {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #ced4da !important;
+}
+.list-view {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 12px;
+    padding: 20px !important;
+}
+table.earning-table th {
+    color: #495057 !important;
+    border-bottom: 2px solid #dee2e6 !important;
+}
+table.earning-table td {
+    color: #212529 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+table.earning-table tr:hover {
+    background-color: #f8f9fa !important;
+}
+</style>
 @endsection

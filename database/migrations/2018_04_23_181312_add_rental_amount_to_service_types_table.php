@@ -14,7 +14,7 @@ class AddRentalAmountToServiceTypesTable extends Migration
     public function up()
     {
         Schema::table('service_types', function (Blueprint $table) {
-            $table->integer('rental_amount')->after('description');
+            $table->integer('rental_amount')->default(0);;
         });
     }
 

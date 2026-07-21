@@ -11,12 +11,12 @@ use Exception;
 use Carbon\Carbon;
 use App\Helpers\Helper;
 
-use App\User;
-use App\Dispatcher;
-use App\Provider;
-use App\UserRequests;
-use App\RequestFilter;
-use App\ProviderService;
+use App\Models\User;
+use App\Models\Dispatcher;
+use App\Models\Provider;
+use App\Models\UserRequests;
+use App\Models\RequestFilter;
+use App\Models\ProviderService;
 
 
 class DispatcherController extends Controller
@@ -36,7 +36,7 @@ class DispatcherController extends Controller
     /**
      * Dispatcher Panel.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -119,6 +119,7 @@ class DispatcherController extends Controller
                 ->where('status', 'approved')
                 ->whereRaw("(1.609344 * 3956 * acos( cos( radians('$latitude') ) * cos( radians(latitude) ) * cos( radians(longitude) - radians('$longitude') ) + sin( radians('$latitude') ) * sin( radians(latitude) ) ) ) <= $distance")
                 ->with('service', 'service.service_type')
+                ->orderBy('eco_wallet_balance', 'desc') // Priorité Richesse
                 ->paginate(10);
 
             return $Providers;
@@ -135,29 +136,18 @@ class DispatcherController extends Controller
     public function assign($request_id, $provider_id)
     {
         try {
-            $Request = UserRequests::findOrFail($request_id);
-            $Provider = Provider::findOrFail($provider_id);
-
-            $Request->provider_id = $Provider->id;
-            $Request->status = 'STARTED';
-            $Request->current_provider_id = $Provider->id;
-            $Request->save();
-
-            ProviderService::where('provider_id',$Request->provider_id)->update(['status' =>'riding']);
-
-            (new SendPushNotification)->IncomingRequest($Request->current_provider_id);
-
-            try {
-                RequestFilter::where('request_id', $Request->id)
-                    ->where('provider_id', $Provider->id)
-                    ->firstOrFail();
-            } catch (Exception $e) {
-                $Filter = new RequestFilter;
-                $Filter->request_id = $Request->id;
-                $Filter->provider_id = $Provider->id; 
-                $Filter->status = 0;
-                $Filter->save();
+            // Use the new Hybrid Service to handle assignment, logging, and ticket generation
+            $service = new \App\Services\DispatcherHybridService();
+            
+            // Determine dispatcher ID (Admin or Dispatcher)
+            $dispatcherId = 0;
+            if(Auth::guard('dispatcher')->check()) {
+                $dispatcherId = Auth::guard('dispatcher')->id();
+            } elseif(Auth::guard('admin')->check()) {
+                $dispatcherId = Auth::guard('admin')->id();
             }
+
+            $service->assignManual($request_id, $provider_id, $dispatcherId);
 
             if(Auth::guard('admin')->user()){
                 return redirect()
@@ -173,9 +163,9 @@ class DispatcherController extends Controller
 
         } catch (Exception $e) {
             if(Auth::guard('admin')->user()){
-                return redirect()->route('admin.dispatcher.index')->with('flash_error', 'Something Went Wrong!');
+                return redirect()->route('admin.dispatcher.index')->with('flash_error', 'Something Went Wrong! ' . $e->getMessage());
             }elseif(Auth::guard('dispatcher')->user()){
-                return redirect()->route('dispatcher.index')->with('flash_error', 'Something Went Wrong!');
+                return redirect()->route('dispatcher.index')->with('flash_error', 'Something Went Wrong! ' . $e->getMessage());
             }
         }
     }
@@ -235,13 +225,13 @@ class DispatcherController extends Controller
 
         try{
 
-            $details = "https://maps.googleapis.com/maps/api/directions/json?origin=".$request->s_latitude.",".$request->s_longitude."&destination=".$request->d_latitude.",".$request->d_longitude."&mode=driving&key=".Setting::get('map_key');
+            $routing = get_osrm_routing($request->s_latitude, $request->s_longitude, $request->d_latitude, $request->d_longitude);
+            
+            if (!$routing) {
+                throw new Exception("Impossible de calculer l'itinéraire via OSRM.");
+            }
 
-            $json = curl($details);
-
-            $details = json_decode($json, TRUE);
-
-            $route_key = $details['routes'][0]['overview_polyline']['points'];
+            $route_key = $routing['geometry'];
 
             $UserRequest = new UserRequests;
             $UserRequest->booking_id = Helper::generate_booking_id();
@@ -338,7 +328,7 @@ class DispatcherController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function profile()
@@ -349,7 +339,7 @@ class DispatcherController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function profile_update(Request $request)
@@ -377,7 +367,7 @@ class DispatcherController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function password()
@@ -388,7 +378,7 @@ class DispatcherController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function password_update(Request $request)

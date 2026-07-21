@@ -1,0 +1,8 @@
+# PicMe - Crontab Example for Production (Google Cloud / Ubuntu)
+# -------------------------------------------------------------
+# Ajouter cette ligne dans le crontab de l'utilisateur qui fait tourner le serveur web (ex: www-data ou ubuntu).
+# Ne l'ajoutez pas en tant que 'root' !
+#
+# Pour diter le crontab : `crontab -e`
+
+* * * * * cd /var/www/picme && php artisan schedule:run >> /dev/null 2>&1

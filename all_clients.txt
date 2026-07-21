@@ -1,0 +1,4 @@
+--- ALL OAUTH CLIENTS ---
+ID: 1 | Name: Personal Access Client | Secret: 1NgZslIpJA5isTyWJpuIgIAioGOmfAPbwP8rwkZO | Password: 0
+ID: 4 | Name: PickMe PRO Mobile App | Secret: FTclBLuKNkFlyarbF9RJLFpoRLiIIGTpKVGgkyan | Password: 1
+ID: 5 | Name: PickMe Driver Mobile App | Secret: rzlIaqH3PBAnnpySPwVFSMyffEdgf0gxKdpPjSvu | Password: 1

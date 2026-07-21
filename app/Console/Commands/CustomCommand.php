@@ -70,7 +70,7 @@ class CustomCommand extends Command
                         ->where('schedule_at','<=',\Carbon\Carbon::now()->addMinutes(5))
                         ->get();
 
-        if(!empty($UserRequest)){
+        if(!empty($CustomPush)){
             foreach($CustomPush as $Push){
                 DB::table('custom_pushes')
                         ->where('id',$Push->id)

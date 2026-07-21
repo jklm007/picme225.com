@@ -1,11 +1,18 @@
 <?php
 
+set_time_limit(0);
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
  * @package  Laravel
  * @author   Taylor Otwell <taylor@laravel.com>
  */
+
+// Fix OpenSSL hang on Windows
+if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+    putenv('OPENSSL_CONF=C:\xampp\php\extras\ssl\openssl.cnf');
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +26,7 @@
 |
 */
 
-require __DIR__.'/../bootstrap/autoload.php';
+require __DIR__ . '/../bootstrap/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +40,7 @@ require __DIR__.'/../bootstrap/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once __DIR__ . '/../bootstrap/app.php';
 
 /*
 |--------------------------------------------------------------------------

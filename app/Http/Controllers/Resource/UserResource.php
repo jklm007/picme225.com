@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Resource;
 
-use App\User;
-use App\UserRequests;
+use App\Models\User;
+use App\Models\UserRequests;
 use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -86,7 +86,7 @@ class UserResource extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -102,14 +102,15 @@ class UserResource extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         try {
             $user = User::findOrFail($id);
-            return view('admin.users.edit',compact('user'));
+            $plans = \App\Models\SubscriptionPlan::where('target', 'user')->where('status', 1)->get();
+            return view('admin.users.edit',compact('user', 'plans'));
         } catch (ModelNotFoundException $e) {
             return $e;
         }
@@ -119,7 +120,7 @@ class UserResource extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -143,6 +144,23 @@ class UserResource extends Controller
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
             $user->mobile = $request->mobile;
+            
+            if ($request->has('subscription_plan_id')) {
+                $user->subscription_plan_id = $request->subscription_plan_id;
+                if ($request->subscription_plan_id) {
+                    $plan = \App\Models\SubscriptionPlan::find($request->subscription_plan_id);
+                    if ($plan) {
+                        $days = 30;
+                        if ($plan->period == 'DAILY') $days = 1;
+                        if ($plan->period == 'WEEKLY') $days = 7;
+                        if ($plan->period == 'YEARLY') $days = 365;
+                        $user->subscription_expires_at = now()->addDays($days);
+                    }
+                } else {
+                    $user->subscription_expires_at = null;
+                }
+            }
+            
             $user->save();
 
             return redirect()->route('admin.user.index')->with('flash_success', 'User Updated Successfully');    
@@ -156,7 +174,7 @@ class UserResource extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -175,9 +193,58 @@ class UserResource extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
+    /**
+     * Display a listing of KYC requests.
+     */
+    public function kyc_requests()
+    {
+        $users = User::whereIn('kyc_status', ['PENDING', 'APPROVED', 'REJECTED'])
+                    ->orderBy('updated_at', 'desc')
+                    ->get();
+        return view('admin.users.kyc', compact('users'));
+    }
+
+    /**
+     * Approve KYC request.
+     */
+    public function approve_kyc($id)
+    {
+        try {
+            $user = User::findOrFail($id);
+            $user->kyc_status = 'APPROVED';
+            $user->kyc_verified_at = \Carbon\Carbon::now();
+            $user->save();
+
+            return back()->with('flash_success', 'KYC Approved for ' . $user->first_name);
+        } catch (Exception $e) {
+            return back()->with('flash_error', 'User Not Found');
+        }
+    }
+
+    /**
+     * Reject KYC request.
+     */
+    public function reject_kyc(Request $request, $id)
+    {
+        $this->validate($request, [
+            'reason' => 'required|string|max:255',
+        ]);
+
+        try {
+            $user = User::findOrFail($id);
+            $user->kyc_status = 'REJECTED';
+            $user->kyc_rejected_reason = $request->reason;
+            $user->save();
+
+            return back()->with('flash_success', 'KYC Rejected for ' . $user->first_name);
+        } catch (Exception $e) {
+            return back()->with('flash_error', 'User Not Found');
+        }
+    }
+
     public function request($id){
 
         try{

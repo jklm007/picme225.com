@@ -1,0 +1,24 @@
+FROM node:18-alpine
+
+# Définition du répertoire de travail
+WORKDIR /app
+
+# Copie des fichiers package.json
+# Remarque : Votre projet n'a peut-être pas de package.json dédié juste pour server.js,
+# mais si vous avez des dépendances (socket.io, express, ioredis), elles seront installées.
+COPY package*.json ./
+
+# Installer git car certaines dépendances npm peuvent l'exiger
+RUN apk add --no-cache git
+
+# Installation des dépendances de production
+RUN npm install --production
+
+# Copie du script serveur
+COPY server.js .
+
+# Exposer le port des WebSockets
+EXPOSE 3000
+
+# Démarrage du serveur temps réel
+CMD ["node", "server.js"]

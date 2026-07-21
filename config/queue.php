@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_DRIVER', 'sync'),
+    'default' => env('QUEUE_CONNECTION', env('QUEUE_DRIVER', 'sync')),
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     */
 
     'failed' => [
-        'database' => env('DB_CONNECTION', 'mysql'),
+        'database' => env('DB_CONNECTION', 'pgsql'),
         'table' => 'failed_jobs',
     ],
 

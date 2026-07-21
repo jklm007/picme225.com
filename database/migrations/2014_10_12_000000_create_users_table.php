@@ -14,12 +14,16 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
+            // CHANGE: Using $table->id() is the modern and recommended way
+            // It creates a BIGINT UNSIGNED AUTO_INCREMENT column,
+            // which is compatible with foreignId() and ensures consistency.
+            $table->id(); // WAS: $table->increments('id');
+
             $table->string('first_name');
             $table->string('last_name');
             $table->enum('payment_mode', ['CASH', 'CARD', 'PAYPAL']);
             $table->string('email')->unique();
-            $table->string('mobile')->nullable();
+            $table->string('mobile')->unique();
             $table->string('password');
             $table->string('picture')->nullable();
             $table->string('device_token')->nullable();

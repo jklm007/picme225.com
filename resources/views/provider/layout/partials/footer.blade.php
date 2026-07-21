@@ -21,7 +21,7 @@
                 <h5>Get App on</h5>
                 <ul class="app">
                     <li><a href="{{Setting::get('store_link_ios','#')}}"><img src="{{ asset('asset/img/appstore.png') }}"></a></li>
-                    <li><a href="{{Setting::get('store_link_android','#')}}"><img src="{{ asset('asset/img/playstore.png') }}"></a></li>
+                    <li><a href="javascript:void(0)" onclick="installPWA('{{Setting::get('store_link_android','#')}}')"><img src="{{ asset('asset/img/playstore.png') }}"></a></li>
                 </ul>
             </div>
 

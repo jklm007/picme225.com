@@ -1,7 +1,7 @@
 @extends('user.layout.app')
 
 @section('content')
-    <div class="banner row no-margin" style="background-image: url('{{ asset('asset/img/banner-bg.jpg') }}');">
+    <div class="banner row no-margin" style="background-image: url('{{ asset('asset/img/abidjan_plateau_sunset.png') }}'); background-position: center; background-size: cover;">
         <div class="banner-overlay"></div>
         <div class="container">
             <div class="col-md-8">
@@ -261,6 +261,6 @@
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ Setting::get('map_key') }}&libraries=places&callback=initMap" async defer></script>
 
-    <?php $footer = asset('asset/img/footer-city.png'); ?>
-    <div class="footer-city row no-margin" style="background-image: url({{$footer}});"></div>
+    <?php $footer = asset('asset/img/abidjan-banner.jpg'); ?>
+    <div class="footer-city row no-margin" style="background-image: url({{$footer}}); background-size: cover; background-position: center;"></div>
 @endsection

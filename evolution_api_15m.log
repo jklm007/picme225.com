@@ -1,0 +1,745 @@
+Closing session: SessionEntry {
+  _chains: {
+    'BSpBaCQ98lw9IQlpl/M3ye5fznogRAYj9paYR3hTE0Am': { chainKey: [Object], chainType: 1, messageKeys: {} }
+  },
+  registrationId: 256534447,
+  currentRatchet: {
+    ephemeralKeyPair: {
+      pubKey: <Buffer 05 2a 41 68 24 3d f2 5c 3d 21 09 69 97 f3 37 c9 ee 5f ce 7a 20 44 06 23 f6 96 98 47 78 53 13 40 26>,
+      privKey: <Buffer 38 2d 7c ed a4 ee bb 1b 1a b3 82 28 12 73 5f 29 84 14 fb 9d a0 9a 2f 1a 9d f9 ec 56 f6 57 a8 76>
+    },
+    lastRemoteEphemeralKey: <Buffer 05 79 23 79 4b 7d ba 37 54 4a a1 89 f4 e8 52 65 d9 09 48 8f 60 84 1d 16 32 79 09 40 a4 31 93 03 06>,
+    previousCounter: 0,
+    rootKey: <Buffer 2b b3 5e 3b 2e dc 92 fa 70 15 68 61 58 4b 37 7c 17 82 77 4a 25 90 ad 42 ab d2 89 12 03 50 11 e7>
+  },
+  indexInfo: {
+    baseKey: <Buffer 05 d6 5f 79 54 06 bb b6 71 e2 d8 d1 92 ce 0f cc 9e e7 7e a3 b0 00 61 f3 96 e4 bf ba af a4 51 29 6c>,
+    baseKeyType: 1,
+    closed: -1,
+    used: 1783445508030,
+    created: 1783445508030,
+    remoteIdentityKey: <Buffer 05 d6 53 f7 ab 4d 68 de f5 17 a7 d9 b6 5b bb 82 6b 68 8c ed 30 0f 53 51 6c 9b 6d 57 8c f1 25 8f 3b>
+  },
+  pendingPreKey: {
+    signedKeyId: 1027544,
+    baseKey: <Buffer 05 d6 5f 79 54 06 bb b6 71 e2 d8 d1 92 ce 0f cc 9e e7 7e a3 b0 00 61 f3 96 e4 bf ba af a4 51 29 6c>,
+    preKeyId: 13294280
+  }
+}
+Closing session: SessionEntry {
+  _chains: {
+    'BSV9GxVySBzNkVUwm+jOAY1Oe6R3HXEzon9iWVnTik0N': { chainKey: [Object], chainType: 1, messageKeys: {} }
+  },
+  registrationId: 498665709,
+  currentRatchet: {
+    ephemeralKeyPair: {
+      pubKey: <Buffer 05 25 7d 1b 15 72 48 1c cd 91 55 30 9b e8 ce 01 8d 4e 7b a4 77 1d 71 33 a2 7f 62 59 59 d3 8a 4d 0d>,
+      privKey: <Buffer 48 81 a0 ac e2 8b 14 74 05 0f 4c 59 fe 95 4f a6 53 86 2b 58 83 f7 29 6d cb a1 c6 58 f6 57 42 73>
+    },
+    lastRemoteEphemeralKey: <Buffer 05 f9 30 97 54 6d bb 75 f8 c7 15 2f 52 9e 2a cb ca 8b 27 62 13 f5 f0 6c 09 fe 44 5b 19 08 b6 08 3f>,
+    previousCounter: 0,
+    rootKey: <Buffer c9 a8 68 bd 00 1b c9 60 98 11 3c 91 04 46 6c 24 bc 31 66 8f 78 71 53 ba 3c 2b ed 28 a8 c2 54 6c>
+  },
+  indexInfo: {
+    baseKey: <Buffer 05 19 5b 12 e1 71 6a cc d4 f1 a6 da 64 11 99 f6 f8 3a 53 97 ee a9 46 79 fa e2 73 6b 6f eb 8c f2 36>,
+    baseKeyType: 1,
+    closed: -1,
+    used: 1783448841382,
+    created: 1783448841382,
+    remoteIdentityKey: <Buffer 05 ff 4d b3 3c 44 64 a7 f1 a4 be 69 95 8d a7 94 09 ad 4e 42 ee 57 37 e1 70 f0 ab 0b 26 8a 60 d0 44>
+  },
+  pendingPreKey: {
+    signedKeyId: 2065448,
+    baseKey: <Buffer 05 19 5b 12 e1 71 6a cc d4 f1 a6 da 64 11 99 f6 f8 3a 53 97 ee a9 46 79 fa e2 73 6b 6f eb 8c f2 36>,
+    preKeyId: 13370816
+  }
+}
+Closing session: SessionEntry {
+  _chains: {
+    'Ba9pC+oF7i3flIvuHOPboU12X/Ovfij0PPCEhXK923wX': { chainKey: [Object], chainType: 1, messageKeys: {} }
+  },
+  registrationId: 1576371280,
+  currentRatchet: {
+    ephemeralKeyPair: {
+      pubKey: <Buffer 05 af 69 0b ea 05 ee 2d df 94 8b ee 1c e3 db a1 4d 76 5f f3 af 7e 28 f4 3c f0 84 85 72 bd db 7c 17>,
+      privKey: <Buffer a0 39 38 ef ac f3 26 36 fc a3 1d c7 08 2c 38 98 b2 2a b3 06 d6 1d ef f1 6b b6 e3 67 2f f4 ab 68>
+    },
+    lastRemoteEphemeralKey: <Buffer 05 1c 0d ac 28 8f 9c 35 8f 6f 1a 4c 7c 05 cb fd 13 0e fb b2 af aa 91 3e bf 2e 71 24 62 04 9b 05 28>,
+    previousCounter: 0,
+    rootKey: <Buffer 64 96 25 4b 40 14 82 36 10 e3 b2 ac 5f d8 f7 88 66 19 86 1d 5e 71 aa 72 87 2d 32 d3 71 15 8a 8d>
+  },
+  indexInfo: {
+    baseKey: <Buffer 05 b9 d9 c4 1d 47 ba 8c b8 ca 30 1a 0f 89 6b 8e 6a f9 b2 6f 10 0c 3a fb 22 4e 6e c6 53 9e ec 02 02>,
+    baseKeyType: 1,
+    closed: -1,
+    used: 1783448839964,
+    created: 1783448839964,
+    remoteIdentityKey: <Buffer 05 ab ac 52 3a a6 f2 a6 4a 4d b5 5a 68 5e 38 ac 9e 07 08 f1 d6 f4 8a 9a c4 1e 76 46 7b de be 12 6c>
+  },
+  pendingPreKey: {
+    signedKeyId: 8301914,
+    baseKey: <Buffer 05 b9 d9 c4 1d 47 ba 8c b8 ca 30 1a 0f 89 6b 8e 6a f9 b2 6f 10 0c 3a fb 22 4e 6e c6 53 9e ec 02 02>,
+    preKeyId: 2649674
+  }
+}
+Removing old closed session: SessionEntry {
+  _chains: {
+    BTIjXK04FSSJF05r7viy0eD3CHEsaYvmFf93DmjWhSAh: { chainKey: [Object], chainType: 2, messageKeys: {} },
+    'BSEjxjnv192ndTB5J7n4/T5GyUpB6yaLMvlgdyAYW4Bl': { chainKey: [Object], chainType: 1, messageKeys: {} }
+  },
+  registrationId: 498665709,
+  currentRatchet: {
+    ephemeralKeyPair: {
+      pubKey: <Buffer 05 21 23 c6 39 ef d7 dd a7 75 30 79 27 b9 f8 fd 3e 46 c9 4a 41 eb 26 8b 32 f9 60 77 20 18 5b 80 65>,
+      privKey: <Buffer 70 84 5d 49 db e9 95 10 2a 22 f7 db 94 3b 59 d9 5a 6b 14 7a 27 f0 a0 04 97 b9 52 b7 e3 e5 f2 5c>
+    },
+    lastRemoteEphemeralKey: <Buffer 05 32 23 5c ad 38 15 24 89 17 4e 6b ee f8 b2 d1 e0 f7 08 71 2c 69 8b e6 15 ff 77 0e 68 d6 85 20 21>,
+    previousCounter: 0,
+    rootKey: <Buffer bd 95 43 ce 7a b4 19 90 2f 36 41 74 ee c2 35 6e e6 8e 85 b1 a5 22 41 fb 85 ed 1a 9a cc 03 83 b0>
+  },
+  indexInfo: {
+    baseKey: <Buffer 05 2d bb 18 23 ed 2c 96 ab 13 84 3f 88 69 69 20 32 e3 01 d4 2f 39 fd 26 56 9b fa b0 da bf 26 94 0c>,
+    baseKeyType: 1,
+    closed: 1783432436723,
+    used: 1783432435142,
+    created: 1783432434680,
+    remoteIdentityKey: <Buffer 05 ff 4d b3 3c 44 64 a7 f1 a4 be 69 95 8d a7 94 09 ad 4e 42 ee 57 37 e1 70 f0 ab 0b 26 8a 60 d0 44>
+  }
+}
+CACHE: {
+  cached: null,
+  updateKey: 'e33b7f30-7f1a-4252-a6a7-1fecc707b052_3EB0E57879ADC8ABEC956A_0',
+  messageTimestamp: undefined,
+  secondsSinceEpoch: 1783449993
+}
+{"level":50,"time":1783450212343,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{"name":"PreKeyError"},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450212343,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A8801661E8EC5E3541A","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"PreKeyError","message":"Invalid PreKey ID","stack":"PreKeyError: Invalid PreKey ID\n    at SessionBuilder.initIncoming (/evolution/node_modules/libsignal/src/session_builder.js:66:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async 60542043607067_1.0 [as awaitable] (/evolution/node_modules/libsignal/src/session_cipher.js:205:30)\n    at async _asyncQueueExecutor (/evolution/node_modules/libsignal/src/queue_job.js:20:29)","name":"PreKeyError"},"messageType":"pkmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+{"level":50,"time":1783450212344,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450212344,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A8801661E8EC5E3541A","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"Error","message":"No session found to decrypt message","stack":"Error: No session found to decrypt message\n    at GroupCipher.decrypt (file:///evolution/node_modules/baileys/lib/Signal/Group/group_cipher.js:35:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///evolution/node_modules/baileys/lib/Utils/auth-utils.js:220:36"},"messageType":"skmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:12   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+{"level":50,"time":1783450212871,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450212871,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A13C0C4567B6068AB6B","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"Error","message":"No session found to decrypt message","stack":"Error: No session found to decrypt message\n    at GroupCipher.decrypt (file:///evolution/node_modules/baileys/lib/Signal/Group/group_cipher.js:35:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///evolution/node_modules/baileys/lib/Utils/auth-utils.js:220:36"},"messageType":"skmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+{"level":50,"time":1783450213296,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{"name":"PreKeyError"},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450213297,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A8801661E8EC5E3541A","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"PreKeyError","message":"Invalid PreKey ID","stack":"PreKeyError: Invalid PreKey ID\n    at SessionBuilder.initIncoming (/evolution/node_modules/libsignal/src/session_builder.js:66:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async 60542043607067_1.0 [as awaitable] (/evolution/node_modules/libsignal/src/session_cipher.js:205:30)\n    at async _asyncQueueExecutor (/evolution/node_modules/libsignal/src/queue_job.js:20:29)","name":"PreKeyError"},"messageType":"pkmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:13   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader"
+}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:15   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+{"level":50,"time":1783450215290,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{"name":"PreKeyError"},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450215291,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A02DB8C77F177B69612","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"PreKeyError","message":"Invalid PreKey ID","stack":"PreKeyError: Invalid PreKey ID\n    at SessionBuilder.initIncoming (/evolution/node_modules/libsignal/src/session_builder.js:66:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async 60542043607067_1.0 [as awaitable] (/evolution/node_modules/libsignal/src/session_cipher.js:205:30)\n    at async _asyncQueueExecutor (/evolution/node_modules/libsignal/src/queue_job.js:20:29)","name":"PreKeyError"},"messageType":"pkmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+{"level":50,"time":1783450215299,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450215299,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A02DB8C77F177B69612","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"Error","message":"No session found to decrypt message","stack":"Error: No session found to decrypt message\n    at GroupCipher.decrypt (file:///evolution/node_modules/baileys/lib/Signal/Group/group_cipher.js:35:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///evolution/node_modules/baileys/lib/Utils/auth-utils.js:220:36"},"messageType":"skmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:15   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+{"level":50,"time":1783450215731,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{"name":"PreKeyError"},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450215734,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A13C0C4567B6068AB6B","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"PreKeyError","message":"Invalid PreKey ID","stack":"PreKeyError: Invalid PreKey ID\n    at SessionBuilder.initIncoming (/evolution/node_modules/libsignal/src/session_builder.js:66:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async 60542043607067_1.0 [as awaitable] (/evolution/node_modules/libsignal/src/session_cipher.js:205:30)\n    at async _asyncQueueExecutor (/evolution/node_modules/libsignal/src/queue_job.js:20:29)","name":"PreKeyError"},"messageType":"pkmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+{"level":50,"time":1783450217162,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450217162,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A1033A5F3BD7E1429C0","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"Error","message":"No session found to decrypt message","stack":"Error: No session found to decrypt message\n    at GroupCipher.decrypt (file:///evolution/node_modules/baileys/lib/Signal/Group/group_cipher.js:35:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///evolution/node_modules/baileys/lib/Utils/auth-utils.js:220:36"},"messageType":"skmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:17   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+{"level":50,"time":1783450217586,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450217586,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A769B1A4A0B4BB5F505","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"Error","message":"No session found to decrypt message","stack":"Error: No session found to decrypt message\n    at GroupCipher.decrypt (file:///evolution/node_modules/baileys/lib/Signal/Group/group_cipher.js:35:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///evolution/node_modules/baileys/lib/Utils/auth-utils.js:220:36"},"messageType":"skmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:17   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader"
+}
+{"level":50,"time":1783450218016,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{"name":"PreKeyError"},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450218016,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A8801661E8EC5E3541A","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"PreKeyError","message":"Invalid PreKey ID","stack":"PreKeyError: Invalid PreKey ID\n    at SessionBuilder.initIncoming (/evolution/node_modules/libsignal/src/session_builder.js:66:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async 60542043607067_1.0 [as awaitable] (/evolution/node_modules/libsignal/src/session_cipher.js:205:30)\n    at async _asyncQueueExecutor (/evolution/node_modules/libsignal/src/queue_job.js:20:29)","name":"PreKeyError"},"messageType":"pkmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:18   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader"
+}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:19   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+{"level":50,"time":1783450219436,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{"name":"PreKeyError"},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450219436,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A02DB8C77F177B69612","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"PreKeyError","message":"Invalid PreKey ID","stack":"PreKeyError: Invalid PreKey ID\n    at SessionBuilder.initIncoming (/evolution/node_modules/libsignal/src/session_builder.js:66:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async 60542043607067_1.0 [as awaitable] (/evolution/node_modules/libsignal/src/session_cipher.js:205:30)\n    at async _asyncQueueExecutor (/evolution/node_modules/libsignal/src/queue_job.js:20:29)","name":"PreKeyError"},"messageType":"pkmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+{"level":50,"time":1783450221391,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{"name":"PreKeyError"},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450221391,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A13C0C4567B6068AB6B","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"PreKeyError","message":"Invalid PreKey ID","stack":"PreKeyError: Invalid PreKey ID\n    at SessionBuilder.initIncoming (/evolution/node_modules/libsignal/src/session_builder.js:66:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async 60542043607067_1.0 [as awaitable] (/evolution/node_modules/libsignal/src/session_cipher.js:205:30)\n    at async _asyncQueueExecutor (/evolution/node_modules/libsignal/src/queue_job.js:20:29)","name":"PreKeyError"},"messageType":"pkmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:21   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:22   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+{"level":50,"time":1783450222816,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{"name":"PreKeyError"},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450222816,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A1033A5F3BD7E1429C0","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"PreKeyError","message":"Invalid PreKey ID","stack":"PreKeyError: Invalid PreKey ID\n    at SessionBuilder.initIncoming (/evolution/node_modules/libsignal/src/session_builder.js:66:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async 60542043607067_1.0 [as awaitable] (/evolution/node_modules/libsignal/src/session_cipher.js:205:30)\n    at async _asyncQueueExecutor (/evolution/node_modules/libsignal/src/queue_job.js:20:29)","name":"PreKeyError"},"messageType":"pkmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+{"level":50,"time":1783450224542,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","error":{"name":"PreKeyError"},"msg":"transaction failed, rolling back"}
+{"level":50,"time":1783450224543,"pid":163,"hostname":"evolution-api-deployment-847bb77cff-m467r","key":{"remoteJid":"120363184402536529@g.us","fromMe":false,"id":"2A769B1A4A0B4BB5F505","participant":"60542043607067@lid","participantAlt":"22589702851@s.whatsapp.net","addressingMode":"lid"},"err":{"type":"PreKeyError","message":"Invalid PreKey ID","stack":"PreKeyError: Invalid PreKey ID\n    at SessionBuilder.initIncoming (/evolution/node_modules/libsignal/src/session_builder.js:66:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async 60542043607067_1.0 [as awaitable] (/evolution/node_modules/libsignal/src/session_cipher.js:205:30)\n    at async _asyncQueueExecutor (/evolution/node_modules/libsignal/src/queue_job.js:20:29)","name":"PreKeyError"},"messageType":"pkmsg","sender":"120363184402536529@g.us","author":"60542043607067@lid","isSessionRecordError":false,"msg":"failed to decrypt message"}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:24   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:25   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+{
+  key: {
+    remoteJid: '120363184402536529@g.us',
+    remoteJidAlt: undefined,
+    fromMe: false,
+    id: '2A8801661E8EC5E3541A',
+    participant: '60542043607067@lid',
+    participantAlt: '22589702851@s.whatsapp.net',
+    addressingMode: 'lid'
+  },
+  pushName: 'Car Rental Leader',
+  status: 'DELIVERY_ACK',
+  message: {
+    senderKeyDistributionMessage: {
+      groupId: '120363184402536529@g.us',
+      axolotlSenderKeyDistributionMessage: [Uint8Array]
+    },
+    messageContextInfo: {
+      threadId: [],
+      deviceListMetadata: [Object],
+      deviceListMetadataVersion: 2,
+      messageSecret: [Uint8Array]
+    },
+    conversation: "Présentement l'urgence est d'avoir un pick-up"
+  },
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 1,
+    isForwarded: true,
+    pairedMediaType: 0
+  },
+  messageType: 'conversation',
+  messageTimestamp: 1783450219,
+  instanceId: 'e33b7f30-7f1a-4252-a6a7-1fecc707b052',
+  source: 'unknown'
+}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:26   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+{
+  key: {
+    remoteJid: '120363184402536529@g.us',
+    remoteJidAlt: undefined,
+    fromMe: false,
+    id: '2A02DB8C77F177B69612',
+    participant: '60542043607067@lid',
+    participantAlt: '22589702851@s.whatsapp.net',
+    addressingMode: 'lid'
+  },
+  pushName: 'Car Rental Leader',
+  status: 'DELIVERY_ACK',
+  message: {
+    senderKeyDistributionMessage: {
+      groupId: '120363184402536529@g.us',
+      axolotlSenderKeyDistributionMessage: [Uint8Array]
+    },
+    messageContextInfo: {
+      threadId: [],
+      deviceListMetadata: [Object],
+      deviceListMetadataVersion: 2,
+      messageSecret: [Uint8Array]
+    },
+    conversation: 'Demain même matin'
+  },
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 1,
+    isForwarded: true,
+    pairedMediaType: 0
+  },
+  messageType: 'conversation',
+  messageTimestamp: 1783450221,
+  instanceId: 'e33b7f30-7f1a-4252-a6a7-1fecc707b052',
+  source: 'unknown'
+}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:27   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+{
+  key: {
+    remoteJid: '120363184402536529@g.us',
+    remoteJidAlt: undefined,
+    fromMe: false,
+    id: '2A13C0C4567B6068AB6B',
+    participant: '60542043607067@lid',
+    participantAlt: '22589702851@s.whatsapp.net',
+    addressingMode: 'lid'
+  },
+  pushName: 'Car Rental Leader',
+  status: 'DELIVERY_ACK',
+  message: {
+    senderKeyDistributionMessage: {
+      groupId: '120363184402536529@g.us',
+      axolotlSenderKeyDistributionMessage: [Uint8Array]
+    },
+    messageContextInfo: {
+      threadId: [],
+      deviceListMetadata: [Object],
+      deviceListMetadataVersion: 2,
+      messageSecret: [Uint8Array]
+    },
+    conversation: 'Bouafflé'
+  },
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 1,
+    isForwarded: true,
+    pairedMediaType: 0
+  },
+  messageType: 'conversation',
+  messageTimestamp: 1783450222,
+  instanceId: 'e33b7f30-7f1a-4252-a6a7-1fecc707b052',
+  source: 'unknown'
+}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:27   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+{
+  key: {
+    remoteJid: '120363184402536529@g.us',
+    remoteJidAlt: undefined,
+    fromMe: false,
+    id: '2A1033A5F3BD7E1429C0',
+    participant: '60542043607067@lid',
+    participantAlt: '22589702851@s.whatsapp.net',
+    addressingMode: 'lid'
+  },
+  pushName: 'Car Rental Leader',
+  status: 'DELIVERY_ACK',
+  message: {
+    senderKeyDistributionMessage: {
+      groupId: '120363184402536529@g.us',
+      axolotlSenderKeyDistributionMessage: [Uint8Array]
+    },
+    messageContextInfo: {
+      threadId: [],
+      deviceListMetadata: [Object],
+      deviceListMetadataVersion: 2,
+      messageSecret: [Uint8Array]
+    },
+    conversation: "Normalement c'est pour ma journée de demain"
+  },
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 1,
+    isForwarded: true,
+    pairedMediaType: 0
+  },
+  messageType: 'conversation',
+  messageTimestamp: 1783450224,
+  instanceId: 'e33b7f30-7f1a-4252-a6a7-1fecc707b052',
+  source: 'unknown'
+}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:28   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+{
+  key: {
+    remoteJid: '120363184402536529@g.us',
+    remoteJidAlt: undefined,
+    fromMe: false,
+    id: '2A769B1A4A0B4BB5F505',
+    participant: '60542043607067@lid',
+    participantAlt: '22589702851@s.whatsapp.net',
+    addressingMode: 'lid'
+  },
+  pushName: 'Car Rental Leader',
+  status: 'DELIVERY_ACK',
+  message: {
+    conversation: 'Commande ‼️\n' +
+      '\n' +
+      'Besoin d’un pick-up pour Location avec Chauffeur demain sur Bouaflé !',
+    senderKeyDistributionMessage: {
+      groupId: '120363184402536529@g.us',
+      axolotlSenderKeyDistributionMessage: [Uint8Array]
+    },
+    messageContextInfo: {
+      threadId: [],
+      deviceListMetadata: [Object],
+      deviceListMetadataVersion: 2,
+      messageSecret: [Uint8Array]
+    }
+  },
+  contextInfo: undefined,
+  messageType: 'conversation',
+  messageTimestamp: 1783450226,
+  instanceId: 'e33b7f30-7f1a-4252-a6a7-1fecc707b052',
+  source: 'unknown'
+}
+[Evolution API] [picme_whatsapp] 163 - Tue Jul 07 2026 15:50:29   DEBUG  [ChannelStartupService] [string] Updating contact: {
+  "id": "60542043607067@lid",
+  "notify": "Car Rental Leader",
+  "verifiedName": "Car Rental Leader"
+}
+Message received from phone, id= 3EB046B37845F96395A4AA WebMessageInfo {
+  messageStubParameters: [],
+  labels: [],
+  userReceipt: [],
+  reactions: [],
+  pollUpdates: [],
+  eventResponses: [],
+  statusMentions: [],
+  messageAddOns: [],
+  statusMentionSources: [],
+  supportAiCitations: [],
+  key: MessageKey {
+    remoteJid: '120363184402536529@g.us',
+    fromMe: false,
+    id: '2A13C0C4567B6068AB6B'
+  },
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      endCardTiles: [],
+      text: 'Bouafflé',
+      previewType: 0,
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo { threadId: [], messageSecret: [Uint8Array] }
+  },
+  messageTimestamp: Long { low: 1783450212, high: 0, unsigned: true },
+  participant: '60542043607067@lid',
+  messageSecret: Uint8Array(32) [
+     17, 169, 151,  76, 179, 238, 149, 110,
+    250, 180, 127, 212, 138,  26, 236, 168,
+    122, 124,  80,  69,  75,  61, 236,  72,
+     86, 176,  88, 218, 103,  28, 192, 101
+  ],
+  reportingTokenInfo: ReportingTokenInfo {
+    reportingTag: Uint8Array(20) [
+        1,  20,  69, 159, 158, 137,
+      225, 127, 136, 214,  95, 173,
+       96, 117, 157, 238, 148, 113,
+       14, 110
+    ]
+  },
+  isMentionedInStatus: false
+}
+{
+  key: MessageKey {
+    remoteJid: '120363184402536529@g.us',
+    fromMe: false,
+    id: '2A13C0C4567B6068AB6B'
+  },
+  pushName: '60542043607067@lid',
+  status: 'DELIVERY_ACK',
+  message: {
+    messageContextInfo: { threadId: [], messageSecret: [Uint8Array] },
+    conversation: 'Bouafflé'
+  },
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 1,
+    isForwarded: true,
+    forwardOrigin: 0
+  },
+  messageType: 'conversation',
+  messageTimestamp: 1783450212,
+  instanceId: 'e33b7f30-7f1a-4252-a6a7-1fecc707b052',
+  source: 'unknown'
+}
+Message received from phone, id= 3EB06EC1A77E8F7CC55ACE WebMessageInfo {
+  messageStubParameters: [],
+  labels: [],
+  userReceipt: [],
+  reactions: [],
+  pollUpdates: [],
+  eventResponses: [],
+  statusMentions: [],
+  messageAddOns: [],
+  statusMentionSources: [],
+  supportAiCitations: [],
+  key: MessageKey {
+    remoteJid: '120363184402536529@g.us',
+    fromMe: false,
+    id: '2A8801661E8EC5E3541A'
+  },
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      endCardTiles: [],
+      text: "Présentement l'urgence est d'avoir un pick-up",
+      previewType: 0,
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo { threadId: [], messageSecret: [Uint8Array] }
+  },
+  messageTimestamp: Long { low: 1783450212, high: 0, unsigned: true },
+  participant: '60542043607067@lid',
+  messageSecret: Uint8Array(32) [
+     82,  29,  36, 152, 234, 119,  52, 217,
+     80, 102,  69, 240,  41, 251, 164, 194,
+    186, 220, 246, 238, 199, 194, 117, 190,
+     65, 199, 110,  14, 165,  87,  19, 142
+  ],
+  reportingTokenInfo: ReportingTokenInfo {
+    reportingTag: Uint8Array(20) [
+        1,  20, 236, 117,  87, 151,
+      245,  29,  31,  36, 248, 197,
+      147,  62,   9, 147,  58, 172,
+      147, 241
+    ]
+  },
+  isMentionedInStatus: false
+}
+{
+  key: MessageKey {
+    remoteJid: '120363184402536529@g.us',
+    fromMe: false,
+    id: '2A8801661E8EC5E3541A'
+  },
+  pushName: '60542043607067@lid',
+  status: 'DELIVERY_ACK',
+  message: {
+    messageContextInfo: { threadId: [], messageSecret: [Uint8Array] },
+    conversation: "Présentement l'urgence est d'avoir un pick-up"
+  },
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 1,
+    isForwarded: true,
+    forwardOrigin: 0
+  },
+  messageType: 'conversation',
+  messageTimestamp: 1783450212,
+  instanceId: 'e33b7f30-7f1a-4252-a6a7-1fecc707b052',
+  source: 'unknown'
+}
+Message received from phone, id= 3EB01A95A43ED7FC7A27C9 WebMessageInfo {
+  messageStubParameters: [],
+  labels: [],
+  userReceipt: [],
+  reactions: [],
+  pollUpdates: [],
+  eventResponses: [],
+  statusMentions: [],
+  messageAddOns: [],
+  statusMentionSources: [],
+  supportAiCitations: [],
+  key: MessageKey {
+    remoteJid: '120363184402536529@g.us',
+    fromMe: false,
+    id: '2A02DB8C77F177B69612'
+  },
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      endCardTiles: [],
+      text: 'Demain même matin',
+      previewType: 0,
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo { threadId: [], messageSecret: [Uint8Array] }
+  },
+  messageTimestamp: Long { low: 1783450213, high: 0, unsigned: true },
+  participant: '60542043607067@lid',
+  messageSecret: Uint8Array(32) [
+     98,  25, 254, 186,  53,  97, 226, 140,
+    117, 133,  24, 210,  99, 184,  90, 253,
+     38, 191, 152, 218,  31,  49, 191, 248,
+    178,  76, 176,  85, 184, 212, 186, 254
+  ],
+  reportingTokenInfo: ReportingTokenInfo {
+    reportingTag: Uint8Array(20) [
+        1,  20, 100,  75, 251, 224,
+       53, 141, 159, 178, 153,  38,
+      151, 102,   8, 171,  75,  20,
+       18, 171
+    ]
+  },
+  isMentionedInStatus: false
+}
+{
+  key: MessageKey {
+    remoteJid: '120363184402536529@g.us',
+    fromMe: false,
+    id: '2A02DB8C77F177B69612'
+  },
+  pushName: '60542043607067@lid',
+  status: 'DELIVERY_ACK',
+  message: {
+    messageContextInfo: { threadId: [], messageSecret: [Uint8Array] },
+    conversation: 'Demain même matin'
+  },
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 1,
+    isForwarded: true,
+    forwardOrigin: 0
+  },
+  messageType: 'conversation',
+  messageTimestamp: 1783450213,
+  instanceId: 'e33b7f30-7f1a-4252-a6a7-1fecc707b052',
+  source: 'unknown'
+}
+Message received from phone, id= 3EB00B9AF794CDB107D709 WebMessageInfo {
+  messageStubParameters: [],
+  labels: [],
+  userReceipt: [],
+  reactions: [],
+  pollUpdates: [],
+  eventResponses: [],
+  statusMentions: [],
+  messageAddOns: [],
+  statusMentionSources: [],
+  supportAiCitations: [],
+  key: MessageKey {
+    remoteJid: '120363184402536529@g.us',
+    fromMe: false,
+    id: '2A1033A5F3BD7E1429C0'
+  },
+  message: Message {
+    extendedTextMessage: ExtendedTextMessage {
+      endCardTiles: [],
+      text: "Normalement c'est pour ma journée de demain",
+      previewType: 0,
+      contextInfo: [ContextInfo],
+      inviteLinkGroupTypeV2: 0
+    },
+    messageContextInfo: MessageContextInfo { threadId: [], messageSecret: [Uint8Array] }
+  },
+  messageTimestamp: Long { low: 1783450213, high: 0, unsigned: true },
+  participant: '60542043607067@lid',
+  messageSecret: Uint8Array(32) [
+     27, 243, 160, 220, 191, 60, 122,  12,
+    237,  50,  12, 240,  16,  9, 230, 104,
+    182,  51, 226,  53,  64,  9,  58,  30,
+    220, 189, 238, 161, 220, 99,  57, 123
+  ],
+  reportingTokenInfo: ReportingTokenInfo {
+    reportingTag: Uint8Array(20) [
+        1, 20, 204,  74,   8, 108,
+      207, 55, 220, 237,  48,  55,
+       96, 47, 232, 117, 105, 152,
+      137, 72
+    ]
+  },
+  isMentionedInStatus: false
+}
+{
+  key: MessageKey {
+    remoteJid: '120363184402536529@g.us',
+    fromMe: false,
+    id: '2A1033A5F3BD7E1429C0'
+  },
+  pushName: '60542043607067@lid',
+  status: 'DELIVERY_ACK',
+  message: {
+    messageContextInfo: { threadId: [], messageSecret: [Uint8Array] },
+    conversation: "Normalement c'est pour ma journée de demain"
+  },
+  contextInfo: {
+    mentionedJid: [],
+    groupMentions: [],
+    statusAttributions: [],
+    forwardingScore: 1,
+    isForwarded: true,
+    forwardOrigin: 0
+  },
+  messageType: 'conversation',
+  messageTimestamp: 1783450213,
+  instanceId: 'e33b7f30-7f1a-4252-a6a7-1fecc707b052',
+  source: 'unknown'
+}
+Message received from phone, id= 3EB0E27DDF5D1C1B9E2C46 WebMessageInfo {
+  messageStubParameters: [],
+  labels: [],
+  userReceipt: [],
+  reactions: [],
+  pollUpdates: [],
+  eventResponses: [],
+  statusMentions: [],
+  messageAddOns: [],
+  statusMentionSources: [],
+  supportAiCitations: [],
+  key: MessageKey {
+    remoteJid: '120363184402536529@g.us',
+    fromMe: false,
+    id: '2A769B1A4A0B4BB5F505'
+  },
+  message: Message {
+    conversation: 'Commande ‼️\n' +
+      '\n' +
+      'Besoin d’un pick-up pour Location avec Chauffeur demain sur Bouaflé !',
+    messageContextInfo: MessageContextInfo { threadId: [], messageSecret: [Uint8Array] }
+  },
+  messageTimestamp: Long { low: 1783450214, high: 0, unsigned: true },
+  participant: '60542043607067@lid',
+  messageSecret: Uint8Array(32) [
+     68, 120, 140, 254,  84,  60, 183, 102,
+     82, 181, 124, 109,  56, 103, 221, 214,
+     17, 157, 182, 214, 220,  23,  92, 161,
+    220,  98, 180,  72,   8,  42,  58, 152
+  ],
+  reportingTokenInfo: ReportingTokenInfo {
+    reportingTag: Uint8Array(20) [
+        1,  20,  32,  81, 241,   4,
+      200, 213, 100, 173, 168,  50,
+       68,  78,  99, 148, 119, 238,
+      121, 217
+    ]
+  },
+  isMentionedInStatus: false
+}
+{
+  key: MessageKey {
+    remoteJid: '120363184402536529@g.us',
+    fromMe: false,
+    id: '2A769B1A4A0B4BB5F505'
+  },
+  pushName: '60542043607067@lid',
+  status: 'DELIVERY_ACK',
+  message: {
+    conversation: 'Commande ‼️\n' +
+      '\n' +
+      'Besoin d’un pick-up pour Location avec Chauffeur demain sur Bouaflé !',
+    messageContextInfo: { threadId: [], messageSecret: [Uint8Array] }
+  },
+  contextInfo: undefined,
+  messageType: 'conversation',
+  messageTimestamp: 1783450214,
+  instanceId: 'e33b7f30-7f1a-4252-a6a7-1fecc707b052',
+  source: 'unknown'
+}

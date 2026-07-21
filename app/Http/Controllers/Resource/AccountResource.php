@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Resource;
 
-use App\Account;
+use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Controllers\Controller;
@@ -78,7 +78,7 @@ class AccountResource extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Dispatcher  $account
+     * @param  \App\Models\Dispatcher  $account
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -135,7 +135,7 @@ class AccountResource extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Account  $dispatcher
+     * @param  \App\Models\Account  $dispatcher
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

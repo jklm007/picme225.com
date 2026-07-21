@@ -1,0 +1,480 @@
+<?php
+
+namespace App\Http\Controllers\ProviderAuth;
+
+use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
+use App\Http\Controllers\Controller;
+use App\Notifications\ResetPasswordOTP;
+
+use Auth;
+use Config;
+use Setting;
+use Notification;
+use Validator;
+use Socialite;
+
+use App\Provider;
+use App\ProviderDevice;
+use App\ProviderService;
+use App\RequestFilter;
+use App\ServiceType;
+use App\Hospital;
+
+class TokenController extends Controller
+{
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function hospitals() {
+
+        if($hospitals = Hospital::all()) {
+            return response()->json(['hospital' => $hospitals]);
+        } else {
+            return response()->json(['error' => 'No hospitals found!'], 500);
+        }
+    }
+
+    public function services() {
+
+        if($Services = ServiceType::all()) {
+            return response()->json(['service' => $Services]);
+        } else {
+            return response()->json(['error' => 'No Services!'], 500);
+        }
+    }
+
+    public function register(Request $request)
+    {
+        $this->validate($request, [
+            'device_id' => 'required',
+            'device_type' => 'required|in:android,ios',
+            'device_token' => 'required',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:providers',
+            'mobile' => 'required',
+            'password' => 'required|min:6|confirmed',
+            'service_type_id' =>'required',
+            'service_number' => 'required',
+            'service_model' => 'required',
+        ]);
+        $service = ServiceType::where('id',$request->service_type_id)->get(['ambulance']);
+        if($service[0]->ambulance == 1){
+            $this->validate($request, [
+                'hospital_id' => 'required',
+                'document_url' => 'required'
+            ]);
+        }
+
+        try{
+
+            $Provider = $request->all();
+            $Provider['password'] = bcrypt($request->password);
+            $Provider['status'] = 'banned';
+
+            $Provider = Provider::create($Provider);
+
+            if(isset($request->document_url)){
+                $document =$request->document_url->store('provider/hospitaldocuments');
+            }else{
+                $document ='NULL';
+            }
+            // if(Setting::get('demo_mode', 0) == 1) {
+            // $Provider->update(['status' => 'approved']);
+            ProviderService::create([
+                'provider_id' => $Provider->id,
+                'service_type_id' => $request->service_type_id,
+                'status' => 'active',
+                'service_number' =>  $request->service_number,
+                'service_model' =>  $request->service_model,
+                'hospital_id' =>  $request->hospital_id? : '0',
+                'document_url' => $document,
+            ]);
+            // }
+
+            ProviderDevice::create([
+                'provider_id' => $Provider->id,
+                'udid' => $request->device_id,
+                'token' => $request->device_token,
+                'type' => $request->device_type,
+            ]);
+
+            return $Provider;
+
+
+        } catch (QueryException $e) {
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json(['error' => 'Something went wrong, Please try again later!'], 500);
+            }
+            return abort(500);
+        }
+
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function authenticate(Request $request)
+    {
+        $this->validate($request, [
+            'device_id' => 'required',
+            'device_type' => 'required|in:android,ios',
+            'device_token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::guard('providerapi')->attempt($credentials)) {
+            $User = Auth::guard('providerapi')->user();
+            $token = $User->createToken('Provider Access Token')->accessToken;
+
+            $User = Provider::with('service', 'device')->find($User->id);
+
+            $User->access_token = $token;
+            $User->token_type = 'Bearer';
+            $User->currency = Setting::get('currency', '$');
+            $User->sos = Setting::get('sos_number', '911');
+
+            if($User->device) {
+                ProviderDevice::where('id',$User->device->id)->update([
+                    'udid' => $request->device_id,
+                    'token' => $request->device_token,
+                    'type' => $request->device_type,
+                ]);
+
+            } else {
+                ProviderDevice::create([
+                    'provider_id' => $User->id,
+                    'udid' => $request->device_id,
+                    'token' => $request->device_token,
+                    'type' => $request->device_type,
+                ]);
+            }
+
+            return response()->json($User);
+        } else {
+            return response()->json(['error' => 'The email address or password you entered is incorrect.'], 401);
+        }
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function logout(Request $request)
+    {
+        try {
+            ProviderDevice::where('provider_id', $request->id)->update(['udid'=> '', 'token' => '']);
+            ProviderService::where('provider_id',$request->id)->update(['status' => 'offline']);
+
+            $provider = Provider::find($request->id); // Find the provider to revoke tokens
+            if ($provider) {
+                $provider->tokens()->revoke(); // Revoke all provider's tokens
+            }
+
+
+            $LogoutOpenRequest = RequestFilter::with(['request.provider','request'])
+                ->where('provider_id', $request->id)
+                ->whereHas('request', function($query) use ($request){
+                    $query->where('status','SEARCHING');
+                    $query->where('current_provider_id','<>',$request->id);
+                    $query->orWhereNull('current_provider_id');
+                })->pluck('id');
+
+            if(count($LogoutOpenRequest)>0){
+                RequestFilter::whereIn('id',$LogoutOpenRequest)->delete();
+            }
+
+            return response()->json(['message' => trans('api.logout_success')]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => trans('api.something_went_wrong')], 500);
+        }
+    }
+
+    /**
+     * Forgot Password.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function forgot_password(Request $request){
+
+        $this->validate($request, [
+            'email' => 'required|email|exists:providers,email',
+        ]);
+
+        try{
+
+            $provider = Provider::where('email' , $request->email)->first();
+
+            $otp = mt_rand(100000, 999999);
+
+            $provider->otp = $otp;
+            $provider->save();
+
+            Notification::send($provider, new ResetPasswordOTP($otp));
+
+            return response()->json([
+                'message' => 'OTP sent to your email!',
+                'provider' => $provider
+            ]);
+
+        }catch(\Exception $e){
+            return response()->json(['error' => trans('api.something_went_wrong')], 500);
+        }
+    }
+
+
+    /**
+     * Reset Password.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function reset_password(Request $request){
+
+        $this->validate($request, [
+            'password' => 'required|confirmed|min:6',
+            'id' => 'required|numeric|exists:providers,id'
+        ]);
+
+        try{
+
+            $Provider = Provider::findOrFail($request->id);
+
+            $Provider->password = bcrypt($request->password);
+            $Provider->save();
+            if($request->ajax()) {
+                return response()->json(['message' => 'Password Updated']);
+            }
+
+        }catch (\Exception $e) {
+            if($request->ajax()) {
+                return response()->json(['error' => trans('api.something_went_wrong')]);
+            }
+        }
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function facebookViaAPI(Request $request) {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'device_type' => 'required|in:android,ios',
+                'device_token' => 'required',
+                'accessToken'=>'required',
+                //'mobile' => 'required',
+                'device_id' => 'required',
+                'login_by' => 'required|in:manual,facebook,google'
+            ]
+        );
+
+        if($validator->fails()) {
+            return response()->json(['status'=>false,'message' => $validator->messages()->all()]);
+        }
+        $user = Socialite::driver('facebook')->stateless();
+        $FacebookDrive = $user->userFromToken( $request->accessToken);
+
+        try{
+            $FacebookSql = Provider::where('social_unique_id',$FacebookDrive->id);
+            if($FacebookDrive->email !=""){
+                $FacebookSql->orWhere('email',$FacebookDrive->email);
+            }
+            $AuthUser = $FacebookSql->first();
+            if($AuthUser){
+                $AuthUser->social_unique_id=$FacebookDrive->id;
+                $AuthUser->login_by="facebook";
+                $AuthUser->mobile=$request->mobile?:'';
+                $AuthUser->save();
+            }else{
+                $AuthUser["email"]=$FacebookDrive->email;
+                $name = explode(' ', $FacebookDrive->name, 2);
+                $AuthUser["first_name"]=$name[0];
+                $AuthUser["last_name"]=isset($name[1]) ? $name[1] : '';
+                $AuthUser["password"]=bcrypt($FacebookDrive->id);
+                $AuthUser["social_unique_id"]=$FacebookDrive->id;
+                $AuthUser["avatar"]=$FacebookDrive->avatar;
+                $AuthUser["mobile"]=$request->mobile?:'';
+                $AuthUser["login_by"]="facebook";
+                $AuthUser = Provider::create($AuthUser);
+
+                if(Setting::get('demo_mode', 0) == 1) {
+                    $AuthUser->update(['status' => 'approved']);
+                    ProviderService::create([
+                        'provider_id' => $AuthUser->id,
+                        'service_type_id' => '1',
+                        'status' => 'active',
+                        'service_number' => '4pp03ets',
+                        'service_model' => 'Audi R8',
+                    ]);
+                }
+            }
+            if($AuthUser){
+                $userToken = $AuthUser->createToken('Facebook Provider Token')->accessToken;
+                $User = Provider::with('service', 'device')->find($AuthUser->id);
+                if($User->device) {
+                    ProviderDevice::where('id',$User->device->id)->update([
+
+                        'udid' => $request->device_id,
+                        'token' => $request->device_token,
+                        'type' => $request->device_type,
+                    ]);
+
+                } else {
+                    ProviderDevice::create([
+                        'provider_id' => $User->id,
+                        'udid' => $request->device_id,
+                        'token' => $request->device_token,
+                        'type' => $request->device_type,
+                    ]);
+                }
+                return response()->json([
+                    "status" => true,
+                    "token_type" => "Bearer",
+                    "access_token" => $userToken,
+                    'currency' => Setting::get('currency', '$'),
+                    'sos' => Setting::get('sos_number', '911')
+                ]);
+            }else{
+                return response()->json(['status'=>false,'message' => "Invalid credentials!"]);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['status'=>false,'message' => trans('api.something_went_wrong')]);
+        }
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function googleViaAPI(Request $request) {
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'device_type' => 'required|in:android,ios',
+                'device_token' => 'required',
+                'accessToken'=>'required',
+                //'mobile' => 'required',
+                'device_id' => 'required',
+                'login_by' => 'required|in:manual,facebook,google'
+            ]
+        );
+
+        if($validator->fails()) {
+            return response()->json(['status'=>false,'message' => $validator->messages()->all()]);
+        }
+        $user = Socialite::driver('google')->stateless();
+        $GoogleDrive = $user->userFromToken( $request->accessToken);
+
+        try{
+            $GoogleSql = Provider::where('social_unique_id',$GoogleDrive->id);
+            if($GoogleDrive->email !=""){
+                $GoogleSql->orWhere('email',$GoogleDrive->email);
+            }
+            $AuthUser = $GoogleSql->first();
+            if($AuthUser){
+                $AuthUser->social_unique_id=$GoogleDrive->id;
+                $AuthUser->mobile=$request->mobile?:'';
+                $AuthUser->login_by="google";
+                $AuthUser->save();
+            }else{
+                $AuthUser["email"]=$GoogleDrive->email;
+                $name = explode(' ', $GoogleDrive->name, 2);
+                $AuthUser["first_name"]=$name[0];
+                $AuthUser["last_name"]=isset($name[1]) ? $name[1] : '';
+                $AuthUser["password"]=($GoogleDrive->id);
+                $AuthUser["social_unique_id"]=$GoogleDrive->id;
+                $AuthUser["avatar"]=$GoogleDrive->avatar;
+                $AuthUser["mobile"]=$request->mobile?:'';
+                $AuthUser["login_by"]="google";
+                $AuthUser = Provider::create($AuthUser);
+
+                if(Setting::get('demo_mode', 0) == 1) {
+                    $AuthUser->update(['status' => 'approved']);
+                    ProviderService::create([
+                        'provider_id' => $AuthUser->id,
+                        'service_type_id' => '1',
+                        'status' => 'active',
+                        'service_number' => '4pp03ets',
+                        'service_model' => 'Audi R8',
+                    ]);
+                }
+            }
+            if($AuthUser){
+                $userToken = $AuthUser->createToken('Google Provider Token')->accessToken;
+                $User = Provider::with('service', 'device')->find($AuthUser->id);
+                if($User->device) {
+                    ProviderDevice::where('id',$User->device->id)->update([
+
+                        'udid' => $request->device_id,
+                        'token' => $request->device_token,
+                        'type' => $request->device_type,
+                    ]);
+
+                } else {
+                    ProviderDevice::create([
+                        'provider_id' => $User->id,
+                        'udid' => $request->device_id,
+                        'token' => $request->device_token,
+                        'type' => $request->device_type,
+                    ]);
+                }
+                return response()->json([
+                    "status" => true,
+                    "token_type" => "Bearer",
+                    "access_token" => $userToken,
+                    'currency' => Setting::get('currency', '$'),
+                    'sos' => Setting::get('sos_number', '911')
+                ]);
+            }else{
+                return response()->json(['status'=>false,'message' => "Invalid credentials!"]);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['status'=>false,'message' => trans('api.something_went_wrong')]);
+        }
+    }
+
+
+    public function refresh_token(Request $request)
+    {
+        return response()->json(['error' => 'Refresh token not directly supported with Personal Access Tokens in this example. Re-authentication required.'], 400);
+    }
+
+
+    /**
+     * Show the email availability.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function verify(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email|max:255|unique:providers',
+        ]);
+
+        try{
+
+            return response()->json(['message' => trans('api.email_available')]);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => trans('api.something_went_wrong')], 500);
+        }
+    }
+}

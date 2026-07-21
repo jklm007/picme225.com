@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('gateway_nodes', function (Blueprint $table) {
+            $table->dropUnique('gateway_nodes_phone_number_unique');
+            $table->unique(['phone_number', 'network']);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('gateway_nodes', function (Blueprint $table) {
+            $table->dropUnique(['phone_number', 'network']);
+            $table->unique('phone_number');
+        });
+    }
+};

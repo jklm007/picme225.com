@@ -1,0 +1,50 @@
+FROM webdevops/php-nginx:8.4
+
+# Définition du répertoire de travail
+WORKDIR /app
+
+# Configuration de l'environnement Nginx pour Laravel
+ENV WEB_DOCUMENT_ROOT=/app/public
+ENV PHP_DATE_TIMEZONE="Africa/Abidjan"
+# CRITIQUE: Permet à PHP-FPM de lire les variables d'environnement K8s
+# Sans ça, PHP getenv() retourne vide même si les vars K8s sont définies
+ENV PHP_FPM_CLEAR_ENV=no
+
+
+# Installation d'extensions système (PostgreSQL est déjà inclus dans webdevops, on ajoute au cas où)
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    postgresql-client \
+    && docker-php-ext-install pdo pdo_pgsql pgsql \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copier les fichiers du projet (à l'exception de vendor/ via .dockerignore)
+COPY . /app
+
+# Installation des dépendances Composer
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev --ignore-platform-reqs
+
+# Supprimer le cache de config compilé (important: les valeurs viennent des env vars K8s au runtime)
+RUN rm -f /app/bootstrap/cache/config.php /app/bootstrap/cache/routes-v7.php /app/bootstrap/cache/services.php
+
+# Permissions pour le serveur web (Nginx / PHP-FPM)
+RUN mkdir -p /app/storage/framework/cache/data \
+    && mkdir -p /app/storage/framework/sessions \
+    && mkdir -p /app/storage/framework/views \
+    && mkdir -p /app/storage/app/public \
+    && mkdir -p /app/storage/logs \
+    && mkdir -p /app/bootstrap/cache \
+    && chown -R application:application /app/storage /app/bootstrap/cache \
+    && chmod -R 775 /app/storage /app/bootstrap/cache \
+    # Assure que tous les assets publics sont lisibles par Nginx
+    && find /app/public -type d -exec chmod 755 {} \; \
+    && find /app/public -type f -exec chmod 644 {} \;
+
+# Copier le fichier d'environnement (sera surchargé par Kubernetes ConfigMap)
+# COPY .env.example .env
+
+# Exposer le port HTTP Nginx
+EXPOSE 80
+
+# Le point d'entrée par défaut de webdevops/php-nginx lancera Nginx et PHP-FPM via Supervisord

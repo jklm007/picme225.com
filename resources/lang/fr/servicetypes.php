@@ -18,5 +18,18 @@ return [
     'DISTANCE'      => 'Prix par Distance',
     'DISTANCEMIN'   => 'Tarification par distance et à la minute',
     'DISTANCEHOUR'  => 'Tarification par distance et par heure',
+    'Moto' => 'Moto',
+    'Berline' => 'Berline',
+    'SUV' => 'SUV / 4x4',
+    'Luxe' => 'Véhicule de Luxe',
+    'Camionnette' => 'Camionnette / Van',
+    'Ambulance' => 'Ambulance',
+    'Samu' => 'SAMU',
+    'GSPM' => 'Sapeurs-Pompiers (GSPM)',
+    'Taxi Vtc' => 'Taxi VTC',
+    'Taxi Compteur' => 'Taxi Compteur',
+    'Inter-communal' => 'Woro-Woro Intercommunal',
+    'Cargo' => 'Livraison Cargo (Van)',
+    'Moto' => 'Moto-Taxi / Livraison',
 
 ];

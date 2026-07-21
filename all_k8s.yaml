@@ -1,0 +1,1928 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "2"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"coturn"},"name":"coturn-deployment","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"coturn"}},"template":{"metadata":{"labels":{"app":"coturn"}},"spec":{"containers":[{"args":["-n","--log-file=stdout","--min-port=49152","--max-port=65535","--user=picme:secret_turn_password","--realm=picme225.site"],"image":"coturn/coturn:latest","name":"coturn","ports":[{"containerPort":3478,"protocol":"UDP"},{"containerPort":3478,"protocol":"TCP"}],"resources":{"limits":{"cpu":"1","memory":"512Mi"},"requests":{"cpu":"100m","memory":"128Mi"}}}],"hostNetwork":true}}}}
+    creationTimestamp: "2026-06-25T21:43:28Z"
+    generation: 2
+    labels:
+      app: coturn
+    name: coturn-deployment
+    namespace: default
+    resourceVersion: "148759"
+    uid: f3f8014e-e55d-48a6-804b-2c2d0d97abd3
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: coturn
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: coturn
+      spec:
+        containers:
+        - args:
+          - -n
+          - --log-file=stdout
+          - --min-port=49152
+          - --max-port=65535
+          - --user=picme:secret_turn_password
+          - --realm=picme225.site
+          image: coturn/coturn:latest
+          imagePullPolicy: Always
+          name: coturn
+          ports:
+          - containerPort: 3478
+            protocol: UDP
+          - containerPort: 3478
+            protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        hostNetwork: true
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-25T21:43:28Z"
+      lastUpdateTime: "2026-06-25T21:49:36Z"
+      message: ReplicaSet "coturn-deployment-9fb5f4fdb" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-06-29T16:54:02Z"
+      lastUpdateTime: "2026-06-29T16:54:02Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+    terminatingReplicas: 0
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "3"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"epdd-deployment","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"epdd"}},"template":{"metadata":{"labels":{"app":"epdd"}},"spec":{"containers":[{"env":[{"name":"APP_NAME","value":"EPDD"},{"name":"APP_ENV","value":"production"},{"name":"APP_KEY","value":"base64:/uyp2LQ64kv4h4b0ZOBP3psNrJzIPBt22kc7iDl7RPI="},{"name":"APP_DEBUG","value":"true"},{"name":"APP_URL","value":"https://epdd.site"},{"name":"LOG_CHANNEL","value":"stderr"},{"name":"DB_CONNECTION","value":"pgsql"},{"name":"DB_HOST","value":"postgres-service"},{"name":"DB_PORT","value":"5432"},{"name":"DB_DATABASE","value":"db_epdd"},{"name":"DB_USERNAME","value":"picme_user"},{"name":"DB_PASSWORD","value":"secret_password"},{"name":"CACHE_DRIVER","value":"redis"},{"name":"QUEUE_CONNECTION","value":"redis"},{"name":"SESSION_DRIVER","value":"redis"},{"name":"REDIS_HOST","value":"redis-service"},{"name":"REDIS_PASSWORD","value":"null"},{"name":"REDIS_PORT","value":"6379"}],"image":"epdd-backend:latest","imagePullPolicy":"IfNotPresent","name":"epdd","ports":[{"containerPort":80}],"resources":{"limits":{"cpu":"500m","memory":"768Mi"},"requests":{"cpu":"100m","memory":"256Mi"}}}]}}}}
+    creationTimestamp: "2026-06-27T12:07:55Z"
+    generation: 3
+    name: epdd-deployment
+    namespace: default
+    resourceVersion: "173573"
+    uid: 670d6541-c67e-4c1c-bf50-778e10ffac13
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: epdd
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: epdd
+      spec:
+        containers:
+        - env:
+          - name: APP_NAME
+            value: EPDD
+          - name: APP_ENV
+            value: production
+          - name: APP_KEY
+            value: base64:/uyp2LQ64kv4h4b0ZOBP3psNrJzIPBt22kc7iDl7RPI=
+          - name: APP_DEBUG
+            value: "true"
+          - name: APP_URL
+            value: https://epdd.site
+          - name: LOG_CHANNEL
+            value: stderr
+          - name: DB_CONNECTION
+            value: pgsql
+          - name: DB_HOST
+            value: postgres-service
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_DATABASE
+            value: db_epdd
+          - name: DB_USERNAME
+            value: picme_user
+          - name: DB_PASSWORD
+            value: secret_password
+          - name: CACHE_DRIVER
+            value: redis
+          - name: QUEUE_CONNECTION
+            value: redis
+          - name: SESSION_DRIVER
+            value: redis
+          - name: REDIS_HOST
+            value: redis-service
+          - name: REDIS_PASSWORD
+            value: "null"
+          - name: REDIS_PORT
+            value: "6379"
+          image: epdd-backend:latest
+          imagePullPolicy: IfNotPresent
+          name: epdd
+          ports:
+          - containerPort: 80
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 768Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-27T12:07:55Z"
+      lastUpdateTime: "2026-06-27T15:32:40Z"
+      message: ReplicaSet "epdd-deployment-5d4c758746" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-06-30T06:32:03Z"
+      lastUpdateTime: "2026-06-30T06:32:03Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+    terminatingReplicas: 0
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "13"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"evolution-api"},"name":"evolution-api-deployment","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"evolution-api"}},"template":{"metadata":{"labels":{"app":"evolution-api"}},"spec":{"containers":[{"env":[{"name":"AUTHENTICATION_TYPE","value":"apikey"},{"name":"AUTHENTICATION_API_KEY","value":"picme225-evolution-secret-key"},{"name":"AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES","value":"true"},{"name":"SERVER_PORT","value":"8080"},{"name":"SERVER_URL","value":"https://evolution.picme225.site"},{"name":"WEBHOOK_GLOBAL_ENABLED","value":"true"},{"name":"WEBHOOK_GLOBAL_URL","value":"https://www.picme225.site/api/whatsapp/webhook"},{"name":"WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS","value":"false"},{"name":"WEBHOOK_EVENTS_MESSAGES_UPSERT","value":"true"},{"name":"WEBHOOK_EVENTS_CONNECTION_UPDATE","value":"true"},{"name":"STORE_MESSAGES","value":"true"},{"name":"STORE_MESSAGE_UP","value":"true"},{"name":"STORE_CONTACTS","value":"true"},{"name":"DATABASE_ENABLED","value":"true"},{"name":"DATABASE_PROVIDER","value":"postgresql"},{"name":"DATABASE_CONNECTION_URI","value":"postgresql://picme_user:secret_password@postgres-service:5432/picme_db?schema=evolution\u0026sslmode=disable"},{"name":"REDIS_ENABLED","value":"true"},{"name":"REDIS_URI","value":"redis://redis-service:6379"},{"name":"REDIS_PREFIX_KEY","value":"evolution"},{"name":"LOG_LEVEL","value":"ERROR"},{"name":"LOG_COLOR","value":"false"}],"image":"evoapicloud/evolution-api:latest","imagePullPolicy":"Never","name":"evolution-api","ports":[{"containerPort":8080}],"resources":{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"100m","memory":"256Mi"}},"volumeMounts":[{"mountPath":"/evolution/instances","name":"evolution-storage"}]}],"volumes":[{"name":"evolution-storage","persistentVolumeClaim":{"claimName":"evolution-api-pvc"}}]}}}}
+    creationTimestamp: "2026-06-29T01:18:48Z"
+    generation: 13
+    labels:
+      app: evolution-api
+    name: evolution-api-deployment
+    namespace: default
+    resourceVersion: "154128"
+    uid: aff3c6d7-9e5e-4877-a244-1637a76ff96a
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: evolution-api
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-06-29T19:15:59Z"
+        labels:
+          app: evolution-api
+      spec:
+        containers:
+        - env:
+          - name: AUTHENTICATION_TYPE
+            value: apikey
+          - name: AUTHENTICATION_API_KEY
+            value: picme225-evolution-secret-key
+          - name: AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES
+            value: "true"
+          - name: SERVER_PORT
+            value: "8080"
+          - name: SERVER_URL
+            value: https://evolution.picme225.site
+          - name: WEBHOOK_GLOBAL_ENABLED
+            value: "true"
+          - name: WEBHOOK_GLOBAL_URL
+            value: https://www.picme225.site/api/whatsapp/webhook
+          - name: WEBHOOK_GLOBAL_WEBHOOK_BY_EVENTS
+            value: "false"
+          - name: WEBHOOK_EVENTS_MESSAGES_UPSERT
+            value: "true"
+          - name: WEBHOOK_EVENTS_CONNECTION_UPDATE
+            value: "true"
+          - name: STORE_MESSAGES
+            value: "true"
+          - name: STORE_MESSAGE_UP
+            value: "true"
+          - name: STORE_CONTACTS
+            value: "true"
+          - name: DATABASE_ENABLED
+            value: "true"
+          - name: DATABASE_PROVIDER
+            value: postgresql
+          - name: DATABASE_CONNECTION_URI
+            value: postgresql://picme_user:secret_password@postgres-service:5432/picme_db?schema=evolution&sslmode=disable
+          - name: REDIS_ENABLED
+            value: "true"
+          - name: REDIS_PREFIX_KEY
+            value: evolution
+          - name: LOG_LEVEL
+            value: DEBUG
+          - name: LOG_COLOR
+            value: "false"
+          - name: REDIS_URI
+            value: redis://redis-service:6379
+          - name: CACHE_REDIS_ENABLED
+            value: "true"
+          - name: CACHE_REDIS_URI
+            value: redis://redis-service:6379
+          image: evoapicloud/evolution-api:latest
+          imagePullPolicy: Always
+          name: evolution-api
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /evolution/instances
+            name: evolution-storage
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - name: evolution-storage
+          persistentVolumeClaim:
+            claimName: evolution-api-pvc
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-29T19:16:57Z"
+      lastUpdateTime: "2026-06-29T19:16:57Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-06-29T01:18:48Z"
+      lastUpdateTime: "2026-06-29T19:16:57Z"
+      message: ReplicaSet "evolution-api-deployment-58849576ff" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 13
+    readyReplicas: 1
+    replicas: 1
+    terminatingReplicas: 0
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "2"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"jklm-python-deployment","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"jklm-python"}},"template":{"metadata":{"labels":{"app":"jklm-python"}},"spec":{"containers":[{"env":[{"name":"PYTHONUNBUFFERED","value":"1"},{"name":"GROQ_API_KEY","value":"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"},{"name":"GROQ_MODEL","value":"llama-3.1-8b-instant"},{"name":"GROQ_TIMEOUT","value":"5"},{"name":"PICME_AI_ENABLED","value":"true"}],"image":"jklm-python:latest","imagePullPolicy":"IfNotPresent","name":"jklm-python","ports":[{"containerPort":8000}],"resources":{"limits":{"cpu":"800m","memory":"1536Mi"},"requests":{"cpu":"200m","memory":"512Mi"}}}]}}}}
+    creationTimestamp: "2026-06-27T12:07:55Z"
+    generation: 2
+    name: jklm-python-deployment
+    namespace: default
+    resourceVersion: "176305"
+    uid: 1ef0e197-1c9d-43dc-afdf-6531667294e6
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: jklm-python
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: jklm-python
+      spec:
+        containers:
+        - env:
+          - name: PYTHONUNBUFFERED
+            value: "1"
+          - name: GROQ_API_KEY
+            value: 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
+          - name: GROQ_MODEL
+            value: llama-3.1-8b-instant
+          - name: GROQ_TIMEOUT
+            value: "5"
+          - name: PICME_AI_ENABLED
+            value: "true"
+          image: jklm-python:latest
+          imagePullPolicy: IfNotPresent
+          name: jklm-python
+          ports:
+          - containerPort: 8000
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 800m
+              memory: 1536Mi
+            requests:
+              cpu: 200m
+              memory: 512Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-27T12:07:56Z"
+      lastUpdateTime: "2026-06-27T12:57:56Z"
+      message: ReplicaSet "jklm-python-deployment-5bff5f5988" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-06-30T08:12:19Z"
+      lastUpdateTime: "2026-06-30T08:12:19Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+    terminatingReplicas: 0
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "3"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"jklm-web-deployment","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"jklm-web"}},"template":{"metadata":{"labels":{"app":"jklm-web"}},"spec":{"containers":[{"env":[{"name":"APP_NAME","value":"JKLM_AI"},{"name":"APP_ENV","value":"production"},{"name":"APP_KEY","value":"base64:Um+DwUC7qJqeVQpZ04KSQBQS9TUl73RHas+K0LOHi/A="},{"name":"APP_DEBUG","value":"true"},{"name":"APP_URL","value":"https://jklmai.site"},{"name":"LOG_CHANNEL","value":"stderr"},{"name":"DB_CONNECTION","value":"pgsql"},{"name":"DB_HOST","value":"postgres-service"},{"name":"DB_PORT","value":"5432"},{"name":"DB_DATABASE","value":"db_jklm"},{"name":"DB_USERNAME","value":"picme_user"},{"name":"DB_PASSWORD","value":"secret_password"},{"name":"AI_SERVICE_URL","value":"http://jklm-python-service:8000"}],"image":"jklm-web:latest","imagePullPolicy":"IfNotPresent","name":"jklm-web","ports":[{"containerPort":80}],"resources":{"limits":{"cpu":"500m","memory":"768Mi"},"requests":{"cpu":"100m","memory":"256Mi"}}}]}}}}
+    creationTimestamp: "2026-06-27T12:07:55Z"
+    generation: 3
+    name: jklm-web-deployment
+    namespace: default
+    resourceVersion: "173652"
+    uid: 6781ca42-299b-4bb5-be37-0d4f5c6bec9f
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: jklm-web
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: jklm-web
+      spec:
+        containers:
+        - env:
+          - name: APP_NAME
+            value: JKLM_AI
+          - name: APP_ENV
+            value: production
+          - name: APP_KEY
+            value: base64:Um+DwUC7qJqeVQpZ04KSQBQS9TUl73RHas+K0LOHi/A=
+          - name: APP_DEBUG
+            value: "true"
+          - name: APP_URL
+            value: https://jklmai.site
+          - name: LOG_CHANNEL
+            value: stderr
+          - name: DB_CONNECTION
+            value: pgsql
+          - name: DB_HOST
+            value: postgres-service
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_DATABASE
+            value: db_jklm
+          - name: DB_USERNAME
+            value: picme_user
+          - name: DB_PASSWORD
+            value: secret_password
+          - name: AI_SERVICE_URL
+            value: http://jklm-python-service:8000
+          image: jklm-web:latest
+          imagePullPolicy: IfNotPresent
+          name: jklm-web
+          ports:
+          - containerPort: 80
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 768Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-27T12:07:55Z"
+      lastUpdateTime: "2026-06-27T15:32:40Z"
+      message: ReplicaSet "jklm-web-deployment-5fbd9998b" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-06-30T06:34:30Z"
+      lastUpdateTime: "2026-06-30T06:34:30Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+    terminatingReplicas: 0
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "20"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"laravel"},"name":"laravel-deployment","namespace":"default"},"spec":{"replicas":2,"selector":{"matchLabels":{"app":"laravel"}},"template":{"metadata":{"labels":{"app":"laravel"}},"spec":{"containers":[{"env":[{"name":"APP_NAME","value":"PicMe225"},{"name":"APP_ENV","value":"production"},{"name":"APP_KEY","value":"base64:576GI/RZGbSt+e2/8147duRLv+tAQL0xQtdKUFeMnB4="},{"name":"APP_DEBUG","value":"false"},{"name":"APP_URL","value":"https://picme225.site"},{"name":"DB_CONNECTION","value":"pgsql"},{"name":"DB_HOST","value":"postgres-service"},{"name":"DB_PORT","value":"5432"},{"name":"DB_DATABASE","value":"picme_db"},{"name":"DB_USERNAME","value":"picme_user"},{"name":"DB_PASSWORD","value":"secret_password"},{"name":"REDIS_HOST","value":"redis-service"},{"name":"CACHE_DRIVER","value":"redis"},{"name":"QUEUE_CONNECTION","value":"redis"},{"name":"SESSION_DRIVER","value":"redis"},{"name":"FILESYSTEM_DISK","value":"s3"},{"name":"AWS_ACCESS_KEY_ID","value":"VOTRE_R2_ACCESS_KEY"},{"name":"AWS_SECRET_ACCESS_KEY","value":"VOTRE_R2_SECRET_KEY"},{"name":"AWS_DEFAULT_REGION","value":"auto"},{"name":"AWS_BUCKET","value":"picme225-bucket"},{"name":"AWS_ENDPOINT","value":"https://\u003caccount_id\u003e.r2.cloudflarestorage.com"},{"name":"OSRM_URL","value":"http://osrm-service:5000"},{"name":"PHOTON_URL","value":"http://photon-service:2322"}],"image":"picme225-laravel:latest","imagePullPolicy":"Never","name":"laravel","ports":[{"containerPort":80}],"resources":{"limits":{"cpu":"1","memory":"1Gi"},"requests":{"cpu":"250m","memory":"512Mi"}},"volumeMounts":[{"mountPath":"/opt/docker/etc/nginx/vhost.common.d/05-static.conf","name":"nginx-static-conf","subPath":"05-static.conf"}]}],"volumes":[{"configMap":{"name":"nginx-static-conf"},"name":"nginx-static-conf"}]}}}}
+    creationTimestamp: "2026-06-25T21:43:28Z"
+    generation: 21
+    labels:
+      app: laravel
+    name: laravel-deployment
+    namespace: default
+    resourceVersion: "247133"
+    uid: ba3532ba-780d-4ff8-a8d4-df732b63233e
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: laravel
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          kubectl.kubernetes.io/restartedAt: "2026-06-30T23:08:11Z"
+        labels:
+          app: laravel
+      spec:
+        containers:
+        - env:
+          - name: APP_NAME
+            value: PicMe225
+          - name: APP_ENV
+            value: production
+          - name: APP_KEY
+            value: base64:576GI/RZGbSt+e2/8147duRLv+tAQL0xQtdKUFeMnB4=
+          - name: APP_DEBUG
+            value: "false"
+          - name: APP_URL
+            value: https://picme225.site
+          - name: DB_CONNECTION
+            value: pgsql
+          - name: DB_HOST
+            value: postgres-service
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_DATABASE
+            value: picme_db
+          - name: DB_USERNAME
+            value: picme_user
+          - name: DB_PASSWORD
+            value: secret_password
+          - name: REDIS_HOST
+            value: redis-service
+          - name: CACHE_DRIVER
+            value: redis
+          - name: QUEUE_CONNECTION
+            value: redis
+          - name: SESSION_DRIVER
+            value: redis
+          - name: FILESYSTEM_DISK
+            value: s3
+          - name: AWS_ACCESS_KEY_ID
+            value: VOTRE_R2_ACCESS_KEY
+          - name: AWS_SECRET_ACCESS_KEY
+            value: VOTRE_R2_SECRET_KEY
+          - name: AWS_DEFAULT_REGION
+            value: auto
+          - name: AWS_BUCKET
+            value: picme225-bucket
+          - name: AWS_ENDPOINT
+            value: https://<account_id>.r2.cloudflarestorage.com
+          - name: OSRM_URL
+            value: http://osrm-service:5000
+          - name: PHOTON_URL
+            value: http://photon-service:2322
+          - name: GROQ_API_KEY
+            value: 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
+          image: picme225-laravel:latest
+          imagePullPolicy: Never
+          name: laravel
+          ports:
+          - containerPort: 80
+            protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+            requests:
+              cpu: 250m
+              memory: 512Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /opt/docker/etc/nginx/vhost.common.d/05-static.conf
+            name: nginx-static-conf
+            subPath: 05-static.conf
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: nginx-static-conf
+          name: nginx-static-conf
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-29T17:00:06Z"
+      lastUpdateTime: "2026-06-29T17:00:06Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-06-25T23:48:00Z"
+      lastUpdateTime: "2026-06-30T23:08:21Z"
+      message: ReplicaSet "laravel-deployment-787568f8f4" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 21
+    readyReplicas: 1
+    replicas: 1
+    terminatingReplicas: 0
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "3"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"laravel-worker"},"name":"laravel-worker","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"laravel-worker"}},"template":{"metadata":{"labels":{"app":"laravel-worker"}},"spec":{"containers":[{"command":["php","artisan","queue:work","--tries=3","--timeout=90"],"envFrom":[{"secretRef":{"name":"laravel-env"}}],"image":"picme225-laravel:latest","imagePullPolicy":"Never","name":"laravel-worker","resources":{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"100m","memory":"256Mi"}}}]}}}}
+    creationTimestamp: "2026-06-29T07:59:27Z"
+    generation: 3
+    labels:
+      app: laravel-worker
+    name: laravel-worker
+    namespace: default
+    resourceVersion: "295365"
+    uid: 1fc325e8-1f37-4f30-a8a9-832b3ab9d24d
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: laravel-worker
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: laravel-worker
+      spec:
+        containers:
+        - command:
+          - php
+          - artisan
+          - queue:work
+          - --tries=3
+          - --timeout=90
+          env:
+          - name: GROQ_API_KEY
+            value: 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
+          - name: DB_CONNECTION
+            value: pgsql
+          - name: DB_HOST
+            value: postgres-service
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_DATABASE
+            value: picme_db
+          - name: DB_USERNAME
+            value: picme_user
+          - name: DB_PASSWORD
+            value: secret_password
+          envFrom:
+          - secretRef:
+              name: laravel-env
+          image: picme225-laravel:latest
+          imagePullPolicy: Never
+          name: laravel-worker
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-29T07:59:27Z"
+      lastUpdateTime: "2026-06-29T10:00:54Z"
+      message: ReplicaSet "laravel-worker-59bb9bcf79" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-07-03T11:46:13Z"
+      lastUpdateTime: "2026-07-03T11:46:13Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+    terminatingReplicas: 0
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "2"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"nodejs"},"name":"nodejs-deployment","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"nodejs"}},"template":{"metadata":{"labels":{"app":"nodejs"}},"spec":{"containers":[{"env":[{"name":"NODE_ENV","value":"production"},{"name":"PORT","value":"3000"},{"name":"REDIS_HOST","value":"redis-service"},{"name":"REDIS_PORT","value":"6379"},{"name":"MYSQL_HOST","value":"postgres-service"}],"image":"picme225-node:latest","imagePullPolicy":"Never","name":"nodejs","ports":[{"containerPort":3000}],"resources":{"limits":{"cpu":"1","memory":"1Gi"},"requests":{"cpu":"250m","memory":"256Mi"}}}]}}}}
+    creationTimestamp: "2026-06-25T21:43:28Z"
+    generation: 2
+    labels:
+      app: nodejs
+    name: nodejs-deployment
+    namespace: default
+    resourceVersion: "175062"
+    uid: a71c4475-47da-4967-bb21-eac9073795a3
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: nodejs
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: nodejs
+      spec:
+        containers:
+        - env:
+          - name: NODE_ENV
+            value: production
+          - name: PORT
+            value: "3000"
+          - name: REDIS_HOST
+            value: redis-service
+          - name: REDIS_PORT
+            value: "6379"
+          - name: MYSQL_HOST
+            value: postgres-service
+          image: picme225-node:latest
+          imagePullPolicy: Never
+          name: nodejs
+          ports:
+          - containerPort: 3000
+            protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+            requests:
+              cpu: 250m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-25T21:43:28Z"
+      lastUpdateTime: "2026-06-25T22:01:16Z"
+      message: ReplicaSet "nodejs-deployment-7fbf7cd649" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-06-30T07:26:19Z"
+      lastUpdateTime: "2026-06-30T07:26:19Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+    terminatingReplicas: 0
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "3"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"osrm"},"name":"osrm-deployment","namespace":"default"},"spec":{"replicas":0,"selector":{"matchLabels":{"app":"osrm"}},"template":{"metadata":{"labels":{"app":"osrm"}},"spec":{"containers":[{"command":["osrm-routed","--algorithm","mld","/data/cotedivoire-latest.osrm"],"image":"osrm/osrm-backend:latest","name":"osrm","ports":[{"containerPort":5000}],"volumeMounts":[{"mountPath":"/data","name":"osrm-data"}]}],"volumes":[{"hostPath":{"path":"/opt/osrm-data"},"name":"osrm-data"}]}}}}
+    creationTimestamp: "2026-06-25T21:43:28Z"
+    generation: 4
+    labels:
+      app: osrm
+    name: osrm-deployment
+    namespace: default
+    resourceVersion: "10453"
+    uid: 9a69e355-c3ef-4384-bb7c-5f9a44b729fa
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 0
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: osrm
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: osrm
+      spec:
+        containers:
+        - command:
+          - osrm-routed
+          - --algorithm
+          - mld
+          - /data/cotedivoire-latest.osrm
+          image: osrm/osrm-backend:latest
+          imagePullPolicy: Always
+          name: osrm
+          ports:
+          - containerPort: 5000
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /data
+            name: osrm-data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - hostPath:
+            path: /opt/osrm-data
+            type: ""
+          name: osrm-data
+  status:
+    conditions:
+    - lastTransitionTime: "2026-06-26T00:01:35Z"
+      lastUpdateTime: "2026-06-26T00:02:10Z"
+      message: ReplicaSet "osrm-deployment-5785db69f8" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-06-26T00:16:41Z"
+      lastUpdateTime: "2026-06-26T00:16:41Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 4
+    terminatingReplicas: 0
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "3"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"photon"},"name":"photon-deployment","namespace":"default"},"spec":{"replicas":0,"selector":{"matchLabels":{"app":"photon"}},"template":{"metadata":{"labels":{"app":"photon"}},"spec":{"containers":[{"image":"komoot/photon:latest","name":"photon","ports":[{"containerPort":2322}],"volumeMounts":[{"mountPath":"/photon/photon_data","name":"photon-data"}]}],"volumes":[{"hostPath":{"path":"/opt/photon-data"},"name":"photon-data"}]}}}}
+    creationTimestamp: "2026-06-25T21:43:28Z"
+    generation: 4
+    labels:
+      app: photon
+    name: photon-deployment
+    namespace: default
+    resourceVersion: "10480"
+    uid: cef63516-a316-4065-b882-73da9b6f1e3a
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 0
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: photon
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: photon
+      spec:
+        containers:
+        - image: komoot/photon:latest
+          imagePullPolicy: Always
+          name: photon
+          ports:
+          - containerPort: 2322
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /photon/photon_data
+            name: photon-data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - hostPath:
+            path: /opt/photon-data
+            type: ""
+          name: photon-data
+  status:
+    conditions:
+    - lastTransitionTime: "2026-06-26T00:16:42Z"
+      lastUpdateTime: "2026-06-26T00:16:42Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2026-06-26T00:16:42Z"
+      lastUpdateTime: "2026-06-26T00:16:42Z"
+      message: ReplicaSet "photon-deployment-5f7ff77b97" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 4
+    terminatingReplicas: 0
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "2"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"postgres"},"name":"postgres-deployment","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"postgres"}},"template":{"metadata":{"labels":{"app":"postgres"}},"spec":{"containers":[{"env":[{"name":"POSTGRES_DB","value":"picme_db"},{"name":"POSTGRES_USER","value":"picme_user"},{"name":"POSTGRES_PASSWORD","value":"secret_password"}],"image":"postgis/postgis:15-3.3","name":"postgres","ports":[{"containerPort":5432}],"volumeMounts":[{"mountPath":"/var/lib/postgresql/data","name":"postgres-data"}]}],"volumes":[{"emptyDir":{},"name":"postgres-data"}]}}}}
+    creationTimestamp: "2026-06-25T21:43:29Z"
+    generation: 2
+    labels:
+      app: postgres
+    name: postgres-deployment
+    namespace: default
+    resourceVersion: "148846"
+    uid: 411b0b48-dfda-4379-9027-5fa75609f6dd
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: postgres
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: postgres
+      spec:
+        containers:
+        - env:
+          - name: POSTGRES_DB
+            value: picme_db
+          - name: POSTGRES_USER
+            value: picme_user
+          - name: POSTGRES_PASSWORD
+            value: secret_password
+          image: postgis/postgis:15-3.3
+          imagePullPolicy: IfNotPresent
+          name: postgres
+          ports:
+          - containerPort: 5432
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: postgres-data
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - emptyDir: {}
+          name: postgres-data
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-25T21:43:29Z"
+      lastUpdateTime: "2026-06-26T00:02:18Z"
+      message: ReplicaSet "postgres-deployment-54dfff559f" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-06-29T16:54:40Z"
+      lastUpdateTime: "2026-06-29T16:54:40Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+    terminatingReplicas: 0
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "2"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"redis"},"name":"redis-deployment","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"redis"}},"template":{"metadata":{"labels":{"app":"redis"}},"spec":{"containers":[{"image":"redis:7-alpine","name":"redis","ports":[{"containerPort":6379}]}]}}}}
+    creationTimestamp: "2026-06-25T21:43:29Z"
+    generation: 2
+    labels:
+      app: redis
+    name: redis-deployment
+    namespace: default
+    resourceVersion: "148724"
+    uid: fb935ff3-aff4-4316-81f3-b632fff9c4be
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: redis
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: redis
+      spec:
+        containers:
+        - image: redis:7-alpine
+          imagePullPolicy: IfNotPresent
+          name: redis
+          ports:
+          - containerPort: 6379
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-06-25T21:43:29Z"
+      lastUpdateTime: "2026-06-26T00:01:56Z"
+      message: ReplicaSet "redis-deployment-c46d5dffc" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-06-29T16:53:54Z"
+      lastUpdateTime: "2026-06-29T16:53:54Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+    terminatingReplicas: 0
+    updatedReplicas: 1
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      auth.istio.io/8089: NONE
+    creationTimestamp: "2026-06-29T01:01:13Z"
+    generateName: cm-acme-http-solver-
+    labels:
+      acme.cert-manager.io/http-domain: "1822492830"
+      acme.cert-manager.io/http-token: "1149898422"
+      acme.cert-manager.io/http01-solver: "true"
+    name: cm-acme-http-solver-fvxkh
+    namespace: default
+    ownerReferences:
+    - apiVersion: acme.cert-manager.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Challenge
+      name: evolution-tls-1-3886472705-3172699472
+      uid: ac7bd379-e3dc-4ae7-ab4e-52ce966776b5
+    resourceVersion: "120976"
+    uid: 8d7dcf90-c421-4cb0-bb31-02a2ae6835f4
+  spec:
+    clusterIP: 10.43.106.79
+    clusterIPs:
+    - 10.43.106.79
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: http
+      nodePort: 31045
+      port: 8089
+      protocol: TCP
+      targetPort: 8089
+    selector:
+      acme.cert-manager.io/http-domain: "1822492830"
+      acme.cert-manager.io/http-token: "1149898422"
+      acme.cert-manager.io/http01-solver: "true"
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"coturn-service","namespace":"default"},"spec":{"ports":[{"name":"stun-udp","port":3478,"protocol":"UDP","targetPort":3478},{"name":"stun-tcp","port":3478,"protocol":"TCP","targetPort":3478}],"selector":{"app":"coturn"}}}
+    creationTimestamp: "2026-06-25T21:45:32Z"
+    name: coturn-service
+    namespace: default
+    resourceVersion: "4615"
+    uid: 670dfecf-27f1-4cbf-8825-4c67ca077bb3
+  spec:
+    clusterIP: 10.43.136.25
+    clusterIPs:
+    - 10.43.136.25
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: stun-udp
+      port: 3478
+      protocol: UDP
+      targetPort: 3478
+    - name: stun-tcp
+      port: 3478
+      protocol: TCP
+      targetPort: 3478
+    selector:
+      app: coturn
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"epdd-service","namespace":"default"},"spec":{"ports":[{"port":80,"protocol":"TCP","targetPort":80}],"selector":{"app":"epdd"},"type":"ClusterIP"}}
+    creationTimestamp: "2026-06-27T12:07:55Z"
+    name: epdd-service
+    namespace: default
+    resourceVersion: "62691"
+    uid: eef4a447-f5ad-412b-bef5-20477e99cf81
+  spec:
+    clusterIP: 10.43.67.84
+    clusterIPs:
+    - 10.43.67.84
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+    selector:
+      app: epdd
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"evolution-api-service","namespace":"default"},"spec":{"ports":[{"port":8080,"protocol":"TCP","targetPort":8080}],"selector":{"app":"evolution-api"}}}
+    creationTimestamp: "2026-06-29T01:01:06Z"
+    name: evolution-api-service
+    namespace: default
+    resourceVersion: "120913"
+    uid: 2d4c6419-da34-4a75-82c5-5adfb70c9fb7
+  spec:
+    clusterIP: 10.43.90.250
+    clusterIPs:
+    - 10.43.90.250
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: evolution-api
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"jklm-python-service","namespace":"default"},"spec":{"ports":[{"port":8000,"protocol":"TCP","targetPort":8000}],"selector":{"app":"jklm-python"},"type":"ClusterIP"}}
+    creationTimestamp: "2026-06-27T12:07:56Z"
+    name: jklm-python-service
+    namespace: default
+    resourceVersion: "62737"
+    uid: 01c46824-b5e8-4b62-b2db-c274bc59d051
+  spec:
+    clusterIP: 10.43.232.131
+    clusterIPs:
+    - 10.43.232.131
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 8000
+      protocol: TCP
+      targetPort: 8000
+    selector:
+      app: jklm-python
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"jklm-web-service","namespace":"default"},"spec":{"ports":[{"port":80,"protocol":"TCP","targetPort":80}],"selector":{"app":"jklm-web"},"type":"ClusterIP"}}
+    creationTimestamp: "2026-06-27T12:07:56Z"
+    name: jklm-web-service
+    namespace: default
+    resourceVersion: "62721"
+    uid: 73b968cc-a4a3-498e-985f-7deaf54f09ed
+  spec:
+    clusterIP: 10.43.210.31
+    clusterIPs:
+    - 10.43.210.31
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+    selector:
+      app: jklm-web
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2026-06-25T18:36:58Z"
+    labels:
+      component: apiserver
+      provider: kubernetes
+    name: kubernetes
+    namespace: default
+    resourceVersion: "200"
+    uid: 5a428e0d-803b-4475-8fe5-6e212a73ded9
+  spec:
+    clusterIP: 10.43.0.1
+    clusterIPs:
+    - 10.43.0.1
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 6443
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"laravel-service","namespace":"default"},"spec":{"ports":[{"port":80,"protocol":"TCP","targetPort":80}],"selector":{"app":"laravel"}}}
+    creationTimestamp: "2026-06-25T21:43:28Z"
+    name: laravel-service
+    namespace: default
+    resourceVersion: "4243"
+    uid: db6da082-abc5-480f-8259-941b89ebb660
+  spec:
+    clusterIP: 10.43.155.209
+    clusterIPs:
+    - 10.43.155.209
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+    selector:
+      app: laravel
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"nodejs-service","namespace":"default"},"spec":{"ports":[{"port":3000,"protocol":"TCP","targetPort":3000}],"selector":{"app":"nodejs"}}}
+    creationTimestamp: "2026-06-25T21:43:28Z"
+    name: nodejs-service
+    namespace: default
+    resourceVersion: "4264"
+    uid: b2b42029-b02c-4790-9e75-18c65af1248e
+  spec:
+    clusterIP: 10.43.174.28
+    clusterIPs:
+    - 10.43.174.28
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 3000
+      protocol: TCP
+      targetPort: 3000
+    selector:
+      app: nodejs
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"osrm-service","namespace":"default"},"spec":{"ports":[{"port":5000,"protocol":"TCP","targetPort":5000}],"selector":{"app":"osrm"}}}
+    creationTimestamp: "2026-06-25T21:43:28Z"
+    name: osrm-service
+    namespace: default
+    resourceVersion: "4288"
+    uid: 04db5aed-e820-44ec-acaf-8c259baad4c4
+  spec:
+    clusterIP: 10.43.22.2
+    clusterIPs:
+    - 10.43.22.2
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 5000
+      protocol: TCP
+      targetPort: 5000
+    selector:
+      app: osrm
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"photon-service","namespace":"default"},"spec":{"ports":[{"port":2322,"protocol":"TCP","targetPort":2322}],"selector":{"app":"photon"}}}
+    creationTimestamp: "2026-06-25T21:43:29Z"
+    name: photon-service
+    namespace: default
+    resourceVersion: "4308"
+    uid: 790f9bea-9ba5-4171-8d21-618ea82e7a1b
+  spec:
+    clusterIP: 10.43.132.181
+    clusterIPs:
+    - 10.43.132.181
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 2322
+      protocol: TCP
+      targetPort: 2322
+    selector:
+      app: photon
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"postgres-service","namespace":"default"},"spec":{"ports":[{"port":5432,"protocol":"TCP","targetPort":5432}],"selector":{"app":"postgres"}}}
+    creationTimestamp: "2026-06-25T21:43:29Z"
+    name: postgres-service
+    namespace: default
+    resourceVersion: "4320"
+    uid: 39d856db-64d8-46e4-a552-cf5660865c30
+  spec:
+    clusterIP: 10.43.67.13
+    clusterIPs:
+    - 10.43.67.13
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 5432
+      protocol: TCP
+      targetPort: 5432
+    selector:
+      app: postgres
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"redis-service","namespace":"default"},"spec":{"ports":[{"port":6379,"protocol":"TCP","targetPort":6379}],"selector":{"app":"redis"}}}
+    creationTimestamp: "2026-06-25T21:43:29Z"
+    name: redis-service
+    namespace: default
+    resourceVersion: "4345"
+    uid: b7ec4bdf-7c54-48e8-97cc-c832cc4289d9
+  spec:
+    clusterIP: 10.43.80.169
+    clusterIPs:
+    - 10.43.80.169
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 6379
+      protocol: TCP
+      targetPort: 6379
+    selector:
+      app: redis
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      kubernetes.io/ingress.class: traefik
+      nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0/0,::/0
+    creationTimestamp: "2026-06-29T01:01:13Z"
+    generateName: cm-acme-http-solver-
+    generation: 1
+    labels:
+      acme.cert-manager.io/http-domain: "1822492830"
+      acme.cert-manager.io/http-token: "1149898422"
+      acme.cert-manager.io/http01-solver: "true"
+    name: cm-acme-http-solver-fqlzd
+    namespace: default
+    ownerReferences:
+    - apiVersion: acme.cert-manager.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Challenge
+      name: evolution-tls-1-3886472705-3172699472
+      uid: ac7bd379-e3dc-4ae7-ab4e-52ce966776b5
+    resourceVersion: "120983"
+    uid: e0a7077e-3cae-431d-96c0-a7f7be0834c9
+  spec:
+    rules:
+    - host: evolution.picme225.site
+      http:
+        paths:
+        - backend:
+            service:
+              name: cm-acme-http-solver-fvxkh
+              port:
+                number: 8089
+          path: /.well-known/acme-challenge/c0foZIslgkIEF35eQ_ZdeN3Bw8gDxiilcJiaxONEId4
+          pathType: ImplementationSpecific
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 100.77.40.51
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"kubernetes.io/ingress.class":"traefik"},"name":"epdd-ingress","namespace":"default"},"spec":{"rules":[{"host":"epdd.site","http":{"paths":[{"backend":{"service":{"name":"epdd-service","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}}]}}
+      kubernetes.io/ingress.class: traefik
+    creationTimestamp: "2026-06-27T12:07:55Z"
+    generation: 2
+    name: epdd-ingress
+    namespace: default
+    resourceVersion: "64215"
+    uid: 4b49f22f-2a80-49d5-a5da-9d6c3307c9f7
+  spec:
+    rules:
+    - host: epdd.site
+      http:
+        paths:
+        - backend:
+            service:
+              name: epdd-service
+              port:
+                number: 80
+          path: /
+          pathType: Prefix
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 100.77.40.51
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"cert-manager.io/cluster-issuer":"letsencrypt-prod","kubernetes.io/ingress.class":"traefik","traefik.ingress.kubernetes.io/router.entrypoints":"web,websecure"},"name":"evolution-ingress","namespace":"default"},"spec":{"rules":[{"host":"evolution.picme225.site","http":{"paths":[{"backend":{"service":{"name":"evolution-api-service","port":{"number":8080}}},"path":"/","pathType":"Prefix"}]}}],"tls":[{"hosts":["evolution.picme225.site"],"secretName":"evolution-tls"}]}}
+      kubernetes.io/ingress.class: traefik
+      traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    creationTimestamp: "2026-06-29T01:01:07Z"
+    generation: 1
+    name: evolution-ingress
+    namespace: default
+    resourceVersion: "120921"
+    uid: 3113f28b-f9aa-46e1-9652-907409a2b72d
+  spec:
+    rules:
+    - host: evolution.picme225.site
+      http:
+        paths:
+        - backend:
+            service:
+              name: evolution-api-service
+              port:
+                number: 8080
+          path: /
+          pathType: Prefix
+    tls:
+    - hosts:
+      - evolution.picme225.site
+      secretName: evolution-tls
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 100.77.40.51
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"kubernetes.io/ingress.class":"traefik"},"name":"jklm-ingress","namespace":"default"},"spec":{"rules":[{"host":"jklmai.site","http":{"paths":[{"backend":{"service":{"name":"jklm-web-service","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}}]}}
+      kubernetes.io/ingress.class: traefik
+    creationTimestamp: "2026-06-27T12:07:56Z"
+    generation: 2
+    name: jklm-ingress
+    namespace: default
+    resourceVersion: "64240"
+    uid: 39387ad3-e680-4ade-9d5d-33327754b6eb
+  spec:
+    rules:
+    - host: jklmai.site
+      http:
+        paths:
+        - backend:
+            service:
+              name: jklm-web-service
+              port:
+                number: 80
+          path: /
+          pathType: Prefix
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 100.77.40.51
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"cert-manager.io/cluster-issuer":"letsencrypt-prod","kubernetes.io/ingress.class":"traefik","traefik.ingress.kubernetes.io/router.entrypoints":"web,websecure"},"name":"picme-ingress","namespace":"default"},"spec":{"rules":[{"host":"picme225.site","http":{"paths":[{"backend":{"service":{"name":"nodejs-service","port":{"number":3000}}},"path":"/socket.io/","pathType":"Prefix"},{"backend":{"service":{"name":"laravel-service","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}},{"host":"www.picme225.site","http":{"paths":[{"backend":{"service":{"name":"laravel-service","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}},{"http":{"paths":[{"backend":{"service":{"name":"laravel-service","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}}],"tls":[{"hosts":["picme225.site","www.picme225.site"],"secretName":"picme225-tls"}]}}
+      kubernetes.io/ingress.class: traefik
+      traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    creationTimestamp: "2026-06-25T21:43:28Z"
+    generation: 3
+    name: picme-ingress
+    namespace: default
+    resourceVersion: "23198"
+    uid: a69b64e8-de6c-4b58-a6de-e9b96d7cf740
+  spec:
+    rules:
+    - host: picme225.site
+      http:
+        paths:
+        - backend:
+            service:
+              name: nodejs-service
+              port:
+                number: 3000
+          path: /socket.io/
+          pathType: Prefix
+        - backend:
+            service:
+              name: laravel-service
+              port:
+                number: 80
+          path: /
+          pathType: Prefix
+    - host: www.picme225.site
+      http:
+        paths:
+        - backend:
+            service:
+              name: laravel-service
+              port:
+                number: 80
+          path: /
+          pathType: Prefix
+    - http:
+        paths:
+        - backend:
+            service:
+              name: laravel-service
+              port:
+                number: 80
+          path: /
+          pathType: Prefix
+    tls:
+    - hosts:
+      - picme225.site
+      - www.picme225.site
+      secretName: picme225-tls
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 100.77.40.51
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIBdzCCAR2gAwIBAgIBADAKBggqhkjOPQQDAjAjMSEwHwYDVQQDDBhrM3Mtc2Vy
+      dmVyLWNhQDE3ODI0MTI2MTAwHhcNMjYwNjI1MTczNjUwWhcNMzYwNjIyMTczNjUw
+      WjAjMSEwHwYDVQQDDBhrM3Mtc2VydmVyLWNhQDE3ODI0MTI2MTAwWTATBgcqhkjO
+      PQIBBggqhkjOPQMBBwNCAARW0JUiwxOMe+f2uzGrIKkVkHElCRDcagz1eZPAqkto
+      3GRsyDND4RHzwYVy1f/yCwBiz9f4kdQes0EUCbJCRIMgo0IwQDAOBgNVHQ8BAf8E
+      BAMCAqQwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQU80NVHJedRN3Fw3NeZsHj
+      EUkzY1MwCgYIKoZIzj0EAwIDSAAwRQIhAMy1EuTXTJI+ZTL6nhMFXDDVFYHC3l8B
+      f1JHK9c2H9rAAiAjuixAFsSVcDlZ6Gv23TDTh3ESmwWGY0gzQALatpz81Q==
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubernetes.io/description: Contains a CA bundle that can be used to verify the
+        kube-apiserver when using internal endpoints such as the internal service
+        IP or kubernetes.default.svc. No other usage is guaranteed across distributions
+        of Kubernetes clusters.
+    creationTimestamp: "2026-06-25T18:37:05Z"
+    name: kube-root-ca.crt
+    namespace: default
+    resourceVersion: "303"
+    uid: aa9b3df4-178e-4e3c-b274-b204850cd177
+- apiVersion: v1
+  data:
+    05-static.conf: |
+      location ~* \.(css|js|jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot|otf)$ {
+          expires 1y;
+          add_header Cache-Control public;
+          access_log off;
+      }
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"05-static.conf":"location ~* \\.(css|js|jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot|otf)$ {\n    expires 1y;\n    add_header Cache-Control public;\n    access_log off;\n}\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"nginx-static-conf","namespace":"default"}}
+    creationTimestamp: "2026-06-26T11:52:18Z"
+    name: nginx-static-conf
+    namespace: default
+    resourceVersion: "24083"
+    uid: cd333ac2-c97c-4c3f-b51a-c6701f9eb517
+- apiVersion: v1
+  data:
+    tls.key: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2UUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktjd2dnU2pBZ0VBQW9JQkFRQzhpZUVNRklVaGR6dXAKMlBwUHdyNC9GejJWK1FPV1piRDZVT2RwS3ozaEVVMy81d3lYTFYrYzlneEtHTjY1Rlh4bFJac1ZZV3k3YnVWNQovVmwxZXRvSi84ekczMTdBWnQ2UDRNNXlaRzNWcDNBd2NVUGl5VmxGMDN2bk9KSk9XMGx5QWt2QlJ0MElQVTZvCjJ1UXdpRmxYWG0vczc5TTJuSUZLWkRtL0JPRGdwOG9OK0NGODVnaFBtTlF6Q0J6QjhnOEQwem1wR3NXZ29SZ1gKSk1aSTBENDl3bHRmS0NPRmp1OGdBcC9WMU1FNmpwTFh0Si9PSUlXZU40VCtVSFkzblA0RVlvSGp2cG9BMEJnKwozRitPaVFld29ITG5jNWk5RUIxaE9acWZpVEdJeDlYRS93cTBYV0I2VDB6dHZkbDNuVUU4OUt6S05KcDdhcWFDCnlzTDlrb28zQWdNQkFBRUNnZ0VBZDUyV2JSNmJ0RGE4WUs3cmFDMHFuRVozYVMzYUs5SUtyVlVrN0NGbUdlUHIKczU1MzYzWDdBazlNVHJwbW05Qlk0cnQ5Zjl3V3F2ZlptVUsyUGdXYVRkdS9wTERVb1liaVR6QVdhcGJ5NUNsZAowUzRiSHNnVjNtb2xZdllPUks0Lzg1Z25UZEZTckVhUklDbjN1aDdYWjhuZmd0aEpEWTNQclUzWElTek1LMXJSCnpoYit3emZZaVpxNzVBcmc5RTd3Z2VoclQ2cFNiaStGZWp0bHBjM0krdFZwNGMvYVZKZFhzUW1wdHZKb3ZkMjQKVzNWbDJWQU45czVSbU5pTWtBelhhUTJhNEUySUpLOGlMQXlXcUIzdnVYRWM2bkRzUlFIUWdxak9JMGtickFwTgpMZ21DSEF6dkpOT1FxZEw5T3Jzb2tkUHNjUGRoOHFXNXBXdHc5V1hGVVFLQmdRRFhBelU5NWZ5cVplemRqd0hGCjdhem5qZDBSNEhicjVsazRpQzVlZVVPajFDb3EyMy9aTHoxdnpVQU1IcnVnSEV3bnQzVXVRbm5KdVZjT0F3Z0sKM0c2U2VvTXhFSzM1dElTVzhCUmxTZC9SajhIc3Q0RnBIdUpBRUhDeXJ2dGZtTUR5QTVJajlSL2w1ZTFoV041bQpRNXIzbWViWGEyS0RxZlp6YmNrWVNUUmJQd0tCZ1FEZ2VyaDNXVk56NGxsMUMxdThkR2d4eXdoYW9KcUhQV1MxClYzdWtpcXpFdUNGVE9jNXMrVFZ3T1YzWnk4d05hSGozdXpIN2grSkRpNEF2bllTS0hOVmhxMnZsM0RycVlJNUgKTmFmMm1DVkgvTVdpcy9DWDE5NktrY0JEVFZtZkplSEh4U2I3YVppOS9sdVlFb2F2VTltdVFRT0prcU4vLzB0ZwppMHNheVdockNRS0JnQ2tVSXRMdG9zVkhiZWF5a01zbzZwVGV4TExLcU0zUEY1SzJhZTJBeTR4OFY0WVNvNjF4CjJoSUhLOHBsQU1ISlJqOThUSFlIRzArUUNuTFIzM0o3eE9CVmFjVXhBNXdtZ2dKNFlkMHNMUWZUcUdBNmV3NEQKYVlTRjM1SXozakRZZFZ5SGxCOHNrT2lTY2pUY0RybUpCdzF4S09wVlNPQVEwOVlmem9ER1U2dHZBb0dBR05HNAp2NGxpenJkQ0NNemVzYkYxSzd3MUNrQWpsYnhWL0M3Vi90Vk9VTm5DNVg3SXNnZkR2c3E0ODdHeXQvRExIeWpWClYrZ29QaXVZV3F0aDBodHFCRWg5djRaZ0JUWHp4Uy9MaUZvK0ZQMS9wSU9jb0UwL3o3Wlp1WmM5eDNqYXc4bXEKaTdXYks3YUp6Z0NPWDZnM3N5cUJCNTdzOE9QN0k0dURIRTBVZkhFQ2dZRUFqbHJLbEdUZC84V0J4K2x1MlFQZwpRQXdSZCs4TW1BUjNZL3hMK3pHWm5Ga2pCRFpJV0JVbUlTK2JMNmRzbGl4bEhSQTdjSmpZdjlCdTBUTFB6YTBOCkxLcTJvRFNCbDNZRklTM1FtdytpWGJFR2xxcHpLSUNjYUVTNFJzVzlXZXNsbDZJcExaNnBMWDlxNk9NYjRNeGIKY05tYWovV2FmT0pXbXFhS0N3ZFdpMUk9Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K
+  kind: Secret
+  metadata:
+    creationTimestamp: "2026-06-29T01:01:09Z"
+    generateName: evolution-tls-
+    labels:
+      cert-manager.io/next-private-key: "true"
+      controller.cert-manager.io/fao: "true"
+    name: evolution-tls-48mqj
+    namespace: default
+    ownerReferences:
+    - apiVersion: cert-manager.io/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Certificate
+      name: evolution-tls
+      uid: 0c317970-c2b5-43df-9575-ee506d61a75c
+    resourceVersion: "120940"
+    uid: d851e4ba-03d7-4b78-8f7e-f1debb9d68b2
+  type: Opaque
+- apiVersion: v1
+  data:
+    APP_DEBUG: ZmFsc2U=
+    APP_ENV: cHJvZHVjdGlvbg==
+    APP_KEY: YmFzZTY0OjU3NkdJL1JaR2JTdCtlMi84MTQ3ZHVSTHYrdEFRTDB4UXRkS1VGZU1uQjQ9
+    APP_NAME: IlBpY21lMjI1Ig==
+    APP_URL: aHR0cHM6Ly9waWNtZTIyNS5zaXRl
+    AWS_ACCESS_KEY_ID: ""
+    AWS_BUCKET: ""
+    AWS_DEFAULT_REGION: dXMtZWFzdC0x
+    AWS_SECRET_ACCESS_KEY: ""
+    AWS_USE_PATH_STYLE_ENDPOINT: ZmFsc2U=
+    BROADCAST_DRIVER: cmVkaXM=
+    CACHE_DRIVER: cmVkaXM=
+    DB_CONNECTION: cGdzcWw=
+    DB_DATABASE: cGljbWUyMjVfcHJvZA==
+    DB_HOST: cG9zdGdyZXMtc2VydmljZQ==
+    DB_PASSWORD: U2VjdXJlRGJQYXNzdzByZCEyMDI2
+    DB_PORT: NTQzMg==
+    DB_USERNAME: cGljbWVfYWRtaW4=
+    FILESYSTEM_DISK: czM=
+    GROQ_API_KEY: Z3NrX04wUElyVEJxOWtYZU9SZmZ6YWFKV0dkeWIzRlk0YzRJZWNuRUZlemJPOUZpclllU0tkTWk=
+    GROQ_MODEL: bGxhbWEtMy4xLThiLWluc3RhbnQ=
+    GROQ_TIMEOUT: NQ==
+    LOG_CHANNEL: c3RkZXJy
+    LOG_DEPRECATIONS_CHANNEL: bnVsbA==
+    LOG_LEVEL: aW5mbw==
+    MAIL_ENCRYPTION: dGxz
+    MAIL_FROM_ADDRESS: cGljbWVlMjI1QGdtYWlsLmNvbQ==
+    MAIL_FROM_NAME: IiR7QVBQX05BTUV9Ig==
+    MAIL_HOST: c210cC5nbWFpbC5jb20=
+    MAIL_MAILER: c210cA==
+    MAIL_PASSWORD: eW91ci1hcHAtcGFzc3dvcmQ=
+    MAIL_PORT: NTg3
+    MAIL_USERNAME: cGljbWVlMjI1QGdtYWlsLmNvbQ==
+    MEMCACHED_HOST: MTI3LjAuMC4x
+    PUSHER_APP_CLUSTER: bXQx
+    PUSHER_APP_ID: ""
+    PUSHER_APP_KEY: ""
+    PUSHER_APP_SECRET: ""
+    PUSHER_HOST: ""
+    PUSHER_PORT: NDQz
+    PUSHER_SCHEME: aHR0cHM=
+    QUEUE_CONNECTION: cmVkaXM=
+    REDIS_HOST: cmVkaXMtc2VydmljZQ==
+    REDIS_PASSWORD: bnVsbA==
+    REDIS_PORT: NjM3OQ==
+    REDIS_URL: cmVkaXM6Ly9yZWRpcy1zZXJ2aWNlOjYzNzk=
+    SESSION_DRIVER: cmVkaXM=
+    SESSION_LIFETIME: MTIw
+    SOCKET_PORT: MzAwMA==
+    VITE_APP_NAME: IiR7QVBQX05BTUV9Ig==
+    VITE_PUSHER_APP_CLUSTER: IiR7UFVTSEVSX0FQUF9DTFVTVEVSfSI=
+    VITE_PUSHER_APP_KEY: IiR7UFVTSEVSX0FQUF9LRVl9Ig==
+    VITE_PUSHER_HOST: IiR7UFVTSEVSX0hPU1R9Ig==
+    VITE_PUSHER_PORT: IiR7UFVTSEVSX1BPUlR9Ig==
+    VITE_PUSHER_SCHEME: IiR7UFVTSEVSX1NDSEVNRX0i
+  kind: Secret
+  metadata:
+    creationTimestamp: "2026-06-29T07:59:16Z"
+    name: laravel-env
+    namespace: default
+    resourceVersion: "132378"
+    uid: e73ec6c9-cca1-4a1e-aad9-fe932020adf3
+  type: Opaque
+- apiVersion: v1
+  data:
+    tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZCekNDQSsrZ0F3SUJBZ0lTQmRteitTdjM1aE84K2dDamdjdVU5T0pTTUEwR0NTcUdTSWIzRFFFQkN3VUEKTURNeEN6QUpCZ05WQkFZVEFsVlRNUll3RkFZRFZRUUtFdzFNWlhRbmN5QkZibU55ZVhCME1Rd3dDZ1lEVlFRRApFd05aVWpJd0hoY05Nall3TmpJMk1UQTBOekkwV2hjTk1qWXdPVEkwTVRBME56SXpXakFZTVJZd0ZBWURWUVFECkV3MXdhV050WlRJeU5TNXphWFJsTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUEKdGU4SkVsZTFPUVA1NmtNbXp1dCs1YWNxMDhja2I3V1Q2bmU4NERJbFRFbEFLTkMzbUl1WTJWeHlVS3kwRmdVYgpEdUMyMVdDSkVzdEgrdmdaS2lPOFM1Tm0yT0llQ2x4YzdManhSZWpCTWg1cmxhQkl5UDZaR1JsRDYvQUFDSXkvClhqVkRPRWMrNWVWSnVvL3dzTWhzR0hjWjlNSkpubHd2dTZZUjdnL2tFM0VVQWVrZ3pxb1F5N2NXWi9EYTlmYUsKNG5CMjQyOWpJWGFKd0NSMWptbkhUeEFzUlJNejcrSUZCOUdGbWV6bkhwOE5va0htcG9kZXVOWGpLTXNYZDU3YgpkSkNiRnp2ZlFIbGNUbEtxOVoxVnBhdXFyNE91bWxzN2lXMnJnWkVkWE4yZXJVVnZMZFpwQ0JpK1hHMjdtSlNSClJaZHQ5c0p2ckl1a0dWOVpxbHFoQVFJREFRQUJvNElDTGpDQ0Fpb3dEZ1lEVlIwUEFRSC9CQVFEQWdXZ01CTUcKQTFVZEpRUU1NQW9HQ0NzR0FRVUZCd01CTUF3R0ExVWRFd0VCL3dRQ01BQXdIUVlEVlIwT0JCWUVGSlU5SkRudApWUnFUai9zYll1WHZMbUtvT0NkUE1COEdBMVVkSXdRWU1CYUFGRUFWTFNaNTdUSWdudCthY2gzV01oK0JESUVNCk1ETUdDQ3NHQVFVRkJ3RUJCQ2N3SlRBakJnZ3JCZ0VGQlFjd0FvWVhhSFIwY0RvdkwzbHlNaTVwTG14bGJtTnkKTG05eVp5OHdLd1lEVlIwUkJDUXdJb0lOY0dsamJXVXlNalV1YzJsMFpZSVJkM2QzTG5CcFkyMWxNakkxTG5OcApkR1V3RXdZRFZSMGdCQXd3Q2pBSUJnWm5nUXdCQWdFd0xnWURWUjBmQkNjd0pUQWpvQ0dnSDRZZGFIUjBjRG92CkwzbHlNaTVqTG14bGJtTnlMbTl5Wnk4NE15NWpjbXd3Z2dFTUJnb3JCZ0VFQWRaNUFnUUNCSUg5QklINkFQZ0EKZHdDVVRrT0grdXpCNzRIekdTUW1xQmhsQWNmVFh6Z0NBVDl5WjMxVk55NFoyQUFBQVo4RHdDM2JBQUFFQXdCSQpNRVlDSVFDc3pPRkdWRndZYlBuRVlJZ3QzRXNneGNNTUo1N1BtbFFsTFBaMFdsdzVsd0loQU4vbWhIQTdBSGJCCkZocXBaaXV0Wi9zdTNzR2QvQjQzU040UkFFZG8ydUo2QUgwQVJxK0dQVHMrNVorbGQ5Nm9KRjAyc05udElxSWoKOUdGM1FTS1VVdTZWVUY4QUFBR2ZBOEF1TkFBSUFBQUZBQXJUVmxjRUF3QkdNRVFDSUcxTW81dGd6VTcrUUxyUApYWTJKWGxHdXFGa202YXpZUDdqK0dNTXdDN2FYQWlBREJ4YmdQQ2pvc0lHSUpUY3NyblU4YmRiZS84UUJaVWhvCkcwcU5ST29ZeFRBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQVJJM0MxdFJTK3N4MWZ5UXlRTm8xY2JnS1l1algKbzhTenRjSzlXdHNidDdva2VlQnE4MlZSa3FRZU5aQWsxeUEwUkMyYVNScFlvMnFwZW04KzcyU3FKTTVUdTIwbQpHQTh0QzRkOGw0aENwM0RxRXVscmZMZlhSYXhjblg4MDVmQUVZOUhsNFNJWHJGUDJkeWFkQ2owelV1eFJGWUVFCnY4QTRBKzJWNTUzWTFYSUdwWm5HWWgwMHpmeDMxWjkwak5sekpDcEhOYnVybWVmVDlsKzBNOHZoY0VtRi9ycUQKWFQrSG5BUjhLb0FLWDFUTVdlVXliV2RFUlYrM0hDdlpZUzlhRUlSRlBFQ3RqZkNWMHUwTk15T2lVL0N3UzRkMAo5VHZTMG1nQkR3bndEeFlHakJMTHJTRlNYMGdzRTdLTjkvSFplQ09IYlIyNjJnZ3Z2d0ovYkdoRUNRPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQotLS0tLUJFR0lOIENFUlRJRklDQVRFLS0tLS0KTUlJRTJqQ0NBc0tnQXdJQkFnSVFUcjBrbEg0azA1U0FMWVNsTDlXekdUQU5CZ2txaGtpRzl3MEJBUXNGQURBdQpNUXN3Q1FZRFZRUUdFd0pWVXpFTk1Bc0dBMVVFQ2hNRVNWTlNSekVRTUE0R0ExVUVBeE1IVW05dmRDQlpVakFlCkZ3MHlOVEE1TURNd01EQXdNREJhRncweU9EQTVNREl5TXpVNU5UbGFNRE14Q3pBSkJnTlZCQVlUQWxWVE1SWXcKRkFZRFZRUUtFdzFNWlhRbmN5QkZibU55ZVhCME1Rd3dDZ1lEVlFRREV3TlpVakl3Z2dFaU1BMEdDU3FHU0liMwpEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURaMEx4d0JwcHFoODRsdXFNZXJWL2VlTC9mWFE3bUxRUXYxTG5wCldLWmJ5dkdweDZ3aDZBZm5zbEFuRjZld1RrY0hBK2dTT29Cdm0zRGZtMDZBdUdpRitLUnV0NGZBY293cW5BUVEKQ1c5OCtRUFAvZU92L3d1ZzdJeWs0TmtPeGYySTZnMmY1NVQ2bkpvT1RMRmN1a2VScTgwSkdRRVlhbitkUEZyOQpPR1VnUUsyaEdLZ05rVzg3cGFwcHNPQXVVSmNyb1loUnQ1dVVpczRxYVppcmVpc2V1MzJnekRKTkJBaUt0c3ZkCjZIWDR2MjVicGtSTmNTL0IvR3RjOWtWYlVwRCsyUExQeGRlaTNUaW01NWs0dGZBRVh3RDJxeWlQVHhyVE5xNmwKTitBTXI1ZzJjMWROcWtPVHdqeGVWNkw1bHBQMXJHaVl2TG5SYVBsT3F5WlJQVys1QWdNQkFBR2pnZTR3Z2VzdwpEZ1lEVlIwUEFRSC9CQVFEQWdHR01CTUdBMVVkSlFRTU1Bb0dDQ3NHQVFVRkJ3TUJNQklHQTFVZEV3RUIvd1FJCk1BWUJBZjhDQVFBd0hRWURWUjBPQkJZRUZFQVZMU1o1N1RJZ250K2FjaDNXTWgrQkRJRU1NQjhHQTFVZEl3UVkKTUJhQUZON25XMkRRSW0xQUtIMC9EUUgrcExWU3RGR1VNRElHQ0NzR0FRVUZCd0VCQkNZd0pEQWlCZ2dyQmdFRgpCUWN3QW9ZV2FIUjBjRG92TDNseUxta3ViR1Z1WTNJdWIzSm5MekFUQmdOVkhTQUVEREFLTUFnR0JtZUJEQUVDCkFUQW5CZ05WSFI4RUlEQWVNQnlnR3FBWWhoWm9kSFJ3T2k4dmVYSXVZeTVzWlc1amNpNXZjbWN2TUEwR0NTcUcKU0liM0RRRUJDd1VBQTRJQ0FRQjBaVVFXWjkvWW45Q09FcG8rSmZlY01uQjBoMHZ3RG0vTTY2SXFYcXczTG9hTApteDlsWnZSVGVESVM2N1BVZUkzeUNBMlc2UEtSRDAvRkUvRzU3bE9tUytYeTVBYWFMMDBJQ0dPcWpOY0NhTVdXCjhvOG5ldkhPZDRpNGxxZ3R6bkUvMjhRd2xjZEp5Rjh5QmlXSHBueWpoRXBtTldKVVJnT0NPZzJ4cHdSTUJDc2oKTVNjcVlQdE9oQmV1WVF2U3dBRWVUTUwyVWtoNnVHdVg0RTE0cTY1SmE4Y2RqRjViQWxkblAxZUU0RkJhQXdzWgpHMmZPcXFyS1YwM1k4NU53MmJ0ZWRQMUF0bGlRdUpacy9Kby9nWHhYZGM3THJIM01jZ25wbmJUaUFuY1g3eUVTCmhQNmt6UWVqbGxxTUNJdDUySE9qeERHV2FmUzdYdytES3dxbUgrRXF5OGRjYk91YWcvMUFZbFFvS05WSzNGNXEKSGg2dEVEaU1xUWNMSWliR0t0ZUU2aUhvNEEvYklTY2J6cmhYVVl1aXNtNDJaWXptYzQ4Rk1WSUgzcXk0TDg0RQpUZEFIMmd0eHcwUEFodlJWWHA4SFA3d2ZuZ3B6c04vOHhPVHBlUlNiTTQrUWJjNTZHNitCaWZtdjZzazFpZVFiCk5BM3dKZGw0RERVdVFTVjhoQmd4NnpvSTFaU0dPUnByREZ1eDdjNnJoYzc3UVpNU1JyRWdvbUJla2xlcnZFdmUKODZ5bFdtWjNXV0hWNlJMTWk4eE52amQ3MXI0RVBJR2dZN0JaVS9WUEJrcSt1QTdHYjZtYkpuRmdWNDN1aDN4eQpMUkZneElBcGhJdWt3VEdTTVpaUitBSStRbnAwQllUV292SFhvek9mM0g4cjZob3pFb1QwMkpIbjBBZVRmQT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0KLS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUY5RENDQTl5Z0F3SUJBZ0lSQVBKTGJSZjUyYTE4c2NuK3A0ZUNhWjh3RFFZSktvWklodmNOQVFFTEJRQXcKVHpFTE1Ba0dBMVVFQmhNQ1ZWTXhLVEFuQmdOVkJBb1RJRWx1ZEdWeWJtVjBJRk5sWTNWeWFYUjVJRkpsYzJWaApjbU5vSUVkeWIzVndNUlV3RXdZRFZRUURFd3hKVTFKSElGSnZiM1FnV0RFd0hoY05Nall3TlRFek1EQXdNREF3CldoY05Nekl3T1RBeU1qTTFPVFU1V2pBdU1Rc3dDUVlEVlFRR0V3SlZVekVOTUFzR0ExVUVDaE1FU1ZOU1J6RVEKTUE0R0ExVUVBeE1IVW05dmRDQlpVakNDQWlJd0RRWUpLb1pJaHZjTkFRRUJCUUFEZ2dJUEFEQ0NBZ29DZ2dJQgpBTnZHSm5ONzhDVEpkV0wzK2VHZnNMTjVUck5CSnMrVkg5aFJYcVJid3h1OXNHTmlCMEJEMWZjT3hiU1VRQ0pJCk0xeEUxM0RiKzVDdzF3MHMwRUJZc3Z1SVAvNmpvRjB3OGN1SW1iZ1IxT0dnWWJTUTRPcHpJK0RHOFNHdVRsY0UKODczT0NTK2toM3NybG82dmw0M001T0pnNEFlbzFzZkhwNmtUSkRvSWlGQk5KQVkrT0tmWC9GVXZZS3VoalQrbgpvNDlsbXFtdXBTQkk1UGtCUWlxckVHdFdVNXV4VS9jUVdIR3U4alNqRkJ6blpxdmJOUExNWE1MRnhDYjNXVGZyCkpCWFhqcXZXRyt2NGJqenhqamVBdE9sVTdxYXJSRHZOT3lBdVFZTGxuOTA0TStmYUt4OGhuTENwSjE1WnFhRWcKY05sWSs5TU1XY0M1eXZMMkEyajNsOSsyYnVnZ1pYK2RPRTkxelltSWRhd1R2U1p1VnZsYlJyQWxMeElCNnB3TQpCam5lWENqWVE4KzNCQ0Nqc3NiU05wWlUzaFRjQkRkaGZBbEVEbFlyNnBFYXRuTWRtRFQ1QnFuS0M5MmJkMEVoCk0xZmJMSGlvTGNjTEN1aWV2VDhaa1BoWnJxN01paTdnTlhBY1VFQVI4K2x6WWFsKzl6VGc3QzVEQUx5Vk9lRy8KQ3FmUkFNbjFLU0hDUjBOU0E2UDh0bi9tR1JsbkNjdDVydFZDTG5WeVNWcFU2SDFxR2czRGdUT3Vza2Y4ZWFoVApNaVliSTVlelBKbU81ZXJ0YWxza1ExdXRwNzQrZUR5OTJQSTRmdEhLVGJxOUlXaEg0WVpLaDNXbkpFSXQrb1F2CmxZWmJZOHRwRXJvS3JGQjZQRkd6ckpJRFJ5dHM0SHF2dUg1MlJGajJ6di9CQWdNQkFBR2pnZXN3Z2Vnd0RnWUQKVlIwUEFRSC9CQVFEQWdFR01CTUdBMVVkSlFRTU1Bb0dDQ3NHQVFVRkJ3TUJNQThHQTFVZEV3RUIvd1FGTUFNQgpBZjh3SFFZRFZSME9CQllFRk43blcyRFFJbTFBS0gwL0RRSCtwTFZTdEZHVU1COEdBMVVkSXdRWU1CYUFGSG0wCldlWjd0dVhrQVhPQUNJaklHbGoyNlp0dU1ESUdDQ3NHQVFVRkJ3RUJCQ1l3SkRBaUJnZ3JCZ0VGQlFjd0FvWVcKYUhSMGNEb3ZMM2d4TG1rdWJHVnVZM0l1YjNKbkx6QVRCZ05WSFNBRUREQUtNQWdHQm1lQkRBRUNBVEFuQmdOVgpIUjhFSURBZU1CeWdHcUFZaGhab2RIUndPaTh2ZURFdVl5NXNaVzVqY2k1dmNtY3ZNQTBHQ1NxR1NJYjNEUUVCCkN3VUFBNElDQVFBOHNwU0k5NUtLZm4yVzZHTW1EcEhCSlNQYUxic1MzVzkzY2lqSkNSQ1lBYzFmc0pnTDFGSUwKN0MwQzllY1BPZGN3QjJmaTBEazJwOTRqOWlUSkN4bXQ1Q0ZTS0xSV3duWFQyTU1TWGV4Vnhxb1ZCNzlCZFdQeApWWEVUa1ZtZS9xWVNBdUtWSGg1UHMrNUJpeGdtd1MxSmtqU0FjK01mclViTnNzVkVFbkgwYUVpQWgrcm90WEFWCkpTUC9ZZTdMSlBFd0Q5RFdHNzJ2VldiaEFjdU9mNU9Mano1N0N0azdNZ1FIeW5aNytQbEhKdGFqcm9DYUlidEMKcjZ0Y1paYUF3VVFtK2pReWVXZFYrMmh2OWRlT1lGbUtlUXlqamNTck41TmFkcncrTDlEWkpMYkExSHFlTnZMaApCZ3FwUDBmdkpxMk42RXRENTc0TjZlTUk3dU1zSlRuamkyVUR6OWVsNVhMU3Y5ZnFKTXVEUXRZVmIyb1ROb0twCm9VcWh4UFZDMGFxNGVHNU1FU2FJZG44YjVaR1NTZUFKTE1IWGxqRWRsTnphK25jZmt2aVhrMVBPTG5uRmR2eDgKL2drNk0zNzRXYkxXRlh3OE4xNDFCL1JsL3RJTkdmbDFUeE9JaXF0aU1Za0wwMlJTR2Ixa3EzNEJMOU5QUDI3egpSR011SEduelMzaEZJclJUZkt4cnpVWjlSelFXekVHM0s2ZkozcjJucVNsdGtleXRpczlESUJvRlk5Vm1WeWpMCk03MURNaSt5MStUUlNKVkNsRU13dkE0eUwrKzdxOVhaeDVyNXdCUldCNGtRVEtINXF5b1puRHc3aWl1aDFsSUQKeURGeDhyN2k5dklKVTVIUzNtb1pMa1lXQU9pbE1hVjlONTZBOUJnYjZkTmNIa3ZnM05vYVlBPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBdGU4SkVsZTFPUVA1NmtNbXp1dCs1YWNxMDhja2I3V1Q2bmU4NERJbFRFbEFLTkMzCm1JdVkyVnh5VUt5MEZnVWJEdUMyMVdDSkVzdEgrdmdaS2lPOFM1Tm0yT0llQ2x4YzdManhSZWpCTWg1cmxhQkkKeVA2WkdSbEQ2L0FBQ0l5L1hqVkRPRWMrNWVWSnVvL3dzTWhzR0hjWjlNSkpubHd2dTZZUjdnL2tFM0VVQWVrZwp6cW9ReTdjV1ovRGE5ZmFLNG5CMjQyOWpJWGFKd0NSMWptbkhUeEFzUlJNejcrSUZCOUdGbWV6bkhwOE5va0htCnBvZGV1TlhqS01zWGQ1N2JkSkNiRnp2ZlFIbGNUbEtxOVoxVnBhdXFyNE91bWxzN2lXMnJnWkVkWE4yZXJVVnYKTGRacENCaStYRzI3bUpTUlJaZHQ5c0p2ckl1a0dWOVpxbHFoQVFJREFRQUJBb0lCQUZnNFQ5clFJdlZCdzFiZwpOeHBSUVZoVkJrUnBKWGJ4d29jSWh0TGtIZ2Z1NFNpcGhNMTRxNmFDMkgvY0x2c2FnTE5uTGVFc0RXdktuTjNLCm5sRTd3TnVZMzE4OXpqbFI3bEZ2b0xjNGxTNGJhQ25HN21SZ2FKYXVGS3g4MVZkUUFKL0xEZ3hsSjgvTXJrTEQKOTMrUndERGcxL3BDbC9ZdFY0d1RqRkEyN202cUxaOHZ5amtLVXlwTkZJVFhET0daNFVMT2FuTU5zQVo0LzB5VwpKb3owWDFtWjUxbGdDekxmZU1IdlhDcjRaWVpXYVJ3ZXJEaFhQaDQ3cU1sYjJDUXlTMGlWNlRHMlV0Z1ZlMkVUCkRGTDJsaGRDQjA2a3h3cVc2Y0Y2MnBCRENkeVBzeW9xc2F6N0NYc0Q3TFV2VXFOQ21GNGdCcURiMncxQ05sNFcKNDhnQTNRRUNnWUVBeUlVRmJYOGcwSDU4V1RMUTBjcHF0UlNtRmlGZDRodk1HeVcvQlFpcVhEaEJ0NGRhV1d4WApieGFFUldKUjE0c3lYM3Z5RFBWUDdkcWZlelhTMTM0cTN4ekMxUFpwQldzNmpyM0lFS1hmdVlKcDlJTVdYUkwrCjJYbEJwMzdGa3ZxRHp4N2Y5YlRPTDZSS1JzT1pockVxUSsvc1ZjUytBNkdzVTVjSHhneDRtUEVDZ1lFQTZFV1AKWHVuRjRGQlNJbFNlT3NWOXgzbTFXOWNoL0RVbFBmVmZlaTRvME5jTFNOWHRGT2pvZGdQTDZyUTR5VUtveFk0WQpLc1dvZFM2WDYxbzYxWEEydWcvcisvM0ExNUw2SC81UjlkMGFCaElRbytQUUYxVDNGcmMxYW83bTRXRlV6M2Y4Cm00Yk5NRk90QmJ6ZW5hL2NtVEpocVUxdFBBL3J5N0dIcVdoNENSRUNnWUJUSFhnemU5ZUJOSHljaUlpdi9PUWcKTE8vdkNtT2Mzb0xLMmVtRXo2TzEyQWU5YUJoV0txZFBQNWtTSFgvcEJTU2JHWWdxUU9DaHFkWWpQeHNuQVlBSgp2U1V4R3ZaTExiZzNCSWxTQlQ5bjZKdThvejE0MU8vWCt2L3d5b1pndHdBOXNRR0tHaWpBN0t0eEM1Q3VtTzc0Ci9CRU5PQ0MrNXB2RWhqek5wY3V6TVFLQmdRREZHWW9CRThWYmhTMDlmcXJLMnAzU2NPQktML1BoN2tOTklYUkUKM1BpN3gxQUhIYW5TalpYOTExanFNTWJqV3BLWEdlNCtGWDdPK1p2bkZxbElSN0haRC92RDJXQVVUdCs3MkhjNgplTVpGa256V1psSkdDazZtMHc4Yi9tbkRwWEZ2b0xVV1VUeTduclg3WVh0VE9sR3JHb3F2UFVuTnB3RUQyQUZ6CjYzZTQwUUtCZ0ZOeWxMU2dxWlBucjJNOHVMWWdiWWZXUHFYTUVrT0t1VFJxRmUzRm01YmQ1YnBjWG5RcEV1Z3kKaHV3S21uZUNVUmk3R0tsODdzTnpFZGw1ZUN6S0liWEkwZjdmMWYyOWVaN3ZkeHpLbjlyRHQ4VUlWck1Icmx4QQowSW1ERkNNTDBRUjAxRlhoUGJrdit6bHFzSFU2U2hOanFTdVNNc1FLbVlFSWcwYnhtTWRrCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+  kind: Secret
+  metadata:
+    annotations:
+      cert-manager.io/alt-names: picme225.site,www.picme225.site
+      cert-manager.io/certificate-name: picme225-tls
+      cert-manager.io/common-name: picme225.site
+      cert-manager.io/ip-sans: ""
+      cert-manager.io/issuer-group: cert-manager.io
+      cert-manager.io/issuer-kind: ClusterIssuer
+      cert-manager.io/issuer-name: letsencrypt-prod
+      cert-manager.io/uri-sans: ""
+    creationTimestamp: "2026-06-26T11:45:54Z"
+    labels:
+      controller.cert-manager.io/fao: "true"
+    name: picme225-tls
+    namespace: default
+    resourceVersion: "23786"
+    uid: 8a5e5193-fffc-498c-8a6d-10828f7ff0bb
+  type: kubernetes.io/tls
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{},"name":"evolution-api-pvc","namespace":"default"},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"2Gi"}}}}
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: k3s-master-gcp
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2026-06-29T01:01:06Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    name: evolution-api-pvc
+    namespace: default
+    resourceVersion: "120996"
+    uid: f3d6d4a2-dae8-4ac4-b715-17a6f1d4ae7a
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 2Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-f3d6d4a2-dae8-4ac4-b715-17a6f1d4ae7a
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 2Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      local.path.provisioner/selected-node: k3s-master-gcp
+      pv.kubernetes.io/provisioned-by: rancher.io/local-path
+    creationTimestamp: "2026-06-29T01:01:15Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pvc-f3d6d4a2-dae8-4ac4-b715-17a6f1d4ae7a
+    resourceVersion: "120993"
+    uid: ab17a064-a03b-4c37-b523-c43fb6912297
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 2Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: evolution-api-pvc
+      namespace: default
+      resourceVersion: "120929"
+      uid: f3d6d4a2-dae8-4ac4-b715-17a6f1d4ae7a
+    local:
+      path: /var/lib/rancher/k3s/storage/pvc-f3d6d4a2-dae8-4ac4-b715-17a6f1d4ae7a_default_evolution-api-pvc
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - k3s-master-gcp
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: local-path
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2026-06-29T01:01:15Z"
+    phase: Bound
+kind: List
+metadata:
+  resourceVersion: ""

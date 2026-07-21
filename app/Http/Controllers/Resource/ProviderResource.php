@@ -11,9 +11,9 @@ use Exception;
 use Setting;
 use Storage;
 
-use App\Provider;
-use App\UserRequestPayment;
-use App\UserRequests;
+use App\Models\Provider;
+use App\Models\UserRequestPayment;
+use App\Models\UserRequests;
 use App\Helpers\Helper;
 
 class ProviderResource extends Controller
@@ -25,7 +25,7 @@ class ProviderResource extends Controller
      */
     public function __construct()
     {
-        $this->middleware('demo', ['only' => [ 'store', 'update', 'destroy', 'disapprove']]);
+        $this->middleware('demo', ['only' => ['store', 'update', 'destroy', 'disapprove']]);
     }
 
     /**
@@ -36,16 +36,16 @@ class ProviderResource extends Controller
     public function index(Request $request)
     {
 
-        
-        $AllProviders = Provider::with('service','accepted','cancelled')
-                    ->orderBy('id', 'DESC');
 
-        if(request()->has('fleet')){
-            $providers = $AllProviders->where('fleet',$request->fleet)->get();
-        }else{
+        $AllProviders = Provider::with('service', 'accepted', 'cancelled')
+            ->orderBy('id', 'DESC');
+
+        if (request()->has('fleet')) {
+            $providers = $AllProviders->where('fleet', $request->fleet)->get();
+        } else {
             $providers = $AllProviders->get();
         }
-                    
+
         return view('admin.providers.index', compact('providers'));
     }
 
@@ -77,30 +77,32 @@ class ProviderResource extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        try{
+        try {
 
             $provider = $request->all();
 
             $provider['password'] = bcrypt($request->password);
-            if($request->hasFile('avatar')) {
+            if ($request->hasFile('avatar')) {
                 $provider['avatar'] = $request->avatar->store('provider/profile');
             }
 
+            $provider['is_syndicated'] = $request->has('is_syndicated') ? 1 : 0;
+            // Prevent SQL 'commune doesn't have a default value' error
+            $provider['commune'] = $request->has('commune') ? $request->commune : '';
+            
             $provider = Provider::create($provider);
 
-            return back()->with('flash_success','Provider Details Saved Successfully');
+            return back()->with('flash_success', 'Provider Details Saved Successfully');
 
-        } 
-
-        catch (Exception $e) {
-            return back()->with('flash_error', 'Provider Not Found');
+        } catch (Exception $e) {
+            return back()->with('flash_error', $e->getMessage());
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -116,14 +118,14 @@ class ProviderResource extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         try {
             $provider = Provider::findOrFail($id);
-            return view('admin.providers.edit',compact('provider'));
+            return view('admin.providers.edit', compact('provider'));
         } catch (ModelNotFoundException $e) {
             return $e;
         }
@@ -133,7 +135,7 @@ class ProviderResource extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -150,30 +152,29 @@ class ProviderResource extends Controller
 
             $provider = Provider::findOrFail($id);
 
-            if($request->hasFile('avatar')) {
-                if($provider->avatar) {
+            if ($request->hasFile('avatar')) {
+                if ($provider->avatar) {
                     Storage::delete($provider->avatar);
                 }
-                $provider->avatar = $request->avatar->store('provider/profile');                    
+                $provider->avatar = $request->avatar->store('provider/profile');
             }
 
             $provider->first_name = $request->first_name;
             $provider->last_name = $request->last_name;
             $provider->mobile = $request->mobile;
+            $provider->is_syndicated = $request->has('is_syndicated') ? 1 : 0;
             $provider->save();
 
-            return redirect()->route('admin.provider.index')->with('flash_success', 'Provider Updated Successfully');    
-        } 
-
-        catch (ModelNotFoundException $e) {
-            return back()->with('flash_error', 'Provider Not Found');
+            return redirect()->route('admin.provider.index')->with('flash_success', 'Provider Updated Successfully');
+        } catch (Exception $e) {
+            return back()->with('flash_error', $e->getMessage());
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -182,23 +183,22 @@ class ProviderResource extends Controller
         try {
             Provider::find($id)->delete();
             return back()->with('message', 'Provider deleted successfully');
-        } 
-        catch (Exception $e) {
-            return back()->with('flash_error', 'Provider Not Found');
+        } catch (Exception $e) {
+            return back()->with('flash_error', $e->getMessage());
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function approve($id)
     {
         try {
             $Provider = Provider::findOrFail($id);
-            if($Provider->service) {
+            if ($Provider->service) {
                 $Provider->update(['status' => 'approved']);
                 return back()->with('flash_success', "Provider Approved");
             } else {
@@ -212,97 +212,100 @@ class ProviderResource extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function disapprove($id)
     {
-        
-        Provider::where('id',$id)->update(['status' => 'banned']);
+
+        Provider::where('id', $id)->update(['status' => 'banned']);
         return back()->with('flash_success', "Provider Disapproved");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function request($id){
+    public function request($id)
+    {
 
-        try{
+        try {
 
-            $requests = UserRequests::where('user_requests.provider_id',$id)
-                    ->RequestHistory()
-                    ->get();
+            $requests = UserRequests::where('user_requests.provider_id', $id)
+                ->RequestHistory()
+                ->get();
 
             return view('admin.request.index', compact('requests'));
         } catch (Exception $e) {
-            return back()->with('flash_error','Something Went Wrong!');
+            return back()->with('flash_error', 'Something Went Wrong!');
         }
     }
 
     /**
      * account statements.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function statement($id){
+    public function statement($id)
+    {
 
-        try{
+        try {
 
-            $requests = UserRequests::where('provider_id',$id)
-                        ->where('status','COMPLETED')
-                        ->with('payment')
-                        ->get();
+            $requests = UserRequests::where('provider_id', $id)
+                ->where('status', 'COMPLETED')
+                ->with('payment')
+                ->get();
 
-            $rides = UserRequests::where('provider_id',$id)->with('payment')->orderBy('id','desc')->paginate(10);
-            $cancel_rides = UserRequests::where('status','CANCELLED')->where('provider_id',$id)->count();
+            $rides = UserRequests::where('provider_id', $id)->with('payment')->orderBy('id', 'desc')->paginate(10);
+            $cancel_rides = UserRequests::where('status', 'CANCELLED')->where('provider_id', $id)->count();
             $Provider = Provider::find($id);
-            $revenue = UserRequestPayment::whereHas('request', function($query) use($id) {
-                                    $query->where('provider_id', $id );
-                                })->select(\DB::raw(
-                                   'SUM(ROUND(provider_pay)) as overall, SUM(ROUND(provider_commission)) as commission' 
-                               ))->get();
+            $revenue = UserRequestPayment::whereHas('request', function ($query) use ($id) {
+                $query->where('provider_id', $id);
+            })->select(\DB::raw(
+                        'SUM(ROUND(provider_pay)) as overall, SUM(ROUND(provider_commission)) as commission'
+                    ))->get();
 
 
-            $Joined = $Provider->created_at ? '- Joined '.$Provider->created_at->diffForHumans() : '';
+            $Joined = $Provider->created_at ? '- Joined ' . $Provider->created_at->diffForHumans() : '';
 
-            return view('admin.providers.statement', compact('rides','cancel_rides','revenue'))
-                        ->with('page',$Provider->first_name."'s Overall Statement ". $Joined);
+            return view('admin.providers.statement', compact('rides', 'cancel_rides', 'revenue'))
+                ->with('page', $Provider->first_name . "'s Overall Statement " . $Joined);
 
         } catch (Exception $e) {
-            return back()->with('flash_error','Something Went Wrong!');
+            return back()->with('flash_error', 'Something Went Wrong!');
         }
     }
 
-    public function Accountstatement($id){
+    public function Accountstatement($id)
+    {
 
-        try{
+        try {
 
-            $requests = UserRequests::where('provider_id',$id)
-                        ->where('status','COMPLETED')
-                        ->with('payment')
-                        ->get();
+            $requests = UserRequests::where('provider_id', $id)
+                ->where('status', 'COMPLETED')
+                ->with('payment')
+                ->get();
 
-            $rides = UserRequests::where('provider_id',$id)->with('payment')->orderBy('id','desc')->paginate(10);
-            $cancel_rides = UserRequests::where('status','CANCELLED')->where('provider_id',$id)->count();
+            $rides = UserRequests::where('provider_id', $id)->with('payment')->orderBy('id', 'desc')->paginate(10);
+            $cancel_rides = UserRequests::where('status', 'CANCELLED')->where('provider_id', $id)->count();
             $Provider = Provider::find($id);
-            $revenue = UserRequestPayment::whereHas('request', function($query) use($id) {
-                                    $query->where('provider_id', $id );
-                                })->select(\DB::raw(
-                                   'SUM(ROUND(fixed) + ROUND(distance)) as overall, SUM(ROUND(commision)) as commission' 
-                               ))->get();
+            $revenue = UserRequestPayment::whereHas('request', function ($query) use ($id) {
+                $query->where('provider_id', $id);
+            })->select(\DB::raw(
+                        'SUM(ROUND(fixed) + ROUND(distance)) as overall, SUM(ROUND(commision)) as commission'
+                    ))->get();
 
 
-            $Joined = $Provider->created_at ? '- Joined '.$Provider->created_at->diffForHumans() : '';
+            $Joined = $Provider->created_at ? '- Joined ' . $Provider->created_at->diffForHumans() : '';
 
-            return view('account.providers.statement', compact('rides','cancel_rides','revenue'))
-                        ->with('page',$Provider->first_name."'s Overall Statement ". $Joined);
+            return view('account.providers.statement', compact('rides', 'cancel_rides', 'revenue'))
+                ->with('page', $Provider->first_name . "'s Overall Statement " . $Joined);
 
         } catch (Exception $e) {
-            return back()->with('flash_error','Something Went Wrong!');
+            return back()->with('flash_error', 'Something Went Wrong!');
         }
     }
 }

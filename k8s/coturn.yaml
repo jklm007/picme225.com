@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coturn-deployment
+  labels:
+    app: coturn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coturn
+  template:
+    metadata:
+      labels:
+        app: coturn
+    spec:
+      # FORCER LE POD SUR LE SERVEUR ORACLE ARM 24Go
+      nodeSelector:
+        node-role.kubernetes.io/oracle-arm: "true"
+      # Coturn nécessite d'accéder au réseau de l'hôte pour le WebRTC
+      hostNetwork: true
+      containers:
+        - name: coturn
+          image: coturn/coturn:latest
+          args:
+            - "-n"
+            - "--log-file=stdout"
+            - "--min-port=49152"
+            - "--max-port=65535"
+            - "--user=picme:secret_turn_password"
+            - "--realm=picme225.site"
+          ports:
+            - containerPort: 3478
+              protocol: UDP
+            - containerPort: 3478
+              protocol: TCP
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+
+---
+# Remarque : Puisque hostNetwork = true, le service Kubernetes est optionnel 
+# mais on le garde pour l'architecture.
+apiVersion: v1
+kind: Service
+metadata:
+  name: coturn-service
+spec:
+  selector:
+    app: coturn
+  ports:
+    - name: stun-udp
+      protocol: UDP
+      port: 3478
+      targetPort: 3478
+    - name: stun-tcp
+      protocol: TCP
+      port: 3478
+      targetPort: 3478

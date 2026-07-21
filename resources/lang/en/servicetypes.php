@@ -18,5 +18,13 @@ return [
     'DISTANCE'      => 'Distance Pricing',
     'DISTANCEMIN'   => 'Distance and Per Minute Pricing',
     'DISTANCEHOUR'  => 'Distance and Per Hour Pricing',
+    'Moto' => 'Motorcycle',
+    'Berline' => 'Sedan',
+    'SUV' => 'SUV / 4x4',
+    'Luxe' => 'Luxury Vehicle',
+    'Camionnette' => 'Van / Truck',
+    'Ambulance' => 'Ambulance',
+    'Samu' => 'EMS (SAMU)',
+    'GSPM' => 'Fire Department (GSPM)',
 
 ];

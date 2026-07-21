@@ -9,7 +9,7 @@
         <div class="box box-block bg-white">
             <h5 class="mb-1">Provider Name: {{ $Document->provider->first_name }} {{ $Document->provider->last_name }}</h5>
             <h5 class="mb-1">Document: {{ $Document->document->name }}</h5>
-            <embed src="{{ asset('storage/'.$Document->url) }}" width="100%" height="100%" />
+            <embed src="{{ \Storage::disk('s3')->url($Document->url) }}" width="100%" height="100%" />
 
             <div class="row">
                 <div class="col-xs-6">

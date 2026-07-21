@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\FleetAuth;
 
-use App\Fleet;
+use App\Models\Fleet;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;

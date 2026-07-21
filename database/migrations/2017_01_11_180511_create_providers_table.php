@@ -13,11 +13,11 @@ class CreateProvidersTable extends Migration
     public function up()
     {
         Schema::create('providers', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email')->unique();
-            $table->string('mobile')->nullable();
+            $table->string('email')->nullable();
+            $table->string('mobile')->unique();
             $table->string('password');
             $table->string('avatar')->nullable();
             $table->decimal('rating', 4, 2)->default(5);

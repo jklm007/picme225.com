@@ -50,4 +50,25 @@ class ForgotPasswordController extends Controller
     {
         return Password::broker('providers');
     }
+
+    public function resetViaOtp(\Illuminate\Http\Request $request)
+    {
+        $request->validate([
+            'phone_number' => 'required',
+            'country_code' => 'required',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $mobile = $request->country_code . $request->phone_number;
+        $provider = \App\Models\Provider::where('mobile', $mobile)->first();
+        
+        if (!$provider) {
+            return back()->withErrors(['mobile' => 'Aucun compte chauffeur trouvé avec ce numéro.']);
+        }
+
+        $provider->password = bcrypt($request->password);
+        $provider->save();
+
+        return redirect('/provider/login')->with('flash_success', 'Mot de passe réinitialisé avec succès. Vous pouvez maintenant vous connecter.');
+    }
 }

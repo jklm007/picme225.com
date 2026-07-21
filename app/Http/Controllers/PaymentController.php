@@ -13,11 +13,11 @@ use Auth;
 use Setting;
 use Exception;
 
-use App\Card;
-use App\User;
-use App\WalletPassbook;
-use App\UserRequests;
-use App\UserRequestPayment;
+use App\Models\Card;
+use App\Models\User;
+use App\Models\WalletPassbook;
+use App\Models\UserRequests;
+use App\Models\UserRequestPayment;
 
 class PaymentController extends Controller
 {

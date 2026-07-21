@@ -1,0 +1,140 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "30"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"3"},"creationTimestamp":"2026-06-29T07:59:27Z","generation":3,"labels":{"app":"laravel-worker"},"name":"laravel-worker","namespace":"default","resourceVersion":"295365","uid":"1fc325e8-1f37-4f30-a8a9-832b3ab9d24d"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"laravel-worker"}},"strategy":{"rollingUpdate":{"maxSurge":"25%","maxUnavailable":"25%"},"type":"RollingUpdate"},"template":{"metadata":{"labels":{"app":"laravel-worker"}},"spec":{"containers":[{"command":["php","artisan","queue:work","--tries=3","--timeout=90"],"env":[{"name":"GROQ_API_KEY","value":"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"},{"name":"DB_CONNECTION","value":"pgsql"},{"name":"DB_HOST","value":"postgres-service"},{"name":"DB_PORT","value":"5432"},{"name":"DB_DATABASE","value":"picme_db"},{"name":"DB_USERNAME","value":"picme_user"},{"name":"DB_PASSWORD","value":"secret_password"}],"envFrom":[{"secretRef":{"name":"laravel-env"}}],"image":"picme225-laravel:latest","imagePullPolicy":"Never","name":"laravel-worker","resources":{"limits":{"cpu":"500m","memory":"512Mi"},"requests":{"cpu":"100m","memory":"256Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30}}},"status":{"availableReplicas":1,"conditions":[{"lastTransitionTime":"2026-06-29T07:59:27Z","lastUpdateTime":"2026-06-29T10:00:54Z","message":"ReplicaSet \"laravel-worker-59bb9bcf79\" has successfully progressed.","reason":"NewReplicaSetAvailable","status":"True","type":"Progressing"},{"lastTransitionTime":"2026-07-03T11:46:13Z","lastUpdateTime":"2026-07-03T11:46:13Z","message":"Deployment has minimum availability.","reason":"MinimumReplicasAvailable","status":"True","type":"Available"}],"observedGeneration":3,"readyReplicas":1,"replicas":1,"terminatingReplicas":0,"updatedReplicas":1}}
+  creationTimestamp: "2026-07-05T08:49:53Z"
+  generation: 34
+  labels:
+    app: laravel-worker
+  name: laravel-worker
+  namespace: default
+  resourceVersion: "86323"
+  uid: bf4267be-a33c-4add-89fe-901c3ebd241e
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: laravel-worker
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2026-07-07T13:01:32+02:00"
+      labels:
+        app: laravel-worker
+    spec:
+      containers:
+      - command:
+        - /bin/bash
+        - -c
+        - while true; do php artisan queue:work redis --tries=3 --timeout=90; sleep
+          1; done
+        env:
+        - name: EVOLUTION_API_URL
+          value: http://evolution-api-service:8080
+        - name: EVOLUTION_API_KEY
+          value: picme225-evolution-secret-key
+        - name: EVOLUTION_INSTANCE
+          value: picme_whatsapp
+        - name: AWS_ACCESS_KEY_ID
+          value: "ab9da087a81d703a47f95e34a0167a27"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "f3f4f9c1a0aee212d38db9d4cb412b35e776e622289f36b1bfc508f0607cf123"
+        - name: AWS_DEFAULT_REGION
+          value: "auto"
+        - name: AWS_BUCKET
+          value: "picme225-storage"
+        - name: AWS_ENDPOINT
+          value: "https://45dae7ec0d11d6baef63481feb03aa7d.r2.cloudflarestorage.com"
+        - name: AWS_USE_PATH_STYLE_ENDPOINT
+          value: "true"
+        - name: FILESYSTEM_DISK
+          value: "s3"
+        - name: GROQ_API_KEY
+          value: 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
+        - name: DB_CONNECTION
+          value: pgsql
+        - name: DB_HOST
+          value: postgres-service
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_DATABASE
+          value: picme_db
+        - name: DB_USERNAME
+          value: picme_user
+        - name: DB_PASSWORD
+          value: secret_password
+        - name: DB_PGSQL_HOST
+          value: postgres-service
+        - name: DB_PGSQL_PORT
+          value: "5432"
+        - name: DB_PGSQL_DATABASE
+          value: picme_db
+        - name: DB_PGSQL_USERNAME
+          value: picme_user
+        - name: DB_PGSQL_PASSWORD
+          value: secret_password
+        - name: APP_PUBLIC_URL
+          value: https://www.picme225.site
+        - name: INTERNAL_WEB_URL
+          value: http://laravel-service
+        - name: INTERNAL_API_SECRET
+          value: picme225-internal-secret
+        envFrom:
+        - secretRef:
+            name: laravel-env
+        image: picme225-laravel:latest
+        imagePullPolicy: Never
+        lifecycle:
+          postStart:
+            exec:
+              command:
+              - /bin/bash
+              - -c
+              - mkdir -p /app/storage/framework/views /app/storage/framework/cache
+                /app/storage/framework/sessions /app/storage/logs && chown -R application:application
+                /app/storage && chmod -R 775 /app/storage && rm -f /app/bootstrap/cache/*.php
+        name: laravel-worker
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2026-07-07T13:28:25Z"
+    lastUpdateTime: "2026-07-07T13:28:25Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2026-07-05T08:49:53Z"
+    lastUpdateTime: "2026-07-07T13:39:03Z"
+    message: ReplicaSet "laravel-worker-76559bf6cf" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 34
+  readyReplicas: 1
+  replicas: 1
+  terminatingReplicas: 0
+  updatedReplicas: 1

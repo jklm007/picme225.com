@@ -16,18 +16,20 @@
             <div class="col-md-12">
                 <h5 class="btm-border"><strong>Promotions / Gift Coupons</strong> <a href="#" class="sub-right pull-right" data-toggle="modal" data-target="#add-promotion-modal">@lang('user.add_promocode')</a></h5>
 
-                @forelse($promocodes as $promo)
-                <div class="pay-option">
-                    <h6>
-                        <img src="{{asset('asset/img/low-cost.png')}}"> {{$promo->promocode->promo_code}}
-                        <a href="#" class="default">{{$promo->status}}</a>
-                    </h6>
-                </div>
-                @empty
+                @if(!empty($promocodes) && count($promocodes) > 0)
+                    @foreach($promocodes as $promo)
+                    <div class="pay-option">
+                        <h6>
+                            <img src="{{asset('asset/img/low-cost.png')}}"> {{$promo->promocode->promo_code}}
+                            <a href="#" class="default">{{$promo->status}}</a>
+                        </h6>
+                    </div>
+                    @endforeach
+                @else
                 <div class="pay-option">
                     <h6 class="text-center">No promotions applied.</h6>
                 </div>
-                @endforelse
+                @endif
             </div>
         </div>
     </div>

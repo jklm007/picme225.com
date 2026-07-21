@@ -12,9 +12,10 @@ use Setting;
 use Exception;
 use Validator;
 
-use App\User;
-use App\Provider;
-use App\ProviderService;
+use App\Models\User;
+use App\Models\Provider;
+use App\Models\ProviderService;
+use Illuminate\Support\Facades\Hash;
 
 class SocialLoginController extends Controller
 {
@@ -281,69 +282,94 @@ class SocialLoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function googleViaAPI(Request $request) { 
+   public function googleViaAPI(Request $request) { 
 
-    	$validator = Validator::make(
+        $validator = Validator::make(
             $request->all(),
             [
                 'device_type' => 'required|in:android,ios',
                 'device_token' => 'required',
                 'accessToken'=>'required',
                 'device_id' => 'required',
-                'login_by' => 'required|in:manual,facebook,google'
+                'login_by' => 'required|in:manual,facebook,google',
+                'mobile' => 'nullable|string' // Le mobile est maintenant optionnel
             ]
         );
         
         if($validator->fails()) {
-            return response()->json(['status'=>false,'message' => $validator->messages()->all()]);
+            return response()->json(['status'=>false,'message' => $validator->messages()->all()], 422);
         }
-        $user = Socialite::driver('google')->stateless();
-        $GoogleDrive = $user->userFromToken( $request->accessToken);
-       
-        try{
+        
+        try {
+            // Utiliser Socialite pour valider le token et récupérer les infos de l'utilisateur Google
+            $userDriver = Socialite::driver('google')->stateless();
+            $googleUser = $userDriver->userFromToken($request->accessToken);
+           
+            // Rechercher un utilisateur existant par son ID social ou son email
+            $authUser = User::where('social_unique_id', $googleUser->id)
+                            ->orWhere('email', $googleUser->email)
+                            ->first();
 
-        	
-            $GoogleSql = User::where('social_unique_id',$GoogleDrive->id);
-            if($GoogleDrive->email !=""){
-                $GoogleSql->orWhere('email',$GoogleDrive->email);
-            }
-            $AuthUser = $GoogleSql->first();
-            if($AuthUser){
-                $AuthUser->social_unique_id=$GoogleDrive->id; 
-              	$AuthUser->device_type=$request->device_type;
-                $AuthUser->device_token=$request->device_token;
-                $AuthUser->device_id=$request->device_id;
-                $AuthUser->mobile=$request->mobile?:'';
-                $AuthUser->login_by="google";
-                $AuthUser->save();
-            }else{   
-                $AuthUser=new User();
-                $AuthUser->email=$GoogleDrive->email;
-                $name = explode(' ', $GoogleDrive->name, 2);
-                $AuthUser->first_name=$name[0];
-                $AuthUser->last_name= isset($name[1]) ? $name[1] : '';
-                $AuthUser->password=bcrypt($GoogleDrive->id);
-                $AuthUser->social_unique_id=$GoogleDrive->id;
-                $AuthUser->device_type=$request->device_type;
-                $AuthUser->device_token=$request->device_token;
-                $AuthUser->device_id=$request->device_id;
-                $AuthUser->mobile=$request->mobile?:'';
-                $AuthUser->picture=$GoogleDrive->avatar;
-                $AuthUser->login_by="google";
-                $AuthUser->save();
+            if($authUser){
+                // L'UTILISATEUR EXISTE
+                $authUser->login_by = "google";
+                
+                // Si l'utilisateur n'a pas de numéro et qu'aucun n'est fourni, on renvoie une erreur.
+                if (empty($authUser->mobile) && !$request->has('mobile')) {
+                    return response()->json([
+                        'status' => false,
+                        'error' => 'mobile_number_required',
+                        'message' => 'This account needs a mobile number.'
+                    ], 422);
+                }
+
+                // Si un nouveau numéro est fourni (après vérification OTP), on le met à jour.
+                if ($request->has('mobile')) {
+                    $authUser->mobile = $request->mobile;
+                }
+
+            } else {
+                // NOUVEL UTILISATEUR
+                // Pour un nouvel utilisateur, le numéro de téléphone est obligatoire.
+                if (!$request->has('mobile') || empty($request->mobile)) {
+                    return response()->json([
+                        'status' => false,
+                        'error' => 'mobile_number_required',
+                        'message' => 'A mobile number is required for new users.'
+                    ], 422);
+                }
+
+                $authUser = new User();
+                $authUser->email = $googleUser->email;
+                $name = explode(' ', $googleUser->name, 2);
+                $authUser->first_name = $name[0];
+                $authUser->last_name = isset($name[1]) ? $name[1] : '';
+                $authUser->password = Hash::make($googleUser->id);
+                $authUser->picture = $googleUser->avatar;
+                $authUser->login_by = "google";
+                $authUser->mobile = $request->mobile; // On assigne le numéro fourni
             }    
-            if($AuthUser){ 
-                $userToken = $AuthUser->token()?:$AuthUser->createToken('socialLogin');
-                return response()->json([
-                        "status" => true,
-                        "token_type" => "Bearer",
-                        "access_token" => $userToken->accessToken
-                        ]);
-            }else{
-                return response()->json(['status'=>false,'message' => "Invalid credentials!"]);
-            }  
+
+            // Mise à jour des informations communes (ID social, infos de l'appareil)
+            $authUser->social_unique_id = $googleUser->id;
+            $authUser->device_type = $request->device_type;
+            $authUser->device_token = $request->device_token;
+            $authUser->device_id = $request->device_id;
+            $authUser->save();
+            
+            // Générer et renvoyer le token d'accès
+            $authUser->tokens()->delete(); // Supprimer les anciens tokens pour plus de sécurité
+            $token = $authUser->createToken('socialLogin')->accessToken;
+
+            return response()->json([
+                "status" => true,
+                "token_type" => "Bearer",
+                "access_token" => $token
+            ]);
+
         } catch (Exception $e) {
-            return response()->json(['status'=>false,'message' => trans('api.something_went_wrong')]);
+            // Gérer les erreurs (par ex, token Google invalide)
+            return response()->json(['status'=>false,'message' => $e->getMessage()], 500);
         }
     }
 
@@ -386,19 +412,19 @@ class SocialLoginController extends Controller
     }
        public function ride_val(Request $request){
       try{
-        $details = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".$request->latitude.",".$request->longitude."&destinations=".$request->des_latitude.",".$request->des_longitude."&mode=driving&sensor=false&key=".Setting::get('map_key');
+        $routing = get_osrm_routing($request->latitude, $request->longitude, $request->des_latitude, $request->des_longitude);
+        
+        if (!$routing) {
+            return view('ride');
+        }
 
-            $json = curl($details);
-
-            $details = json_decode($json, TRUE);
-
-            $meter = $details['rows'][0]['elements'][0]['distance']['value'];
-            $time = $details['rows'][0]['elements'][0]['duration']['text'];
-            $seconds = $details['rows'][0]['elements'][0]['duration']['value'];
-
-            $kilometer1 = ($meter/1000)* 0.621371;
-            $kilometer = number_format($kilometer1, 2, '.', '');
-            $minutes = round($seconds/60);
+        $meter   = $routing['distance'];
+        $seconds = $routing['duration'];
+        
+        $kilometer1 = ($meter / 1000) * 0.621371;
+        $kilometer  = number_format($kilometer1, 2, '.', '');
+        $minutes    = round($seconds / 60);
+        $time       = $minutes . ' mins';
 
             $tax_percentage = Setting::get('tax_percentage');
             $commission_percentage = Setting::get('commission_percentage');

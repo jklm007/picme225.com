@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: photon-deployment
+  labels:
+    app: photon
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: photon
+  template:
+    metadata:
+      labels:
+        app: photon
+    spec:
+      containers:
+        - name: photon
+          image: komoot/photon:latest
+          ports:
+            - containerPort: 2322
+          volumeMounts:
+            - mountPath: /photon/photon_data
+              name: photon-data
+      volumes:
+        - name: photon-data
+          hostPath:
+            path: /opt/photon-data # Chemin sur le serveur Oracle
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: photon-service
+spec:
+  selector:
+    app: photon
+  ports:
+    - protocol: TCP
+      port: 2322
+      targetPort: 2322

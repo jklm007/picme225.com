@@ -1,63 +1,37 @@
-<header>
-    <nav class="navbar navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
-                    <span class="hamb-top"></span>
-                    <span class="hamb-middle"></span>
-                    <span class="hamb-bottom"></span>
-                </button>
-                <a class="navbar-brand" href="{{ url('/provider') }}"><img src="{{ Setting::get('site_logo', asset('logo-black.png')) }}"></a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ url('help') }}">Help</a></li>
-                    <li class="dropdown mega-dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            {{ Auth::guard('provider')->user()->first_name }} {{ Auth::guard('provider')->user()->last_name }}
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu mega-dropdown-menu">
-                            <li class="row no-margin">
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                                    <a href="#" class="new-pro-img bg-img" style="background-image: url({{ Auth::guard('provider')->user()->avatar ? asset('storage/'.Auth::guard('provider')->user()->avatar) : asset('asset/img/provider.jpg') }});">
-                                    </a>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                                    <h6 class="new-pro-name">
-                                        {{ Auth::guard('provider')->user()->first_name }} {{ Auth::guard('provider')->user()->last_name }}
-                                    </h6>
-                                    <div class="rating-outer new-pro-rating">
-                                        <input type="hidden" class="rating"/ value="{{ Auth::guard('provider')->user()->rating }}" readonly>
-                                    </div>
-
-                                    <a href="{{ route('provider.profile.index') }}" class="new-pro-link">My Profile</a>
-                                </div>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{{ route('provider.change.password')}}">Change Password</a></li>
-                            <li>
-                                <a href="{{ url('/provider/logout') }}"
-                                    onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-                                <form id="logout-form" action="{{ url('/provider/logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+@if(Request::segment(2) == '' || Request::segment(2) == 'index' || Request::is('provider'))
+<!-- No header on map page -->
+@else
+<?php
+$avatar = Auth::guard('provider')->user()->avatar;
+if ($avatar) {
+    if (strpos($avatar, 'lorempixel.com') !== false) {
+        $avatar_url = asset('asset/img/provider.jpg');
+    } elseif (strpos($avatar, 'http') === 0) {
+        $avatar_url = $avatar;
+    } else {
+        $avatar_url = \Storage::disk('s3')->url( $avatar);
+    }
+} else {
+    $avatar_url = asset('asset/img/provider.jpg');
+}
+?>
+<!-- Dark Header for other pages -->
+<header class="mobile-header" style="background-color: #111; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 15px; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; border-bottom: 1px solid #222;">
+    <!-- Hamburger Menu Toggle (uses vanilla JS to ensure compatibility) -->
+    <button type="button" class="hamburger is-closed" style="background: none; border: none; outline: none; padding: 5px; cursor: pointer;" onclick="var w = document.getElementById('wrapper'); var o = document.getElementById('sidebar-overlay'); if(w){ w.classList.toggle('toggled'); if(o){ if(w.classList.contains('toggled')){ o.style.setProperty('display', 'block', 'important'); } else { o.style.setProperty('display', 'none', 'important'); } } }}">
+        <i class="fa fa-bars" style="color: #fff; font-size: 22px;"></i>
+    </button>
+    
+    <!-- Logo (Inverted for dark theme, absolute path) -->
+    <a href="{{ url('/provider') }}" style="display: flex; align-items: center;">
+        <img src="{{ Setting::get('site_logo') ? (strpos(Setting::get('site_logo'), 'http') === 0 ? Setting::get('site_logo') : asset(Setting::get('site_logo'))) : asset('logo-black.png') }}" style="height: 25px; filter: brightness(0) invert(1);">
+    </a>
+    
+    <!-- Right side avatar (absolute path) -->
+    <div style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+        <a href="{{ route('provider.profile.index') }}" style="color: #fff;">
+            <img src="{{ $avatar_url }}" style="width: 30px; height: 30px; border-radius: 50%; border: 1px solid #f1c40f; object-fit: cover;">
+        </a>
+    </div>
 </header>
+@endif

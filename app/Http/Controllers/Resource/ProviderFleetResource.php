@@ -10,8 +10,8 @@ use DB;
 use Exception;
 use Auth;
 
-use App\Provider;
-use App\UserRequests;
+use App\Models\Provider;
+use App\Models\UserRequests;
 use App\Helpers\Helper;
 
 class ProviderFleetResource extends Controller
@@ -82,7 +82,7 @@ class ProviderFleetResource extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -98,7 +98,7 @@ class ProviderFleetResource extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -115,7 +115,7 @@ class ProviderFleetResource extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -154,7 +154,7 @@ class ProviderFleetResource extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -171,7 +171,7 @@ class ProviderFleetResource extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function approve($id)
@@ -192,7 +192,7 @@ class ProviderFleetResource extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function disapprove($id)
@@ -204,7 +204,7 @@ class ProviderFleetResource extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Provider  $provider
+     * @param  \App\Models\Provider  $provider
      * @return \Illuminate\Http\Response
      */
     public function request($id){

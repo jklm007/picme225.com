@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Resource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\User;
-use App\Card;
+use App\Models\User;
+use App\Models\Card;
 use Exception;
 use Auth;
 use Setting;

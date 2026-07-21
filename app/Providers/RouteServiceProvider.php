@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+//use Laravel\Passport\Passport;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -26,7 +27,10 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
-    }
+
+  //      Passport::routes(); 
+
+   }
 
     /**
      * Define the routes for the application.
@@ -50,6 +54,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapAdminRoutes();
 
         $this->mapProviderApiRoutes();
+
+        $this->mapMarketingRoutes();
 
         //
     }
@@ -195,11 +201,26 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapProviderApiRoutes()
     {
         Route::group([
-            'middleware' => 'provider.language',
+            'middleware' =>['api','provider.language'],
             'namespace' => $this->namespace,
             'prefix' => 'api/provider',
         ], function ($router) {
             require base_path('routes/providerapi.php');
+        });
+    }
+
+    /**
+     * Define the "marketing" routes for the application.
+     * These are public landing pages for SEO & Google Ads.
+     * No authentication required.
+     */
+    protected function mapMarketingRoutes()
+    {
+        Route::group([
+            'middleware' => ['web'],
+            'namespace' => $this->namespace,
+        ], function ($router) {
+            require base_path('routes/marketing.php');
         });
     }
 }

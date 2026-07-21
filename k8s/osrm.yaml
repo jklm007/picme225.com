@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: osrm-deployment
+  labels:
+    app: osrm
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: osrm
+  template:
+    metadata:
+      labels:
+        app: osrm
+    spec:
+      containers:
+        - name: osrm
+          image: osrm/osrm-backend:latest
+          # Remarque: Vous devrez compiler le fichier .osrm avant ou utiliser un volume persistant
+          command: ["osrm-routed", "--algorithm", "mld", "/data/cotedivoire-latest.osrm"]
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - mountPath: /data
+              name: osrm-data
+      volumes:
+        - name: osrm-data
+          hostPath:
+            path: /opt/osrm-data # Chemin sur le serveur Oracle
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: osrm-service
+spec:
+  selector:
+    app: osrm
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000

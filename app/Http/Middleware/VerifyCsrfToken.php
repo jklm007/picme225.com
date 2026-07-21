@@ -14,6 +14,8 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         '/provider/request/*',
         '/provider/profile/available',
-        '/account/kit'
+        '/account/kit',
+        '/login',
+        '/api/whatsapp/webhook',
     ];
 }

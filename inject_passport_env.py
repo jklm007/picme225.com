@@ -1,0 +1,92 @@
+import paramiko
+
+hostname = '109.199.123.69'
+username = 'root'
+password = 'Charlotte23'
+
+private_key = """-----BEGIN PRIVATE KEY-----
+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
+ur78FDgmzQSNbY2O+dOH2/CqFjX4YDc=
+-----END PRIVATE KEY-----"""
+
+public_key = """-----BEGIN PUBLIC KEY-----
+MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAxm8rJDgJJIxY7p/WICgM
+1Jo1h6JrgONhONAg3WhM8IHLHgg6UTOUCoBJtuHQXDOOFn8RYQj0NbM0BP8f6i4E
+OkcyeJZSZMKCQxQMlDs9x/FO1s5VY+im7E2DAqiqnqUkxsF9GbfWLPZjCW2wxBNk
+t7y8HxsBYp1F1OWv38DJ/hUlZfBLQrhE1qjkUITV8HzXRnt0DN121L96GqfR/okq
+n0pTrW7qOK74YBkyMKaR3vH6kGVPoYScFWoCXmoMfJ9oGD5UtdPqjWzOOoOKV3Bf
+DyaUC0Gol56JtcoChE1RAnekkQObKYhyr5hIg3MY250dkfC7t7OuurnliP4s8aAc
+xLYBNkVxDL9W2E/qB9SBSJBSDH978yqXrcWXcrRcfqAtL+OonawIyoHxKPTo9M/A
+Jys637WCB2UXCr3PMt2WZxhIWcywKnQxPFehEETJwD0MLFklJMCTQ7a0tL06yknt
+goTGDfg7B7pvBsLEFHaoD+NlkiQCQBmsP1qISMEcay64jDAnjYK+A6lcKl8FT+6H
+EYGzM3wzof2kVGOT/g24OqQxTUPm8nHp/R+x+dFEuXqcJjWLPGKBp+CGZ0+kgfXR
+/03cry5py1Jd3zDhpyQHZM1IvoyUqa0K7MZnkptVcOV9nV3WI3gd+QQA9uziUmwD
+Aw43dCTju9kE/tDx/cQM6rUCAwEAAQ==
+-----END PUBLIC KEY-----"""
+
+client = paramiko.SSHClient()
+client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+client.connect(hostname, username=username, password=password)
+
+# Apply environment variables using kubectl set env on both deployments
+print("Setting PASSPORT env variables on laravel-deployment...")
+cmd_web = f"kubectl set env deployment/laravel-deployment PASSPORT_PRIVATE_KEY='{private_key}' PASSPORT_PUBLIC_KEY='{public_key}'"
+stdin1, stdout1, stderr1 = client.exec_command(cmd_web)
+print("Web Out:", stdout1.read().decode('utf-8', errors='replace'))
+print("Web Err:", stderr1.read().decode('utf-8', errors='replace'))
+
+print("Setting PASSPORT env variables on laravel-worker...")
+cmd_worker = f"kubectl set env deployment/laravel-worker PASSPORT_PRIVATE_KEY='{private_key}' PASSPORT_PUBLIC_KEY='{public_key}'"
+stdin2, stdout2, stderr2 = client.exec_command(cmd_worker)
+print("Worker Out:", stdout2.read().decode('utf-8', errors='replace'))
+print("Worker Err:", stderr2.read().decode('utf-8', errors='replace'))
+
+client.close()

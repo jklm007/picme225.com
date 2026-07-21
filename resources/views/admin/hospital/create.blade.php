@@ -21,6 +21,30 @@
 				</div>
                             <input type="hidden" name="latitude" id="latitude">
                             <input type="hidden" name="longitude" id="longitude">
+				<div class="form-group row">
+					<label for="contact_phone" class="col-xs-2 col-form-label">Téléphone</label>
+					<div class="col-xs-10">
+						<input class="form-control" type="text" value="{{ old('contact_phone') }}" name="contact_phone" id="contact_phone" placeholder="Numéro de contact">
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="zone_coverage_radius_km" class="col-xs-2 col-form-label">Rayon de couverture (km)</label>
+					<div class="col-xs-10">
+						<input class="form-control" type="number" value="{{ old('zone_coverage_radius_km') ?: 10 }}" name="zone_coverage_radius_km" id="zone_coverage_radius_km" placeholder="Ex: 10">
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label for="is_available" class="col-xs-2 col-form-label">Disponible ?</label>
+					<div class="col-xs-10">
+						<select class="form-control" name="is_available" id="is_available">
+							<option value="1">Oui</option>
+							<option value="0">Non</option>
+						</select>
+					</div>
+				</div>
+
 
 				<div class="form-group row">
 					<label for="zipcode" class="col-xs-2 col-form-label"></label>

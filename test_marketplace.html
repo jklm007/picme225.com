@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>TaxiPicMe225</title>
+
+    <meta name="description" content="PicMe225 — Votre transfert aéroport de luxe et marketplace à Abidjan">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="shortcut icon" type="image/png" href="https://picme225.site/favicon.png"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+
+    <link href="https://picme225.site/asset/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://picme225.site/asset/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://picme225.site/asset/css/style.css" rel="stylesheet">
+
+    <style>
+    /* ═══ PicMe225 Design System CSS Variables ═══ */
+    :root {
+        --color-brand-primary: #0A1628;
+        --color-brand-accent: #C9A84C;
+        --color-brand-success: #2E7D32;
+        --color-bg-light: #F8FAFC;
+        --color-text-dark: #1A202C;
+    }
+
+    /* ─── Global Font & Theme Overrides ─── */
+    *, body, h1, h2, h3, h4, h5, h6, p, span, a, li, ul {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
+    }
+
+    /* Override any legacy green elements from style.css */
+    .nav>li>a:focus, .nav>li>a:hover, .nav>li.active>a, .nav>li.active>a:focus, .nav>li.active>a:hover {
+        background-color: transparent !important;
+        color: #C9A84C !important;
+    }
+    .menu-btn, .content-more-btn {
+        background-color: #C9A84C !important;
+        color: #fff !important;
+    }
+    .content-more-btn:hover {
+        background-color: #B89535 !important;
+    }
+    .content-more, .content-more i, .banner-form h5, .banner-form h5 i, .note-or a {
+        color: #C9A84C !important;
+    }
+
+    /* ─── Top Navbar (Flexbox Layout to eliminate overlap) ─── */
+    nav.navbar.navbar-fixed-top {
+        background: linear-gradient(90deg, #0a1628 0%, #0f2040 100%) !important;
+        border-bottom: 2px solid #C9A84C !important;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.4) !important;
+        min-height: 64px !important;
+        padding: 0 !important;
+    }
+
+    nav.navbar-fixed-top .container-fluid {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        height: 64px !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    .navbar-header {
+        display: flex !important;
+        align-items: center !important;
+        height: 64px !important;
+        float: none !important;
+        margin: 0 !important;
+    }
+
+    .navbar-brand.pm-logo-btn {
+        display: flex !important;
+        align-items: center !important;
+        padding: 0 20px 0 0 !important;
+        height: 64px !important;
+        cursor: pointer !important;
+        background: transparent !important;
+        border-right: 1px solid rgba(201,168,76,0.3) !important;
+        margin-right: 20px !important;
+        float: none !important;
+        flex-shrink: 0 !important;
+        max-width: 140px !important;
+        overflow: hidden !important;
+    }
+    .navbar-brand.pm-logo-btn img {
+        max-height: 38px !important;
+        width: auto !important;
+        display: block !important;
+        transition: opacity .2s !important;
+    }
+    .navbar-brand.pm-logo-btn:hover img { opacity: 0.85 !important; }
+
+    .navbar-toggle {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        border-color: rgba(201,168,76,0.4) !important;
+    }
+    .navbar-toggle .icon-bar { background: #C9A84C !important; }
+
+    @media (min-width: 768px) {
+        .navbar-collapse.collapse {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            flex: 1 !important;
+            height: 64px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .navbar-nav {
+            display: flex !important;
+            align-items: center !important;
+            float: none !important;
+            margin: 0 !important;
+        }
+        .navbar-nav > li {
+            float: none !important;
+        }
+        .navbar-nav.navbar-right {
+            margin-left: auto !important;
+        }
+    }
+
+    /* ─── Liens de navigation ─── */
+    nav.navbar-fixed-top .navbar-nav > li > a {
+        font-size: 14px !important;
+        font-weight: 500 !important;
+        color: rgba(255,255,255,0.85) !important;
+        padding: 22px 16px !important;
+        white-space: nowrap !important;
+        transition: color .2s, border-color .2s !important;
+        border-bottom: 2px solid transparent !important;
+        line-height: 20px !important;
+    }
+    nav.navbar-fixed-top .navbar-nav > li > a:hover,
+    nav.navbar-fixed-top .navbar-nav > li.active > a {
+        color: #C9A84C !important;
+        background: transparent !important;
+        border-bottom-color: #C9A84C !important;
+    }
+
+    /* ─── Liens droite ─── */
+    nav.navbar-fixed-top .navbar-right > li > a {
+        font-size: 13px !important;
+        padding: 22px 10px !important;
+        color: rgba(255,255,255,0.6) !important;
+        white-space: nowrap !important;
+        border-bottom: none !important;
+    }
+    nav.navbar-fixed-top .navbar-right > li > a:hover {
+        color: #fff !important;
+        background: transparent !important;
+    }
+
+    /* ─── Sélecteur de langue ─── */
+    nav.navbar-fixed-top select.form-control {
+        max-width: 70px !important;
+        font-size: 13px !important;
+        height: 30px !important;
+        padding: 2px 4px !important;
+        margin-top: 0 !important;
+        background: rgba(255,255,255,0.07) !important;
+        border: 1px solid rgba(201,168,76,0.3) !important;
+        color: #fff !important;
+        border-radius: 6px !important;
+    }
+
+    /* ─── Bouton Télécharger ─── */
+    .pm-dl-app-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        background: linear-gradient(135deg, #2E7D32, #1B5E20) !important;
+        color: #fff !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        padding: 7px 13px !important;
+        border-radius: 8px !important;
+        margin: 0 0 0 10px !important;
+        border: none !important;
+        text-decoration: none !important;
+        transition: all .2s !important;
+        white-space: nowrap !important;
+    }
+    .pm-dl-app-btn:hover {
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 12px rgba(46,125,50,0.4) !important;
+        color: #fff !important;
+        text-decoration: none !important;
+    }
+
+    /* ─── Drawer (sidebar) ─── */
+    #sidebar-wrapper {
+        background: linear-gradient(180deg, #0a1628 0%, #0d1f3c 100%) !important;
+        border-right: 1px solid rgba(201,168,76,0.12) !important;
+    }
+    #sidebar-wrapper .sidebar-nav li a {
+        color: rgba(255,255,255,0.72) !important;
+        font-size: 14px !important;
+        padding: 13px 24px !important;
+        border-left: 3px solid transparent !important;
+        transition: all .2s !important;
+        display: block;
+    }
+    #sidebar-wrapper .sidebar-nav li a:hover {
+        color: #C9A84C !important;
+        border-left-color: #C9A84C !important;
+        background: rgba(201,168,76,0.05) !important;
+    }
+    #sidebar-wrapper .sidebar-nav li.full-white a {
+        background: rgba(46,125,50,0.12) !important;
+        color: #81C784 !important;
+    }
+    #sidebar-wrapper .sidebar-nav li.white-border a {
+        border-top: 1px solid rgba(201,168,76,0.1) !important;
+        border-bottom: 1px solid rgba(201,168,76,0.1) !important;
+        color: #C9A84C !important;
+    }
+
+    /* ─── Footer Overrides ─── */
+    .footer {
+        background: linear-gradient(180deg, #070e1a 0%, #0a1628 100%) !important;
+        border-top: 3px solid #C9A84C !important;
+        padding: 60px 0 30px !important;
+    }
+    .footer h5, .footer p {
+        color: rgba(255, 255, 255, 0.8) !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.5px !important;
+    }
+    .footer ul li a {
+        color: rgba(255, 255, 255, 0.6) !important;
+        transition: color 0.2s !important;
+    }
+    .footer ul li a:hover {
+        color: #C9A84C !important;
+        text-decoration: none !important;
+    }
+    .footer .copy {
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        padding-top: 20px !important;
+        margin-top: 20px !important;
+        color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    /* ─── Social Icons Premium ─── */
+    .pm-social-links {
+        display: flex !important;
+        gap: 12px !important;
+        padding: 0 !important;
+        list-style: none !important;
+        flex-wrap: wrap !important;
+        margin-top: 12px !important;
+    }
+    .pm-social-links li { list-style: none !important; }
+    .pm-social-btn {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 50% !important;
+        font-size: 17px !important;
+        text-decoration: none !important;
+        transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s !important;
+        border: 2px solid rgba(255,255,255,0.08) !important;
+    }
+    .pm-social-btn:hover {
+        transform: translateY(-4px) scale(1.1) !important;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.4) !important;
+        opacity: 0.92 !important;
+        text-decoration: none !important;
+    }
+    .pm-social-btn.email    { background: #2D3748 !important; color: #fff !important; }
+    .pm-social-btn.whatsapp { background: #25D366 !important; color: #fff !important; }
+    .pm-social-btn.tiktok   { background: #000 !important;    color: #fff !important; }
+    .pm-social-btn.facebook { background: #1877F2 !important; color: #fff !important; }
+    .pm-social-btn svg { width: 18px; height: 18px; fill: #fff; display: block; }
+    /* Force icon color inside social buttons — overrides .footer ul li a */
+    .footer ul.pm-social-links li a.pm-social-btn,
+    .footer ul.pm-social-links li a.pm-social-btn i,
+    .footer ul.pm-social-links li a.pm-social-btn:hover,
+    .footer ul.pm-social-links li a.pm-social-btn:hover i {
+        color: #fff !important;
+        font-size: 18px !important;
+    }
+
+    /* ─── Utility classes ─── */
+    .pm-btn-primary {
+        background: linear-gradient(135deg, #C9A84C 0%, #B89535 100%) !important;
+        color: #fff !important;
+        border: none !important;
+        font-weight: 600 !important;
+        border-radius: 8px !important;
+        padding: 10px 24px !important;
+        transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+    .pm-btn-primary:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 16px rgba(201,168,76,0.3) !important;
+    }
+
+    /* ─── Mobile Bottom Navigation 2026 ─── */
+    .pm-bottom-nav {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 22, 40, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(255,255,255,0.08);
+        z-index: 9999;
+        padding-bottom: env(safe-area-inset-bottom);
+        box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
+    }
+    .pm-bottom-nav-inner {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 64px;
+        padding: 0 10px;
+    }
+    .pm-bottom-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255,255,255,0.5);
+        text-decoration: none !important;
+        font-size: 10px;
+        font-weight: 600;
+        width: 25%;
+        transition: all 0.2s ease;
+    }
+    .pm-bottom-nav-item svg {
+        width: 24px;
+        height: 24px;
+        margin-bottom: 4px;
+        fill: currentColor;
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .pm-bottom-nav-item:hover, .pm-bottom-nav-item.active {
+        color: #C9A84C;
+    }
+    .pm-bottom-nav-item:hover svg, .pm-bottom-nav-item.active svg {
+        transform: translateY(-2px) scale(1.1);
+    }
+    @media (max-width: 767px) {
+        .pm-bottom-nav { display: block; }
+        /* Add padding to body so footer isn't hidden behind bottom nav */
+        body { padding-bottom: 80px !important; }
+        /* Hide regular navbar items on mobile since we have bottom nav */
+        #pm-nav-collapse { display: none !important; }
+    }
+
+    .pm-title-serif {
+        font-family: 'Playfair Display', Georgia, serif !important;
+        font-weight: 700 !important;
+    }
+
+    /* ─── Mobile ─── */
+    @media (max-width: 767px) {
+        nav.navbar-fixed-top .container-fluid {
+            flex-wrap: wrap !important;
+            height: auto !important;
+            min-height: 64px !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        .navbar-header {
+            width: 100% !important;
+            justify-content: space-between !important;
+            padding-right: 10px !important;
+        }
+        .navbar-toggle { display: none !important; }
+        .navbar-collapse.collapse.in {
+            display: block !important;
+            width: 100% !important;
+            background: #0d1f3c !important;
+            padding: 10px 0 !important;
+        }
+        nav.navbar-fixed-top .navbar-nav > li > a { padding: 12px 16px !important; border-bottom: none !important; border-top: 1px solid rgba(255,255,255,.06) !important; }
+        .pm-dl-app-btn { margin: 8px 16px 12px !important; }
+    }
+
+    /* Reset legacy .hamburger fixed/absolute styles specifically for the brand logo */
+    .navbar-brand.pm-logo-btn.hamburger {
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 20px 0 0 !important;
+        z-index: auto !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="overlay" id="overlayer" data-toggle="offcanvas"></div>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="full-white dropdown" style="margin-top: 15px;">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="display: block;">📱 Télécharger l'App <span class="caret"></span></a>
+                    <ul class="dropdown-menu" style="position: relative; width: 100%; float: none; background: #070e1a; border: none; box-shadow: none; padding: 0; margin: 0;">
+                        <li><a href="" target="_blank" style="padding: 12px 32px;"><i class="fa fa-android"></i> Google Play Store</a></li>
+                        <li><a href="https://picme225.site/apk/picme-user.apk" download="PicMe225-User.apk" style="padding: 12px 32px;"><i class="fa fa-download"></i> APK Client (Direct)</a></li>
+                        <li><a href="https://picme225.site/apk/picme-driver.apk" download="PicMe225-Driver.apk" style="padding: 12px 32px;"><i class="fa fa-download"></i> APK Chauffeur (Direct)</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://picme225.site/marketplace">🛒 Marketplace</a>
+                </li>
+                <li>
+                    <a href="https://picme225.site/airport">✈️ Navette Aéroport</a>
+                </li>
+                <li>
+                    <a href="https://picme225.site/location">📍 Location</a>
+                </li>
+                <li>
+                    <a href="https://picme225.site/help">💬 Aide & Contact</a>
+                </li>
+                <li>
+                    <a href="https://picme225.site/privacy">🛡️ Politique de confidentialité</a>
+                </li>
+                <li>
+                    <a href="#">⚖️ Conditions générales</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div id="page-content-wrapper">
+            <header>
+                <nav class="navbar navbar-fixed-top">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+
+                            
+                            <a class="navbar-brand pm-logo-btn hamburger is-closed" data-toggle="offcanvas" href="#" onclick="return false;" aria-label="PicMe225" style="padding:8px 12px;">
+                                <img src="https://picme225.site/logo.png" alt="PicMe225" style="max-height:36px; width:auto; display:block;">
+                            </a>
+
+                            
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#pm-nav-collapse" aria-expanded="false" style="margin-top:12px;">
+                                <span class="sr-only">Menu</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                            
+                            <div class="visible-xs" style="margin-top: 12px;">
+                                <div class="dropdown">
+                                    <a href="#" class="dropdown-toggle pm-dl-app-btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="margin: 0 !important; padding: 7px 12px !important; font-size: 13px !important; background: linear-gradient(135deg, #0d1226, #1c264a);">
+                                        Télécharger <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-right" style="background-color: #0d1226; border: 1px solid #C9A84C;">
+                                        <li><a href="" target="_blank" style="color: #fff; padding: 10px 20px;"><i class="fa fa-android"></i> Play Store</a></li>
+                                        <li><a href="https://picme225.site/apk/picme-user.apk" download="PicMe225-User.apk" style="color: #fff; padding: 10px 20px;"><i class="fa fa-download"></i> APK Client</a></li>
+                                        <li><a href="https://picme225.site/apk/picme-driver.apk" download="PicMe225-Driver.apk" style="color: #fff; padding: 10px 20px;"><i class="fa fa-download"></i> APK Driver</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="pm-nav-collapse">
+                            <ul class="nav navbar-nav">
+                                <li >
+                                    <a href="https://picme225.site">🏠 Accueil</a>
+                                </li>
+                                <li  class="active" >
+                                    <a href="https://picme225.site/marketplace">🛒 Marketplace</a>
+                                </li>
+                                <li >
+                                    <a href="https://picme225.site/airport">✈️ Aéroport</a>
+                                </li>
+                                <li >
+                                    <a href="https://picme225.site/location">📍 Location</a>
+                                </li>
+                                <li >
+                                    <a href="https://picme225.site/drive">🚘 Conduire</a>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <input type="hidden" name="_token" value="j0TfZuxp9CpkMSBAIwJOkZXcsTSntdxXY5xg4bIZ">
+                                                                        <select class="form-control" name="language" id="language">
+                                        <option disabled>Langue</option>
+                                        <option  value="fr">FR</option>
+                                        <option  value="en">EN</option>
+                                    </select>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle pm-dl-app-btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding-top: 10px; padding-bottom: 10px; margin-top: 10px; background: linear-gradient(135deg, #0d1226, #1c264a);">
+                                        📱 Télécharger l'App <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" style="background-color: #0d1226; border: 1px solid #C9A84C;">
+                                        <li><a href="https://picme225.site/download/user" style="color: #fff; padding: 10px 20px;">📱 App Client</a></li>
+                                        <li><a href="https://picme225.site/download/driver" style="color: #fff; padding: 10px 20px;">🚗 App Driver</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
+            <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+*, *::before, *::after { box-sizing: border-box; }
+
+.pm-mkt {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg-color, #0d1226);
+    color: var(--text-color, #e2e8f0);
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Light Mode Variables */
+:root {
+    --bg-color: #0d1226;
+    --bg-header: #0d1226;
+    --bg-card: #ffffff;
+    --text-color: #e2e8f0;
+    --text-dark: #1a202c;
+    --border-color: rgba(255,255,255,0.08);
+    --border-card: #edf2f7;
+    --header-text: #ffffff;
+}
+
+[data-theme="light"] {
+    --bg-color: #f8fafc;
+    --bg-header: #ffffff;
+    --bg-card: #ffffff;
+    --text-color: #4a5568;
+    --text-dark: #1a202c;
+    --border-color: #e2e8f0;
+    --border-card: #e2e8f0;
+    --header-text: #1a202c;
+}
+
+[data-theme="dark"] {
+    --bg-color: #0d1226;
+    --bg-header: #0d1226;
+    --bg-card: #1a202c;
+    --text-color: #e2e8f0;
+    --text-dark: #ffffff;
+    --border-color: rgba(255,255,255,0.08);
+    --border-card: rgba(255,255,255,0.08);
+    --header-text: #ffffff;
+}
+
+/* ─── HEADER ─────────────────────────────────────────── */
+.pm-mkt-header {
+    background: var(--bg-header);
+    padding: 80px 0 40px;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+.pm-mkt-header::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(255,75,124,.05) 0%, transparent 70%);
+    top: -50px; right: -100px;
+    pointer-events: none;
+}
+.pm-mkt-header h1 {
+    font-size: clamp(30px, 5vw, 52px);
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+    color: var(--header-text);
+}
+.pm-mkt-header h1 span {
+    background: linear-gradient(135deg, #C9A84C, #ecc94b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.pm-mkt-header p { color: #a0aec0; font-size: 17px; margin-bottom: 0; }
+
+/* ─── FILTERS BAR ─────────────────────────────────────── */
+.pm-mkt-filters {
+    background: var(--bg-header);
+    backdrop-filter: blur(12px);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 60px;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,.1);
+}
+.pm-search-box {
+    position: relative;
+    margin-bottom: 0;
+}
+.pm-search-box input {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 12px 16px 12px 44px;
+    color: #ffffff;
+    font-size: 15px;
+    outline: none;
+    transition: all .2s;
+}
+.pm-search-box input::placeholder { color: #718096; }
+.pm-search-box input:focus { 
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(201,168,76,.5); 
+    box-shadow: 0 0 0 3px rgba(201,168,76,.1);
+}
+.pm-search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+}
+.pm-cat-chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+.pm-cat-chip {
+    padding: 7px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.07);
+    color: #a0aec0;
+    user-select: none;
+}
+.pm-cat-chip:hover,
+.pm-cat-chip.active {
+    background: rgba(201,168,76,.15);
+    border-color: #C9A84C;
+    color: #C9A84C;
+    box-shadow: 0 0 12px rgba(201,168,76,0.3);
+}
+.pm-cat-chip.active-all {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(255,255,255,.4);
+    color: #ffffff;
+    box-shadow: 0 0 12px rgba(255,255,255,0.2);
+}
+
+/* ─── BODY ────────────────────────────────────────────── */
+.pm-mkt-body {
+    padding: 28px 0 80px; }
+.pm-mkt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+.pm-listing-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all .4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 16px rgba(0,0,0,.15);
+}
+.pm-listing-card:hover {
+    transform: translateY(-8px);
+    border-color: #C9A84C;
+    box-shadow: 0 24px 48px rgba(0,0,0,.3), 0 0 20px rgba(201,168,76,.15);
+}
+.pm-listing-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: #f1f3f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    position: relative;
+}
+.pm-listing-img img { width: 100%; height: 100%; object-fit: cover; }
+.pm-listing-cat {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(255,255,255,.9);
+    backdrop-filter: blur(10px);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: #C9A84C;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+.pm-listing-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.pm-listing-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.pm-listing-desc {
+    font-size: 13px;
+    color: #718096;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}
+.pm-listing-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #edf2f7;
+    padding-top: 14px;
+    margin-top: auto;
+}
+.pm-listing-price {
+    font-size: 20px;
+    font-weight: 800;
+    color: #1a202c;
+}
+.pm-listing-price small { font-size: 12px; font-weight: 400; color: #a0aec0; }
+.pm-listing-location {
+    font-size: 12px;
+    color: #718096;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* CTA button */
+.pm-cta-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    background: linear-gradient(135deg, #0A1628, #102040);
+    color: #C9A84C;
+    transition: all .2s;
+    letter-spacing: .3px;
+}
+.pm-cta-btn:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(10,22,40,.3); }
+
+/* ─── APP MODAL ──────────────────────────────────────── */
+.pm-app-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(13,18,38,.6);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+.pm-app-modal.show { display: flex; }
+.pm-modal-box {
+    background: #ffffff;
+    border: 1px solid #edf2f7;
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 440px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 40px 80px rgba(0,0,0,.15);
+    animation: pm-modal-in .3s ease;
+    color: #1a202c;
+}
+@keyframes pm-modal-in {
+    from { opacity: 0; transform: scale(.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.pm-modal-close {
+    position: absolute;
+    top: 16px; right: 20px;
+    background: none;
+    border: none;
+    color: #a0aec0;
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px;
+}
+.pm-modal-close:hover { color: #1a202c; }
+.pm-modal-box .pm-qr-box {
+    width: 160px; height: 160px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 10px;
+    margin: 0 auto 20px;
+    box-shadow: 0 10px 30px rgba(255,75,124,.15);
+}
+.pm-modal-box .pm-qr-box img { width: 100%; height: 100%; }
+.pm-modal-box h3 { font-size: 22px; font-weight: 800; margin-bottom: 10px; color: #0d1226; }
+.pm-modal-box p { font-size: 14px; color: #4a5568; margin-bottom: 24px; line-height: 1.6; }
+.pm-modal-dl-btns { display: flex; flex-direction: column; gap: 12px; }
+.pm-modal-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all .2s;
+}
+.pm-modal-btn-play {
+    background: linear-gradient(135deg, #34a853, #1a8e3e);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(52,168,83,.2);
+}
+.pm-modal-btn-apk {
+    background: #f8f9fc;
+    color: #4a5568;
+    border: 1px solid #edf2f7;
+}
+.pm-modal-btn:hover { text-decoration: none; opacity: .9; transform: translateY(-2px); }
+.pm-modal-btn i { font-size: 20px; }
+.pm-modal-btn-apk:hover { background: #edf2f7; color: #1a202c; }
+
+/* ─── EMPTY STATE ─────────────────────────────────────── */
+.pm-empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: #718096;
+}
+.pm-empty i { font-size: 64px; margin-bottom: 16px; display: block; color: #C9A84C; opacity: 0.5; }
+.pm-empty h4 { font-size: 20px; color: #e2e8f0; margin-bottom: 8px; font-weight: 700; }
+.pm-empty p { font-size: 14px; color: #718096; }
+
+/* Skeleton loading */
+.pm-skeleton {
+    background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+    background-size: 200% 100%;
+    animation: pm-shimmer 1.8s ease-in-out infinite;
+    border-radius: 8px;
+}
+@keyframes pm-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+.pm-results-count { 
+    color: #C9A84C !important; 
+    font-size: 15px !important; 
+    margin: 20px 0 24px 0 !important; 
+    font-weight: 800 !important; 
+    background: rgba(201,168,76,0.15) !important; 
+    padding: 8px 20px !important; 
+    border-radius: 12px !important; 
+    display: inline-block !important; 
+    border: 1px solid #C9A84C !important; 
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+</style>
+
+<!-- ═══ APP MODAL ═══ -->
+<div class="pm-app-modal" id="pm-app-modal">
+    <div class="pm-modal-box">
+        <button class="pm-modal-close" onclick="document.getElementById('pm-app-modal').classList.remove('show')">✕</button>
+        <div class="pm-qr-box">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=" alt="QR Code App" />
+        </div>
+        <h3>Commander via l'application</h3>
+        <p>Pour finaliser votre achat en toute sécurité (avec séquestre financier garanti), téléchargez l'application PicMe225 sur votre smartphone Android.</p>
+        <div class="pm-modal-dl-btns">
+            <a href="" target="_blank" class="pm-modal-btn pm-modal-btn-play" id="btn-modal-play">
+                <i class="fa fa-android"></i> Google Play Store
+            </a>
+            <a href="" class="pm-modal-btn pm-modal-btn-apk" id="btn-modal-apk">
+                <i class="fa fa-download"></i> Télécharger l'APK directement
+            </a>
+        </div>
+    </div>
+</div>
+
+    <!-- ═══ FILTERS ═══ -->
+    <section class="pm-mkt-filters">
+        <div class="container">
+            <form action="https://picme225.site/marketplace" method="GET" id="pm-filter-form" style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+                <div class="pm-search-box" style="flex: 1; min-width:250px;">
+                    <i class="fa fa-search"></i>
+                    <input type="text" name="search" id="pm-search-input" value="" placeholder="Rechercher un article, un véhicule, un billet…" />
+                </div>
+                
+                <input type="text" name="city" value="" placeholder="Ville" style="padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-color); outline: none; width: 150px;">
+                
+                <input type="number" name="min_price" value="" placeholder="Prix min" style="padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-color); outline: none; width: 100px;">
+                <input type="number" name="max_price" value="" placeholder="Prix max" style="padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-color); outline: none; width: 100px;">
+                
+                <select name="sort" style="padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-color); outline: none;" onchange="document.getElementById('pm-filter-form').submit();">
+                    <option value="newest" >Plus récentes</option>
+                    <option value="price_asc" >Prix croissant</option>
+                    <option value="price_desc" >Prix décroissant</option>
+                </select>
+
+                <button type="submit" style="padding: 12px 24px; background: #C9A84C; color: white; font-weight: bold; border: none; border-radius: 12px; cursor: pointer;">Filtrer</button>
+            </form>
+            
+            <div class="pm-cat-chips">
+                <div class="pm-cat-chip main-cat active-all" data-cat="">Tout afficher</div>
+                                                        <div class="pm-cat-chip main-cat " data-cat="REAL_ESTATE">
+                        🏠 Immobilier
+                    </div>
+                                                        <div class="pm-cat-chip main-cat " data-cat="VEHICLES">
+                        🚗 Véhicules
+                    </div>
+                                                        <div class="pm-cat-chip main-cat " data-cat="SALE">
+                        🛒 Vente
+                    </div>
+                                                        <div class="pm-cat-chip main-cat " data-cat="CONVOY">
+                        🚚 Convoi / Transport
+                    </div>
+                                                        <div class="pm-cat-chip main-cat " data-cat="TICKETS">
+                        🎫 Billets
+                    </div>
+                                                        <div class="pm-cat-chip main-cat " data-cat="ELECTRONICS">
+                        📱 Électronique
+                    </div>
+                                                        <div class="pm-cat-chip main-cat " data-cat="FASHION">
+                        👗 Mode
+                    </div>
+                                                        <div class="pm-cat-chip main-cat " data-cat="FOOD">
+                        🍽 Alimentaire
+                    </div>
+                                                        <div class="pm-cat-chip main-cat " data-cat="SERVICES">
+                        🔧 Services
+                    </div>
+                            </div>
+
+                        
+                    </div>
+    </section>
+
+
+    <!-- ═══ APP DOWNLOAD MODAL ═══ -->
+    <div class="pm-app-modal" id="pm-app-modal">
+        <div class="pm-modal-box">
+            <button class="pm-modal-close" onclick="document.getElementById('pm-app-modal').classList.remove('show')">✕</button>
+            <div class="pm-qr-box">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=" alt="QR Code App" />
+            </div>
+            <h3>Commander via l'application</h3>
+            <p>Pour finaliser votre achat en toute sécurité (avec séquestre financier garanti), téléchargez l'application PicMe225 sur votre smartphone Android.</p>
+            <div class="pm-modal-dl-btns">
+                <a href="" target="_blank" class="pm-modal-btn pm-modal-btn-play" id="btn-modal-play">
+                    <i class="fa fa-android"></i> Google Play Store
+                </a>
+                <a href="" class="pm-modal-btn pm-modal-btn-apk" id="btn-modal-apk">
+                    <i class="fa fa-download"></i> Télécharger l'APK directement
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ GRID ═══ -->
+    <section class="pm-mkt-body">
+        <div class="container">
+            <p class="pm-results-count" id="pm-count">Chargement des annonces…</p>
+            <div class="pm-mkt-grid" id="pm-grid">
+                <!-- Skeleton loaders will be replaced by JS -->
+            </div>
+            <div style="margin-top: 40px; display: flex; justify-content: center;">
+                
+            </div>
+        </div>
+    </section>
+</div>
+
+            <div class="page-content">
+                <div class="footer row no-margin">
+                    <div class="container">
+                        <div class="footer-logo row no-margin">
+                            <div class="logo-img">
+                                <img src="https://picme225.site/logo.png" alt="PicMe225" style="max-height: 40px;">
+                            </div>
+                        </div>
+                        <div class="row no-margin">
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <ul>
+                                    <li><a href="#">Commander</a></li>
+                                    <li><a href="https://picme225.site/drive">Conduire</a></li>
+                                    <li><a href="https://picme225.site/location">Location</a></li>
+                                    <li><a href="https://picme225.site/airport">Aéroport</a></li>
+                                    <li><a href="#">Villes</a></li>
+                                    <li><a href="#">Estimation du tarif</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <ul>
+                                    <li><a href="" target="_blank">Inscris-toi pour commander</a></li>
+                                    <li><a href="https://picme225.site/drive">Deviens conducteur</a></li>
+                                    <li><a href="" target="_blank">Commence ton voyage maintenant</a></li>                            
+                                </ul>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                <h5>Télécharge l'application sur</h5>
+                                <ul class="app">
+                                    <li>
+                                        <a href="https://picme225.site/download/user">
+                                            <img src="https://picme225.site/asset/img/appstore.png">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://picme225.site/download/driver">
+                                            <img src="https://picme225.site/asset/img/playstore.png">
+                                        </a>
+                                    </li>                                                        
+                                </ul>                        
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xs-12">                        
+                                <h5>Contacte-nous</h5>
+                                <ul class="pm-social-links">
+                                    <!-- Email -->
+                                    <li>
+                                        <a href="mailto:contact@picme225.com" class="pm-social-btn email" title="Email">
+                                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <!-- WhatsApp -->
+                                    <li>
+                                        <a href="https://wa.me/22500000000" target="_blank" class="pm-social-btn whatsapp" title="WhatsApp">
+                                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <!-- TikTok -->
+                                    <li>
+                                        <a href="#" target="_blank" class="pm-social-btn tiktok" title="TikTok">
+                                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.94a8.17 8.17 0 004.77 1.52V7.01a4.85 4.85 0 01-1-.32z"/>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <!-- Facebook -->
+                                    <li>
+                                        <a href="#" target="_blank" class="pm-social-btn facebook" title="Facebook">
+                                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row no-margin">
+                            <div class="col-md-12 copy">
+                                <p>&copy; 2026 PicMe225. Tous droits réservés. Développé par <a href="https://jews-world.com" target="_blank" style="color: #C9A84C; text-decoration: none; font-weight: bold; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Jews-World Groupe SARL</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://picme225.site/asset/js/jquery.min.js"></script>
+    <script src="https://picme225.site/asset/js/bootstrap.min.js"></script>
+    <script src="https://picme225.site/asset/js/scripts.js"></script>
+        <script type="text/javascript">
+        $('#language').on('change',function(){
+           $.ajax({
+            url: '/lang',
+            dataType: 'json',
+            type: 'POST',
+            data: {
+        "_token": "j0TfZuxp9CpkMSBAIwJOkZXcsTSntdxXY5xg4bIZ",
+        "id": this.value
+        },
+            success: function(data){
+                console.log(data);
+                location.reload();
+            }
+        });
+        });
+    </script>
+    
+    <!-- Mobile Bottom Navigation 2026 -->
+    <nav class="pm-bottom-nav">
+        <div class="pm-bottom-nav-inner">
+            <a href="https://picme225.site" class="pm-bottom-nav-item ">
+                <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                <span>Accueil</span>
+            </a>
+            <a href="https://picme225.site/drive" class="pm-bottom-nav-item ">
+                <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+                <span>VTC</span>
+            </a>
+            <a href="https://picme225.site/marketplace" class="pm-bottom-nav-item active">
+                <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                <span>Marché</span>
+            </a>
+            <a href="https://picme225.site/login" class="pm-bottom-nav-item">
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                <span>Compte</span>
+            </a>
+        </div>
+    </nav>
+    
+    <script>
+(function() {
+    var allListings = [];
+    var currentCat = '';
+    var currentSubCat = '';
+    var searchQuery = '';
+
+    // ─── Format price ───────────────────────────────────────
+    function formatPrice(price, unit) {
+        var num = parseFloat(price);
+        var formatted = num.toLocaleString('fr-FR') + ' FCFA';
+        if (unit === 'day') formatted += ' <small>/jour</small>';
+        else if (unit === 'month') formatted += ' <small>/mois</small>';
+        return formatted;
+    }
+
+    // ─── Category emoji ────────────────────────────────────
+    function catEmoji(cat) {
+        if (!cat) return '📦';
+        cat = cat.toUpperCase();
+        if (cat.includes('VEHICL') || cat.includes('AUTO')) return '🚗';
+        if (cat.includes('REAL_ESTATE') || cat.includes('IMMO')) return '🏠';
+        if (cat.includes('TICKET') || cat.includes('EVENT') || cat.includes('BILLET')) return '🎫';
+        if (cat.includes('SERVICE')) return '🛠️';
+        return '📦';
+    }
+
+    // ─── Render listings ────────────────────────────────────
+    function renderListings(listings) {
+        var grid = document.getElementById('pm-grid');
+        var countEl = document.getElementById('pm-count');
+
+        if (!listings.length) {
+            grid.innerHTML = '<div class="pm-empty" style="grid-column:1/-1;"><i class="fa fa-search"></i><h4>Aucune annonce trouvée</h4><p>Essayez une autre catégorie ou modifiez votre recherche.</p></div>';
+            countEl.textContent = '0 annonce trouvée';
+            return;
+        }
+
+        countEl.textContent = '2' + ' annonce' + ('2' > 1 ? 's' : '') + ' trouvée' + ('2' > 1 ? 's' : '');
+
+        grid.innerHTML = listings.map(function(item) {
+            var price = formatPrice(item.price, item.price_unit);
+            var img = item.media_url
+                ? '<img src="' + item.media_url + '" alt="' + (item.title || '') + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML=\'<span style=font-size:48px>' + catEmoji(item.category) + '</span>\'">'
+                : '<span style="font-size:48px;">' + catEmoji(item.category) + '</span>';
+            var city = item.location_city || 'Abidjan';
+            var photosBadge = item.images_count > 1
+                ? '<span style="position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);color:#fff;border-radius:16px;padding:4px 10px;font-size:11px;font-weight:600;"><i class="fa fa-camera"></i> ' + item.images_count + '</span>'
+                : '';
+            
+            var searchBadge = item.type === 'SEARCH'
+                ? '<span style="position:absolute;top:12px;right:12px;background:#FF4B7C;color:#fff;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.5px;"><i class="fa fa-search"></i> RECHERCHE</span>'
+                : '';
+
+            var detailUrl = '/marketplace/' + item.id;
+
+            return '<a href="' + detailUrl + '" class="pm-listing-card" style="text-decoration:none;">' +
+                '<div class="pm-listing-img">' +
+                    img +
+                    '<span class="pm-listing-cat">' + (item.category || 'Article') + '</span>' +
+                    searchBadge +
+                    photosBadge +
+                '</div>' +
+                '<div class="pm-listing-body">' +
+                    '<div class="pm-listing-title">' + (item.title || 'Sans titre') + '</div>' +
+                    '<div class="pm-listing-desc">' + (item.description || '') + '</div>' +
+                    '<div class="pm-listing-footer">' +
+                        '<div class="pm-listing-price">' + price + '</div>' +
+                        '<div class="pm-listing-location"><i class="fa fa-map-marker"></i>' + city + '</div>' +
+                    '</div>' +
+                    '<button class="pm-cta-btn" onclick="event.preventDefault();event.stopPropagation();window.location=\'' + detailUrl + '\'">🔍 Voir le détail</button>' +
+                '</div>' +
+            '</a>';
+        }).join('');
+    }
+
+    // ─── Category chips (Backend Filtering) ─────────────────
+    document.querySelectorAll('.pm-cat-chip').forEach(function(chip) {
+        chip.addEventListener('click', function() {
+            var catName = this.getAttribute('data-cat');
+            var form = document.getElementById('pm-filter-form');
+            var catInput = document.getElementById('pm-category-input');
+            
+            if(!catInput) {
+                catInput = document.createElement('input');
+                catInput.type = 'hidden';
+                catInput.name = 'category';
+                catInput.id = 'pm-category-input';
+                form.appendChild(catInput);
+            }
+            
+            catInput.value = catName;
+            form.submit();
+        });
+    });
+
+    // ─── Close modal on backdrop ────────────────────────────
+    document.getElementById('pm-app-modal').addEventListener('click', function(e) {
+        if (e.target === this) this.classList.remove('show');
+    });
+
+    // ─── Theme Toggle ───────────────────────────────────────
+    var themeToggle = document.getElementById('theme-toggle');
+    var currentTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    
+    themeToggle.addEventListener('click', function() {
+        var theme = document.documentElement.getAttribute('data-theme');
+        var newTheme = theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
+
+    // ─── Load listings from server-side data (no auth required) ─────────────────
+    try {
+                var serverListings = [{"id":33,"title":"Hyundai Kona 2022, D\u00e9marrage Star, Automatique, Essence","description":"Hyundai Kona 2022, disponible en vente. Ce v\u00e9hicule est \u00e9quip\u00e9 de d\u00e9marrage star et automatique. Il est aliment\u00e9 par essence et dispose de tous les papiers \u00e0 jour. Le prix est de 11 900 000 FCFA.","price":"11900000.00","price_unit":"FCFA","category":"VEHICLES","type":"SALE","location_city":"Non sp\u00e9cifi\u00e9","media_url":"https:\/\/picme225.site\/marketplace-img\/33\/0","images_count":9,"status":"ACTIVE"},{"id":32,"title":"Kia Sportage 2007 en vente","description":"Voiture Kia Sportage de 2007 en vente. Bo\u00eete automatique, 4 cylindres. Prix : 5 000 000 Kao Kao.","price":"5000000.00","price_unit":"Kao Kao","category":"VEHICLES","type":"SALE","location_city":"non sp\u00e9cifi\u00e9","media_url":"https:\/\/picme225.site\/marketplace-img\/32\/0","images_count":6,"status":"ACTIVE"}];
+        allListings = serverListings;
+        renderListings(allListings);
+    } catch(e) {
+        document.getElementById('pm-grid').innerHTML = '<div class="pm-empty" style="grid-column:1/-1;"><i class="fa fa-exclamation-circle" style="color:#FF4B7C;"></i><h4>Impossible de charger les annonces</h4><p>Vérifiez votre connexion ou réessayez plus tard.</p></div>';
+        document.getElementById('pm-count').textContent = '';
+    }
+})();
+</script>
+</body>
+</html>

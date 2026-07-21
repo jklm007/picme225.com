@@ -1,4 +1,5 @@
 @extends('provider.layout.app')
+@section('body-class', 'light-theme')
 
 @section('content')
 <div class="col-md-9">

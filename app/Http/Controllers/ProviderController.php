@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\UserRequests;
-use App\UserRequestPayment;
-use App\RequestFilter;
-use App\Provider;
+use App\Models\UserRequests;
+use App\Models\UserRequestPayment;
+use App\Models\RequestFilter;
+use App\Models\Provider;
 use Carbon\Carbon;
 use App\Http\Controllers\ProviderResources\TripController;
 
@@ -29,7 +29,26 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        return view('provider.index');
+        $provider = \Auth::guard('provider')->user();
+
+        $today_trips = UserRequests::where('provider_id', $provider->id)
+            ->whereDate('created_at', Carbon::today())
+            ->count();
+
+        $total_trips = UserRequests::where('provider_id', $provider->id)
+            ->where('status', 'COMPLETED')
+            ->count();
+
+        $today_revenue = UserRequestPayment::whereHas('request', function($query) use ($provider) {
+                $query->where('provider_id', $provider->id);
+                $query->whereDate('created_at', Carbon::today());
+            })->sum('provider_pay');
+
+        $total_revenue = UserRequestPayment::whereHas('request', function($query) use ($provider) {
+                $query->where('provider_id', $provider->id);
+            })->sum('provider_pay');
+
+        return view('provider.index', compact('today_trips', 'total_trips', 'today_revenue', 'total_revenue', 'provider'));
     }
 
     /**
@@ -232,5 +251,24 @@ class ProviderController extends Controller
         } catch (ModelNotFoundException $e) {
             return back()->with(['flash_error' => "Something Went Wrong"]);
         }
+    }
+
+    /**
+     * Show the provider support page.
+     */
+    public function support()
+    {
+        $provider = \Auth::guard('provider')->user();
+        return view('provider.profile.support', compact('provider'));
+    }
+
+    public function wallet()
+    {
+        return view('provider.wallet.index');
+    }
+
+    public function governance()
+    {
+        return view('provider.governance.index');
     }
 }

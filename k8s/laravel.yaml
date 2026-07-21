@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-deployment
+  labels:
+    app: laravel
+spec:
+  replicas: 2 # Haute disponibilité : 2 pods Laravel
+  selector:
+    matchLabels:
+      app: laravel
+  template:
+    metadata:
+      labels:
+        app: laravel
+    spec:
+      containers:
+        - name: laravel
+          # Remplacez par l'URL de votre registre Docker, ex: us-docker.pkg.dev/.../picme-laravel
+          image: picme225-laravel:latest 
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            - name: APP_NAME
+              value: "PicMe225"
+            - name: APP_ENV
+              value: "production"
+            - name: APP_KEY
+              value: "base64:576GI/RZGbSt+e2/8147duRLv+tAQL0xQtdKUFeMnB4="
+            - name: APP_DEBUG
+              value: "false"
+            - name: APP_URL
+              value: "https://picme225.site"
+            
+            # Connexion DB (PostgreSQL)
+            - name: DB_CONNECTION
+              value: "pgsql"
+            - name: DB_HOST
+              value: "postgres-service" # Résolution DNS interne K8s
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_DATABASE
+              value: "picme_db"
+            - name: DB_USERNAME
+              value: "picme_user"
+            - name: DB_PASSWORD
+              value: "secret_password"
+            
+            # Redis
+            - name: REDIS_HOST
+              value: "redis-service"
+            - name: CACHE_DRIVER
+              value: "redis"
+            - name: QUEUE_CONNECTION
+              value: "redis"
+            - name: SESSION_DRIVER
+              value: "redis"
+            
+            # Cloudflare R2 S3
+            - name: FILESYSTEM_DISK
+              value: "s3"
+            - name: AWS_ACCESS_KEY_ID
+              value: "VOTRE_R2_ACCESS_KEY"
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "VOTRE_R2_SECRET_KEY"
+            - name: AWS_DEFAULT_REGION
+              value: "auto"
+            - name: AWS_BUCKET
+              value: "picme225-bucket"
+            - name: AWS_ENDPOINT
+              value: "https://<account_id>.r2.cloudflarestorage.com"
+            
+            # OSRM & Photon (Redirigé vers les pods sur Oracle ARM)
+            - name: OSRM_URL
+              value: "http://osrm-service:5000"
+            - name: PHOTON_URL
+              value: "http://photon-service:2322"
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          volumeMounts:
+            - name: nginx-static-conf
+              mountPath: /opt/docker/etc/nginx/vhost.common.d/05-static.conf
+              subPath: 05-static.conf
+      volumes:
+        - name: nginx-static-conf
+          configMap:
+            name: nginx-static-conf
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: laravel-service
+spec:
+  selector:
+    app: laravel
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

@@ -1,4 +1,5 @@
 @extends('provider.layout.app')
+@section('body-class', 'light-theme')
 
 @section('content')
 <div class="pro-dashboard-head">
@@ -138,45 +139,102 @@
 @section('styles')
 <link href="{{ asset('asset/css/jasny-bootstrap.min.css') }}" rel="stylesheet" type="text/css">
 <style type="text/css">
-    .fileinput .btn-file {
-        padding:0;
-        background-color: #fff;
-        border: 0;
-        border-radius:0!important;
+    body, .page-content, .pro-dashboard, .pro-dashboard-content {
+        background-color: #ffffff !important;
+        color: #000000 !important;
     }
-    .fileinput .form-control {
-        border: 0;
-        box-shadow : none;
-        border-left:0;
-        border-right:5px;
+    .pro-dashboard-head {
+        background-color: #f8f9fa !important;
+        border-bottom: 1px solid #e9ecef !important;
+        margin-top: 60px !important;
     }
-    .fileinput .upload-link {
-        border:0;
-        border-radius: 0;
-        padding:0;
+    .pro-head-link {
+        color: #495057 !important;
+    }
+    .pro-head-link.active {
+        color: #000000 !important;
+        border-bottom: 2px solid #000000 !important;
+        font-weight: bold;
+    }
+    .manage-docs {
+        background: #ffffff !important;
+        padding: 30px 15px !important;
+    }
+    .manage-doc-section {
+        background: #ffffff !important;
+        border: 1px solid #dee2e6 !important;
+        border-radius: 12px;
+        padding: 24px !important;
+        margin-bottom: 30px !important;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.01);
+    }
+    .manage-doc-tit {
+        font-size: 18px !important;
+        font-weight: 700 !important;
+        color: #111111 !important;
+        margin-bottom: 20px !important;
+    }
+    .manage-doc-box {
+        background: #f8f9fa !important;
+        border: 1px solid #e9ecef !important;
+        border-radius: 8px;
+        padding: 15px !important;
+        margin-bottom: 15px !important;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    .manage-txt {
+        font-weight: 600 !important;
+        color: #111111 !important;
+        margin: 0 !important;
+    }
+    .license {
+        font-size: 11px !important;
+        color: #6c757d !important;
+        margin: 5px 0 0 0 !important;
+    }
+    .manage-badge {
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        padding: 6px 12px !important;
+        border-radius: 20px !important;
+        display: inline-block !important;
+        margin: 0 !important;
+    }
+    .yellow-badge {
+        background-color: rgba(241, 196, 15, 0.15) !important;
+        color: #d4ac0d !important;
+        border: 1px solid rgba(241, 196, 15, 0.3) !important;
+    }
+    .green-badge {
+        background-color: rgba(46, 204, 113, 0.15) !important;
+        color: #27ae60 !important;
+        border: 1px solid rgba(46, 204, 113, 0.3) !important;
+    }
+    .red-badge {
+        background-color: rgba(231, 76, 60, 0.15) !important;
+        color: #c0392b !important;
+        border: 1px solid rgba(231, 76, 60, 0.3) !important;
     }
     .input-group-addon.btn {
-        background: #fff;
-        border: 1px solid #37b38b;
-        border-radius: 0; 
-        padding: 10px;
-        height: 40px;
-        line-height: 20px;
+        background: #2ecc71 !important;
+        border: 1px solid #2ecc71 !important;
+        color: #ffffff !important;
+        border-radius: 4px !important;
+        height: 38px !important;
+        line-height: 18px !important;
+        font-weight: 600 !important;
     }
-    .fileinput .fileinput-filename {
-        font-size: 10px;
-    }
-    .fileinput .btn-submit {
-        padding: 0;
-    }
-    .fileinput button {
-        background-color: white;
-        border: 0;
-        padding: 10px;
+    .input-group-addon.btn.btn-default {
+        background: #f8f9fa !important;
+        border: 1px solid #ced4da !important;
+        color: #495057 !important;
     }
 </style>
 @endsection
 
 @section('scripts')
-<script type="text/javascript" src="{{ asset('asset/js/jasny-bootstrap.min.js') }}"></script>
-@endsection

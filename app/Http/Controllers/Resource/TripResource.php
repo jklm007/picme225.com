@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Resource;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\UserRequests;
+use App\Models\UserRequests;
 use Auth;
 use Setting;
 

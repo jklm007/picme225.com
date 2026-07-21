@@ -13,12 +13,11 @@
     <title>{{ Setting::get('site_title', 'Tranxit') }}</title>
     <link rel="shortcut icon" type="image/png" href="{{ Setting::get('site_icon') }}"/>
 
-    <!-- Vendor CSS 
+    <!-- Vendor CSS -->
     <link rel="stylesheet" href="{{asset('main/vendor/bootstrap4/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('main/vendor/themify-icons/themify-icons.css')}}">
     <link rel="stylesheet" href="{{asset('main/vendor/font-awesome/css/font-awesome.min.css')}}">
-
-    <link rel="stylesheet" href="{{asset('main/assets/css/core.css')}}">-->
+    <link rel="stylesheet" href="{{asset('main/assets/css/core.css')}}">
     <link rel="stylesheet" href="{{asset('main/vendor/bootstrap4/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('main/assets/css/style.css')}}">
 

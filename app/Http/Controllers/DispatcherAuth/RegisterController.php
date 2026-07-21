@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\DispatcherAuth;
 
-use App\Dispatcher;
+use App\Models\Dispatcher;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;

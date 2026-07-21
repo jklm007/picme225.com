@@ -1,0 +1,1 @@
+UPDATE users SET password = '$2y$10$WIgeBJ2lRi2N7vL4D.WoQupoZLSz26cQz/NmaX0v0.tzDeNA5/rYm' WHERE mobile IN ('+2250759747444', '+2250758286571'); SELECT id, mobile, LEFT(password,20) as pwd FROM users;

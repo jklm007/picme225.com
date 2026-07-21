@@ -1,0 +1,1 @@
+gcloud compute ssh k3s-master-gcp --zone=europe-west9-a --command "sudo k3s kubectl exec laravel-deployment-5f44cbb875-dp5ff -- php /app/artisan tinker --execute=\"echo app()->getLocale(); echo ' | '; echo Setting::get('language');\""
